@@ -1,16 +1,37 @@
-# React + Vite
+# Draft Pick Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Aplikasi *frontend* berbasis React + Vite untuk simulasi *Draft Pick* karakter (seperti pada game MOBA/Genshin Impact). Proyek ini dibangun menggunakan antarmuka modern dengan *Atomic Design* dan *TailwindCSS*.
 
-Currently, two official plugins are available:
+## 🚀 Fitur Utama
+- **Sistem Autentikasi**: Perlindungan sesi dengan token JWT dan *Role-Based Access Control*.
+- **Manajemen Master Data**: Kelola data Karakter, Peserta, BGM, dan Pengaturan. Dilengkapi dengan **Data Table** 8 Kolom (Fitur Pencarian, Filter Bintang 4/5).
+- **Draft Pick Simulator**: Fitur simulasi Ban & Pick interaktif dengan hitung mundur waktu.
+- **Cetak Laporan (PDF)**: Cetak hasil akhir susunan formasi pertandingan secara otomatis ke PDF.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## 🛠️ Prasyarat
+- Node.js (v18 atau lebih baru)
+- Repositori Backend yang sedang berjalan
 
-## React Compiler
+## ⚙️ Instalasi & Menjalankan di Lokal
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+1. Buka folder ini di terminal.
+2. Jadikan file `.env.example` sebagai `.env` dan sesuaikan nilainya:
+   ```env
+   VITE_API_BASE_URL=http://localhost:3000
+   VITE_API_TIMEOUT=10000
+   ```
+3. Instal semua paket *dependencies*:
+   ```bash
+   npm install
+   ```
+4. Jalankan *server* lokal:
+   ```bash
+   npm run dev
+   ```
+5. Buka `http://localhost:5173` di *browser* Anda.
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 📦 Panduan Deployment (Vercel)
+Aplikasi ini dioptimalkan untuk Vercel.
+1. Hubungkan repositori GitHub Anda ke Vercel.
+2. Tambahkan **Environment Variable**: `VITE_API_BASE_URL` yang diisi dengan URL *Backend* Render Anda (misalnya `https://draftpick-api.onrender.com`).
+3. Vercel akan otomatis melakukan *build* dan aplikasi Anda siap dipakai secara publik!
