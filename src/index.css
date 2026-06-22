@@ -1,0 +1,43 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom Scrollbar untuk Mode Gelap */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 8px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: rgba(31, 41, 55, 0.5); /* bg-gray-800 dengan transparansi */
+  border-radius: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(75, 85, 99, 0.8); /* bg-gray-600 */
+  border-radius: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(107, 114, 128, 1); /* bg-gray-500 */
+}
+
+/* Animasi Teks Berjalan (Marquee) */
+@keyframes scrollText {
+  0% {
+    transform: translateX(10%);
+  }
+  50% {
+    transform: translateX(-100%);
+  }
+  50.01% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(10%);
+  }
+}
+
+.animate-scroll-text {
+  display: inline-block;
+  animation: scrollText 12s linear infinite;
+}
