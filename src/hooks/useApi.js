@@ -9,10 +9,7 @@ export function useApi() {
     const token = localStorage.getItem('userToken');
 
     // 2. Siapkan headers
-    const headers = { 
-      'ngrok-skip-browser-warning': '69420',
-      ...options.headers 
-    };
+    const headers = { ...options.headers };
 
     // Sisipkan token jika ada
     if (token) {
