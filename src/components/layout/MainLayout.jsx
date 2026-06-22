@@ -81,7 +81,10 @@ export default function MainLayout() {
                     title: 'Login',
                     html: `
                       <input id="swal-input-username" class="swal2-input" placeholder="Username" autocomplete="off" style="width: 80%; background: #1e293b; color: white; border: 1px solid #475569;">
-                      <input id="swal-input-password" type="password" class="swal2-input" placeholder="Password" autocomplete="off" style="width: 80%; background: #1e293b; color: white; border: 1px solid #475569;">
+                      <div style="position: relative; width: 80%; margin: 1em auto 0;">
+                        <input id="swal-input-password" type="password" class="swal2-input" placeholder="Password" autocomplete="off" style="width: 100%; background: #1e293b; color: white; border: 1px solid #475569; margin: 0; padding-right: 40px;">
+                        <span id="toggle-password" style="position: absolute; right: 15px; top: 50%; transform: translateY(-50%); cursor: pointer; user-select: none;">👁️</span>
+                      </div>
                     `,
                     background: '#0f172a',
                     color: '#fff',
@@ -90,6 +93,24 @@ export default function MainLayout() {
                     cancelButtonText: 'Batal',
                     confirmButtonColor: '#3b82f6',
                     focusConfirm: false,
+                    didOpen: () => {
+                      const user = document.getElementById('swal-input-username');
+                      const pass = document.getElementById('swal-input-password');
+                      const toggleBtn = document.getElementById('toggle-password');
+                      user.focus();
+                      
+                      toggleBtn.addEventListener('click', () => {
+                        const type = pass.getAttribute('type') === 'password' ? 'text' : 'password';
+                        pass.setAttribute('type', type);
+                        toggleBtn.textContent = type === 'password' ? '👁️' : '🙈';
+                      });
+
+                      const enterListener = (e) => {
+                        if (e.key === 'Enter') Swal.clickConfirm();
+                      };
+                      user.addEventListener('keypress', enterListener);
+                      pass.addEventListener('keypress', enterListener);
+                    },
                     preConfirm: () => {
                       const user = document.getElementById('swal-input-username').value;
                       const pass = document.getElementById('swal-input-password').value;
@@ -135,7 +156,10 @@ export default function MainLayout() {
                     title: 'Register Peserta',
                     html: `
                       <input id="swal-input-reg-username" class="swal2-input" placeholder="Username" autocomplete="off" style="width: 80%; background: #1e293b; color: white; border: 1px solid #475569;">
-                      <input id="swal-input-reg-password" type="password" class="swal2-input" placeholder="Password" autocomplete="off" style="width: 80%; background: #1e293b; color: white; border: 1px solid #475569;">
+                      <div style="position: relative; width: 80%; margin: 1em auto 0;">
+                        <input id="swal-input-reg-password" type="password" class="swal2-input" placeholder="Password" autocomplete="off" style="width: 100%; background: #1e293b; color: white; border: 1px solid #475569; margin: 0; padding-right: 40px;">
+                        <span id="toggle-reg-password" style="position: absolute; right: 15px; top: 50%; transform: translateY(-50%); cursor: pointer; user-select: none;">👁️</span>
+                      </div>
                     `,
                     background: '#0f172a',
                     color: '#fff',
@@ -144,6 +168,24 @@ export default function MainLayout() {
                     cancelButtonText: 'Batal',
                     confirmButtonColor: '#10b981',
                     focusConfirm: false,
+                    didOpen: () => {
+                      const user = document.getElementById('swal-input-reg-username');
+                      const pass = document.getElementById('swal-input-reg-password');
+                      const toggleBtn = document.getElementById('toggle-reg-password');
+                      user.focus();
+                      
+                      toggleBtn.addEventListener('click', () => {
+                        const type = pass.getAttribute('type') === 'password' ? 'text' : 'password';
+                        pass.setAttribute('type', type);
+                        toggleBtn.textContent = type === 'password' ? '👁️' : '🙈';
+                      });
+
+                      const enterListener = (e) => {
+                        if (e.key === 'Enter') Swal.clickConfirm();
+                      };
+                      user.addEventListener('keypress', enterListener);
+                      pass.addEventListener('keypress', enterListener);
+                    },
                     preConfirm: () => {
                       const user = document.getElementById('swal-input-reg-username').value;
                       const pass = document.getElementById('swal-input-reg-password').value;
