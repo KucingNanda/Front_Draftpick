@@ -11,7 +11,7 @@ export function useDraftData() {
 
   useEffect(() => {
     // Fetch Settings
-    fetch(`${import.meta.env.VITE_API_BASE_URL}/api/settings`)
+    fetch(`${import.meta.env.VITE_API_BASE_URL}/api/settings`, { headers: { 'ngrok-skip-browser-warning': 'true' } })
       .then(res => res.json())
       .then(data => {
          if(data && data.maxCost) setSettings(data);
@@ -19,13 +19,13 @@ export function useDraftData() {
       .catch(err => console.error("Error fetch settings:", err));
 
     // Fetch Master Karakter
-    fetch(`${import.meta.env.VITE_API_BASE_URL}/api/karakter`)
+    fetch(`${import.meta.env.VITE_API_BASE_URL}/api/karakter`, { headers: { 'ngrok-skip-browser-warning': 'true' } })
       .then(res => res.json())
       .then(data => setKarakters(data || []))
       .catch(err => console.error("Error fetch karakter:", err));
 
     // Fetch Master Peserta
-    fetch(`${import.meta.env.VITE_API_BASE_URL}/api/peserta`)
+    fetch(`${import.meta.env.VITE_API_BASE_URL}/api/peserta`, { headers: { 'ngrok-skip-browser-warning': 'true' } })
       .then(res => res.json())
       .then(data => setPesertas(data || []))
       .catch(err => console.error("Error fetch peserta:", err));

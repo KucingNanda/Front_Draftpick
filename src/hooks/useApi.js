@@ -22,6 +22,9 @@ export function useApi() {
       headers['Content-Type'] = 'application/json';
     }
 
+    // Bypass Ngrok Warning Page
+    headers['ngrok-skip-browser-warning'] = 'true';
+
     // 3. Lakukan request HTTP
     try {
       const response = await fetch(url, {
