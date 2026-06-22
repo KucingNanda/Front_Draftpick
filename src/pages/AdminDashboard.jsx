@@ -26,13 +26,13 @@ export default function AdminDashboard() {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
-    api('http://localhost:3000/api/karakter')
+    api(`${import.meta.env.VITE_API_BASE_URL}/api/karakter`)
       .then(res => res.json())
       .then(data => setKarakters(data || []))
       .catch(err => console.error("Error fetching karakter:", err));
 
     if (token) {
-      api('http://localhost:3000/api/settings')
+      api(`${import.meta.env.VITE_API_BASE_URL}/api/settings`)
         .then(res => res.json())
         .then(data => setSettings({
           maxCost: data.maxCost || 7,
@@ -42,7 +42,7 @@ export default function AdminDashboard() {
         }))
         .catch(err => console.error("Error fetching settings:", err));
 
-      api('http://localhost:3000/api/users')
+      api(`${import.meta.env.VITE_API_BASE_URL}/api/users`)
         .then(res => res.json())
         .then(data => {
           if (Array.isArray(data)) setUsers(data);
@@ -73,7 +73,7 @@ export default function AdminDashboard() {
     };
 
     try {
-      const res = await api('http://localhost:3000/api/settings', {
+      const res = await api(`${import.meta.env.VITE_API_BASE_URL}/api/settings`, {
         method: 'PUT',
         body: JSON.stringify(payload)
       });

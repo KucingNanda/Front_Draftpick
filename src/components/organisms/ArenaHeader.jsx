@@ -70,7 +70,7 @@ export default function ArenaHeader({
         draftData: JSON.stringify(draftState)
       };
 
-      const res = await api('http://localhost:3000/api/history', {
+      const res = await api(`${import.meta.env.VITE_API_BASE_URL}/api/history`, {
         method: 'POST',
         body: JSON.stringify(payload)
       });

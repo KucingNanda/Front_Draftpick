@@ -27,11 +27,11 @@ export default function MasterPeserta() {
 
   const fetchData = async () => {
     try {
-      const resP = await api('http://localhost:3000/api/peserta');
+      const resP = await api(`${import.meta.env.VITE_API_BASE_URL}/api/peserta`);
       const dataP = await resP.json();
       setPesertas(dataP || []);
 
-      const resK = await api('http://localhost:3000/api/karakter');
+      const resK = await api(`${import.meta.env.VITE_API_BASE_URL}/api/karakter`);
       const dataK = await resK.json();
       // Hanya sediakan karakter Limited (Cost == 1)
       setKarakters((dataK || []).filter(k => k.cost === 1));
@@ -122,7 +122,7 @@ export default function MasterPeserta() {
     };
 
     try {
-      const url = editingId ? `http://localhost:3000/api/peserta/${editingId}` : 'http://localhost:3000/api/peserta';
+      const url = editingId ? `${import.meta.env.VITE_API_BASE_URL}/api/peserta/${editingId}` : `${import.meta.env.VITE_API_BASE_URL}/api/peserta`;
       const method = editingId ? 'PUT' : 'POST';
 
       const res = await api(url, {
@@ -168,7 +168,7 @@ export default function MasterPeserta() {
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-          await api(`http://localhost:3000/api/peserta/${id}`, { method: 'DELETE' });
+          await api(`${import.meta.env.VITE_API_BASE_URL}/api/peserta/${id}`, { method: 'DELETE' });
           fetchData();
           Swal.fire({
             title: 'Terhapus!',

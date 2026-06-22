@@ -23,7 +23,7 @@ export default function DraftPick() {
   const [currentTrackIndex, setCurrentTrackIndex] = useState(0);
 
   useEffect(() => {
-    api('http://localhost:3000/api/bgm')
+    api(`${import.meta.env.VITE_API_BASE_URL}/api/bgm`)
       .then(res => res.json())
       .then(data => setBgms(data || []))
       .catch(err => console.error("Error fetching bgm:", err));

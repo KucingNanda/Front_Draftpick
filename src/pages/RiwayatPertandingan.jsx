@@ -23,7 +23,7 @@ export default function RiwayatPertandingan() {
   const fetchHistories = async () => {
     setIsLoading(true);
     try {
-      const res = await api(`http://localhost:3000/api/history?role=${role}`);
+      const res = await api(`${import.meta.env.VITE_API_BASE_URL}/api/history?role=${role}`);
       if (res.ok) {
         const data = await res.json();
         setHistories(data || []);
@@ -47,7 +47,7 @@ export default function RiwayatPertandingan() {
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-          const res = await api(`http://localhost:3000/api/history/${id}`, { method: 'DELETE' });
+          const res = await api(`${import.meta.env.VITE_API_BASE_URL}/api/history/${id}`, { method: 'DELETE' });
           if (res.ok) {
             setHistories(histories.filter(h => h.id !== id));
             Swal.fire('Terhapus!', 'Riwayat berhasil dihapus.', 'success');

@@ -13,7 +13,7 @@ export default function PlaylistManager({ token }) {
 
   useEffect(() => {
     if (token) {
-      api('http://localhost:3000/api/bgm')
+      api(`${import.meta.env.VITE_API_BASE_URL}/api/bgm`)
         .then(res => res.json())
         .then(data => setBgms(data || []))
         .catch(err => console.error("Error fetching bgms:", err));
@@ -32,7 +32,7 @@ export default function PlaylistManager({ token }) {
     formData.append('audio', newBgmFile);
 
     try {
-      const uploadRes = await api('http://localhost:3000/api/upload/audio', {
+      const uploadRes = await api(`${import.meta.env.VITE_API_BASE_URL}/api/upload/audio`, {
         method: 'POST',
         body: formData
       });
@@ -42,7 +42,7 @@ export default function PlaylistManager({ token }) {
         throw new Error(uploadData.error || 'Upload gagal');
       }
 
-      const bgmRes = await api('http://localhost:3000/api/bgm', {
+      const bgmRes = await api(`${import.meta.env.VITE_API_BASE_URL}/api/bgm`, {
         method: 'POST',
         body: JSON.stringify({ nama: newBgmName, url: uploadData.audioUrl })
       });
@@ -78,7 +78,7 @@ export default function PlaylistManager({ token }) {
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-          const res = await api(`http://localhost:3000/api/bgm/${id}`, { method: 'DELETE' });
+          const res = await api(`${import.meta.env.VITE_API_BASE_URL}/api/bgm/${id}`, { method: 'DELETE' });
           if (res.ok) {
             setBgms(bgms.filter(b => b.id !== id));
             Swal.fire({ title: 'Terhapus!', icon: 'success', background: '#1e293b', color: '#fff', timer: 1500, showConfirmButton: false });

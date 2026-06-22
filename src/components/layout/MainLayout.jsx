@@ -108,7 +108,7 @@ export default function MainLayout() {
                         didOpen: () => Swal.showLoading()
                       });
                       try {
-                        const res = await api('http://localhost:3000/api/login', {
+                        const res = await api(`${import.meta.env.VITE_API_BASE_URL}/api/login`, {
                           method: 'POST',
                           body: JSON.stringify(result.value)
                         });
@@ -162,7 +162,7 @@ export default function MainLayout() {
                         didOpen: () => Swal.showLoading()
                       });
                       try {
-                        const res = await api('http://localhost:3000/api/register', {
+                        const res = await api(`${import.meta.env.VITE_API_BASE_URL}/api/register`, {
                           method: 'POST',
                           body: JSON.stringify(result.value)
                         });

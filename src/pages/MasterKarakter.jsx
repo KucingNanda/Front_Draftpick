@@ -40,7 +40,7 @@ export default function MasterKarakter() {
 
   const fetchKarakters = () => {
     setLoading(true);
-    api('http://localhost:3000/api/karakter')
+    api(`${import.meta.env.VITE_API_BASE_URL}/api/karakter`)
       .then((res) => res.json())
       .then((data) => {
         setKarakters(data || []);
@@ -100,8 +100,8 @@ export default function MasterKarakter() {
     };
 
     const url = formData.id 
-      ? `http://localhost:3000/api/karakter/${formData.id}`
-      : 'http://localhost:3000/api/karakter';
+      ? `${import.meta.env.VITE_API_BASE_URL}/api/karakter/${formData.id}`
+      : `${import.meta.env.VITE_API_BASE_URL}/api/karakter`;
     
     const method = formData.id ? 'PUT' : 'POST';
 
@@ -130,7 +130,7 @@ export default function MasterKarakter() {
       uploadData.append('image', imageFile);
 
       try {
-        const res = await api('http://localhost:3000/api/upload', {
+        const res = await api(`${import.meta.env.VITE_API_BASE_URL}/api/upload`, {
           method: 'POST',
           body: uploadData
         });
@@ -166,7 +166,7 @@ export default function MasterKarakter() {
       color: '#fff'
     }).then((result) => {
       if (result.isConfirmed) {
-        api(`http://localhost:3000/api/karakter/${id}`, { method: 'DELETE' })
+        api(`${import.meta.env.VITE_API_BASE_URL}/api/karakter/${id}`, { method: 'DELETE' })
           .then(() => {
             fetchKarakters();
             setPreviewKarakter(null);

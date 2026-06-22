@@ -26,7 +26,7 @@ export default function Profil() {
 
     setIsSubmitting(true);
     try {
-      const res = await api('http://localhost:3000/api/change-password', {
+      const res = await api(`${import.meta.env.VITE_API_BASE_URL}/api/change-password`, {
         method: 'PUT',
         body: JSON.stringify({
           old_password: passwords.oldPassword,
