@@ -9,7 +9,10 @@ export function useApi() {
     const token = localStorage.getItem('userToken');
 
     // 2. Siapkan headers
-    const headers = { ...options.headers };
+    const headers = { 
+      'ngrok-skip-browser-warning': '69420',
+      ...options.headers 
+    };
 
     // Sisipkan token jika ada
     if (token) {
@@ -21,9 +24,6 @@ export function useApi() {
     if (!(options.body instanceof FormData) && !headers['Content-Type']) {
       headers['Content-Type'] = 'application/json';
     }
-
-    // Bypass Ngrok Warning Page
-    headers['ngrok-skip-browser-warning'] = 'true';
 
     // 3. Lakukan request HTTP
     try {
