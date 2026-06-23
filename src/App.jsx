@@ -1,8 +1,9 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
 
-// Layouts
+// Layouts & Routes
 import MainLayout from './components/layout/MainLayout';
+import PrivateRoute from './routes/PrivateRoute';
 
 // Pages
 import Dashboard from './pages/Dashboard';
@@ -23,12 +24,21 @@ function App() {
 
           {/* MainLayout membungkus route biasa */}
           <Route element={<MainLayout />}>
+            {/* Rute Terbuka (Public) */}
             <Route path="/" element={<Dashboard />} />
             <Route path="/karakter" element={<MasterKarakter />} />
             <Route path="/peserta" element={<MasterPeserta />} />
-            <Route path="/admin" element={<AdminDashboard />} />
             <Route path="/history" element={<RiwayatPertandingan />} />
-            <Route path="/profil" element={<Profil />} />
+            
+            {/* Rute Khusus User Login */}
+            <Route element={<PrivateRoute />}>
+              <Route path="/profil" element={<Profil />} />
+            </Route>
+
+            {/* Rute Khusus Wasit / Admin */}
+            <Route element={<PrivateRoute allowedRoles={['wasit']} />}>
+              <Route path="/admin" element={<AdminDashboard />} />
+            </Route>
           </Route>
         </Routes>
       </Router>

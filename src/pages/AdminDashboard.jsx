@@ -104,22 +104,6 @@ export default function AdminDashboard() {
     handleSaveSettings();
   };
 
-  if (!isWasit) {
-    return (
-      <div className="min-h-[70vh] flex items-center justify-center p-4">
-        <div className="bg-gray-800 p-8 rounded-2xl shadow-2xl w-full max-w-md border border-gray-700 text-center">
-          <h1 className="text-2xl font-bold text-red-400 mb-4">Akses Ditolak</h1>
-          <p className="text-gray-400 mb-6">Hanya Wasit yang memiliki hak akses ke Pengaturan Turnamen.</p>
-          <button 
-            onClick={() => navigate('/')}
-            className="w-full bg-gray-700 hover:bg-gray-600 text-white font-bold py-3 px-4 rounded-lg transition-colors"
-          >
-            Kembali ke Beranda
-          </button>
-        </div>
-      </div>
-    );
-  }
 
   return (
     <div className="min-h-screen bg-[#0f172a] text-white p-6 md:p-12 font-sans">
