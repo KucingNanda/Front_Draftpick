@@ -1,5 +1,7 @@
 # Draft Pick Frontend
 
+**Live App (Vercel):** [https://front-draftpick.vercel.app](https://front-draftpick.vercel.app)
+
 Aplikasi *frontend* berbasis React + Vite untuk simulasi *Draft Pick* karakter (seperti pada game MOBA/Genshin Impact). Proyek ini dibangun menggunakan antarmuka modern dengan *Atomic Design* dan *TailwindCSS*.
 
 ## 🚀 Fitur Utama
@@ -31,7 +33,7 @@ Aplikasi *frontend* berbasis React + Vite untuk simulasi *Draft Pick* karakter (
 5. Buka `http://localhost:5173` di *browser* Anda.
 
 ## 📦 Panduan Deployment (Vercel)
-Aplikasi ini dioptimalkan untuk Vercel.
+Aplikasi ini dioptimalkan untuk di-*deploy* melalui **Vercel**.
 1. Hubungkan repositori GitHub Anda ke Vercel.
-2. Tambahkan **Environment Variable**: `VITE_API_BASE_URL` yang diisi dengan URL *Backend* Render Anda (misalnya `https://draftpick-api.onrender.com`).
+2. Tambahkan **Environment Variable**: `VITE_API_BASE_URL` yang diisi dengan URL *Backend* Railway Anda (yaitu: `https://backdraftpick-production.up.railway.app`).
 3. Vercel akan otomatis melakukan *build* dan aplikasi Anda siap dipakai secara publik!
