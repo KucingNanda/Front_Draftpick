@@ -61,7 +61,7 @@ export default function KarakterPreviewModal({ previewKarakter, setPreviewKarakt
                 </div>
                 {previewKarakter.sinergi && previewKarakter.sinergi !== 'Tidak Ada' && (
                   <div className="flex flex-col col-span-2 mt-1">
-                    <span className="text-gray-500 text-[10px] uppercase tracking-wider font-semibold mb-1">Sinergi Turnamen</span>
+                    <span className="text-gray-500 text-[10px] uppercase tracking-wider font-semibold mb-1">Sinergi</span>
                     <span className="text-blue-400 text-sm font-medium bg-blue-900/20 px-2.5 py-1 rounded-md inline-block w-fit border border-blue-900/50 shadow-sm shadow-blue-900/20">{previewKarakter.sinergi}</span>
                   </div>
                 )}
