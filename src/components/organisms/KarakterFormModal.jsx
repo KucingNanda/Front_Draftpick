@@ -1,5 +1,5 @@
 import { X } from 'lucide-react';
-import { VISIONS, SENJATAS, RARITIES, REGIONS, SINERGIS } from '../../utils/constants';
+import { ELEMENS, SENJATAS, RARITIES, REGIONS, SINERGIS } from '../../utils/constants';
 
 export default function KarakterFormModal({
   isOpen,
@@ -109,11 +109,11 @@ export default function KarakterFormModal({
                 <div>
                   <label className="block text-sm font-medium text-gray-400 mb-2">Elemen</label>
                   <div className="flex flex-wrap gap-2">
-                    {VISIONS.map(v => (
+                    {ELEMENS.map(v => (
                       <div 
                         key={v.name}
-                        onClick={() => setFormData(prev => ({...prev, vision: v.name}))}
-                        className={`w-10 h-10 rounded-lg border-2 cursor-pointer flex items-center justify-center transition-all ${formData.vision === v.name ? 'border-blue-500 bg-blue-500/20 scale-110' : 'border-gray-700 bg-gray-900 hover:border-gray-500'}`}
+                        onClick={() => setFormData(prev => ({...prev, elemen: v.name}))}
+                        className={`w-10 h-10 rounded-lg border-2 cursor-pointer flex items-center justify-center transition-all ${formData.elemen === v.name ? 'border-blue-500 bg-blue-500/20 scale-110' : 'border-gray-700 bg-gray-900 hover:border-gray-500'}`}
                         title={v.name}
                       >
                         {v.icon ? (

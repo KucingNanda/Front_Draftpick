@@ -32,7 +32,7 @@ export default function MasterKarakter() {
   const [formData, setFormData] = useState({
     id: null,
     nama: '',
-    vision: '',
+    elemen: '',
     senjata: '',
     rarity: '',
     imageUrl: '',
@@ -67,7 +67,7 @@ export default function MasterKarakter() {
       setFormData({
         id: null,
         nama: '',
-        vision: '',
+        elemen: '',
         senjata: '',
         rarity: '',
         imageUrl: '',
@@ -101,7 +101,7 @@ export default function MasterKarakter() {
   const saveKarakterData = (finalImageUrl) => {
     const payload = {
       nama: formData.nama,
-      vision: formData.vision,
+      elemen: formData.elemen,
       senjata: formData.senjata,
       rarity: formData.rarity,
       imageUrl: finalImageUrl || formData.imageUrl,
@@ -350,7 +350,7 @@ export default function MasterKarakter() {
                         </div>
                       </td>
                       <td className="p-4 font-bold text-white">{karakter.nama}</td>
-                      <td className="p-4 text-gray-300">{karakter.vision}</td>
+                      <td className="p-4 text-gray-300">{karakter.elemen}</td>
                       <td className="p-4 text-gray-300">{karakter.senjata}</td>
                       <td className="p-4">
                         <span className={`text-xs px-2 py-1 rounded-full border ${karakter.rarity.includes('5 Star') ? 'bg-yellow-500/20 text-yellow-400 border-yellow-500/30' : 'bg-purple-500/20 text-purple-400 border-purple-500/30'}`}>

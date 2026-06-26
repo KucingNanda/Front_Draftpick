@@ -1,4 +1,4 @@
-export const VISIONS = [
+export const ELEMENS = [
   { name: "Anemo", icon: "https://res.cloudinary.com/dene5omzy/image/upload/v1780457130/Element_Anemo_ttjljv.png" },
   { name: "Geo", icon: "https://res.cloudinary.com/dene5omzy/image/upload/v1780457131/Element_Geo_hbpowc.png" },
   { name: "Electro", icon: "https://res.cloudinary.com/dene5omzy/image/upload/v1780457130/Element_Electro_bizsra.png" },

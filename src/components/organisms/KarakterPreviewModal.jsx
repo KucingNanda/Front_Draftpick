@@ -1,5 +1,5 @@
 import { X, Edit2, Trash2, Image as ImageIcon } from 'lucide-react';
-import { VISIONS, SENJATAS } from '../../utils/constants';
+import { ELEMENS, SENJATAS } from '../../utils/constants';
 import { useAuth } from '../../context/AuthContext';
 
 export default function KarakterPreviewModal({ previewKarakter, setPreviewKarakter, handleOpenModal, handleDelete }) {
@@ -44,10 +44,10 @@ export default function KarakterPreviewModal({ previewKarakter, setPreviewKarakt
                 <div className="flex flex-col">
                   <span className="text-gray-500 text-[10px] uppercase tracking-wider font-semibold mb-1">Elemen</span>
                   <div className="flex items-center gap-2">
-                    {VISIONS.find(v => v.name === previewKarakter.vision)?.icon && (
-                      <img src={VISIONS.find(v => v.name === previewKarakter.vision).icon} alt={previewKarakter.vision} className="w-6 h-6" />
+                    {ELEMENS.find(v => v.name === previewKarakter.elemen)?.icon && (
+                      <img src={ELEMENS.find(v => v.name === previewKarakter.elemen).icon} alt={previewKarakter.elemen} className="w-6 h-6" />
                     )}
-                    <span className="text-white text-sm font-medium">{previewKarakter.vision || '-'}</span>
+                    <span className="text-white text-sm font-medium">{previewKarakter.elemen || '-'}</span>
                   </div>
                 </div>
                 <div className="flex flex-col">
