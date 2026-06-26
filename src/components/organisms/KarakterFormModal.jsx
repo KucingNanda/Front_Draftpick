@@ -107,7 +107,7 @@ export default function KarakterFormModal({
                 </div>
               
                 <div>
-                  <label className="block text-sm font-medium text-gray-400 mb-2">Vision</label>
+                  <label className="block text-sm font-medium text-gray-400 mb-2">Elemen</label>
                   <div className="flex flex-wrap gap-2">
                     {VISIONS.map(v => (
                       <div 

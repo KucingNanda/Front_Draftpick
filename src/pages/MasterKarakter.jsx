@@ -322,7 +322,7 @@ export default function MasterKarakter() {
                   <th className="p-4 font-medium w-16 text-center">ID</th>
                   <th className="p-4 font-medium w-24 text-center">Gambar</th>
                   <th className="p-4 font-medium">Nama Karakter</th>
-                  <th className="p-4 font-medium">Vision</th>
+                  <th className="p-4 font-medium">Elemen</th>
                   <th className="p-4 font-medium">Senjata</th>
                   <th className="p-4 font-medium">Rarity</th>
                   <th className="p-4 font-medium text-center">Cost</th>

@@ -42,7 +42,7 @@ export default function KarakterPreviewModal({ previewKarakter, setPreviewKarakt
             <div className="space-y-4">
               <div className="grid grid-cols-2 gap-4">
                 <div className="flex flex-col">
-                  <span className="text-gray-500 text-[10px] uppercase tracking-wider font-semibold mb-1">Vision</span>
+                  <span className="text-gray-500 text-[10px] uppercase tracking-wider font-semibold mb-1">Elemen</span>
                   <div className="flex items-center gap-2">
                     {VISIONS.find(v => v.name === previewKarakter.vision)?.icon && (
                       <img src={VISIONS.find(v => v.name === previewKarakter.vision).icon} alt={previewKarakter.vision} className="w-6 h-6" />
