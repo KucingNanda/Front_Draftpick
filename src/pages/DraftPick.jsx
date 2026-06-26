@@ -9,6 +9,7 @@ import { usePdfExport } from '../hooks/usePdfExport';
 import TeamPanel from '../components/organisms/TeamPanel';
 import CharacterSelectorModal from '../components/organisms/CharacterSelectorModal';
 import ArenaHeader from '../components/organisms/ArenaHeader';
+import DraftRulesModal from '../components/organisms/DraftRulesModal';
 
 export default function DraftPick() {
   const navigate = useNavigate();
@@ -21,6 +22,7 @@ export default function DraftPick() {
   const [isMuted, setIsMuted] = useState(false);
   const [bgms, setBgms] = useState([]);
   const [currentTrackIndex, setCurrentTrackIndex] = useState(0);
+  const [isRulesOpen, setIsRulesOpen] = useState(false);
 
   useEffect(() => {
     api(`${import.meta.env.VITE_API_BASE_URL}/api/bgm`)
@@ -123,6 +125,7 @@ export default function DraftPick() {
         handleExit={handleExit}
         playerA={playerA}
         playerB={playerB}
+        onOpenRules={() => setIsRulesOpen(true)}
       />
 
       {/* AUDIO BGM (Playlist Mode) */}
@@ -193,6 +196,11 @@ export default function DraftPick() {
         filteredModalCharacters={filteredModalCharacters}
         onClose={() => setActiveSlot(null)}
         onSelectCharacter={handleSelectCharacter}
+      />
+
+      <DraftRulesModal 
+        isOpen={isRulesOpen}
+        onClose={() => setIsRulesOpen(false)}
       />
 
     </div>

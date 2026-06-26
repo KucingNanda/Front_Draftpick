@@ -1,9 +1,10 @@
 import { useState, useEffect, useMemo } from 'react';
 import { Link } from 'react-router-dom';
-import { Swords, Users, UserPlus, Sparkles, Clock, Crown, Star } from 'lucide-react';
+import { Swords, Users, UserPlus, Sparkles, Clock, Crown, Star, ShieldAlert } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { useApi } from '../hooks/useApi';
 import { ELEMENS, REGIONS } from '../utils/constants';
+import DraftRulesModal from '../components/organisms/DraftRulesModal';
 
 export default function Dashboard() {
   const { isGuest } = useAuth();
@@ -12,6 +13,7 @@ export default function Dashboard() {
   const [karakters, setKarakters] = useState([]);
   const [settings, setSettings] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [isRulesOpen, setIsRulesOpen] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -68,12 +70,18 @@ export default function Dashboard() {
       {/* HEADER */}
       <div className="text-center mb-12 relative">
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-64 h-64 bg-blue-500/10 blur-[100px] rounded-full pointer-events-none"></div>
-        <h1 className="text-4xl md:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-400 to-blue-400 mb-4 tracking-tight">
+        <h1 className="text-4xl md:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-400 to-blue-400 mb-4 pb-2 tracking-tight">
           Selamat Datang di Draft Pick
         </h1>
-        <p className="text-lg text-gray-400 max-w-2xl mx-auto">
+        <p className="text-lg text-gray-400 max-w-2xl mx-auto mb-6">
           Mulai persaingan strategi tingkat tinggi, kelola daftar pahlawan Anda, dan pantau peserta turnamen.
         </p>
+        <button 
+          onClick={() => setIsRulesOpen(true)} 
+          className="inline-flex items-center gap-2 bg-gray-900/60 hover:bg-gray-800 border border-blue-500/30 hover:border-blue-500/80 text-blue-400 px-6 py-2.5 rounded-full transition-all shadow-lg hover:shadow-blue-500/20 backdrop-blur-md font-medium"
+        >
+          <ShieldAlert size={18} /> Baca Panduan & Aturan
+        </button>
       </div>
 
       {/* SPOTLIGHT SECTION (DI ATAS) */}
@@ -272,6 +280,10 @@ export default function Dashboard() {
         </div>
       </div>
 
+      <DraftRulesModal 
+        isOpen={isRulesOpen}
+        onClose={() => setIsRulesOpen(false)}
+      />
     </div>
   );
 }

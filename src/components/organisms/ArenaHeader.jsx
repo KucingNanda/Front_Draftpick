@@ -1,4 +1,4 @@
-import { Play, Pause, Volume2, VolumeX, SkipForward, Download, X, Save } from 'lucide-react';
+import { Play, Pause, Volume2, VolumeX, SkipForward, Download, X, Save, ShieldAlert } from 'lucide-react';
 import Swal from 'sweetalert2';
 import { useAuth } from '../../context/AuthContext';
 import { useApi } from '../../hooks/useApi';
@@ -18,7 +18,8 @@ export default function ArenaHeader({
   exportToPDF,
   handleExit,
   playerA,
-  playerB
+  playerB,
+  onOpenRules
 }) {
   const { isGuest, role } = useAuth();
   const api = useApi();
@@ -154,6 +155,15 @@ export default function ArenaHeader({
       </div>
       
       <div className="flex-1 flex justify-end gap-3">
+        {/* Tombol Aturan */}
+        <button 
+          onClick={onOpenRules}
+          className="flex items-center justify-center p-2 bg-blue-900/40 hover:bg-blue-800/60 text-blue-400 rounded-lg transition-colors border border-blue-900/50"
+          title="Aturan Main"
+        >
+          <ShieldAlert size={20} />
+        </button>
+
         {/* Opsi Simpan Ganda (Jika Selesai) */}
         {isDraftComplete && (
           <button 
