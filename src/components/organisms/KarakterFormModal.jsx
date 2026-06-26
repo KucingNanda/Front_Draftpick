@@ -18,9 +18,11 @@ export default function KarakterFormModal({
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
+  const previewUrl = imageFile ? URL.createObjectURL(imageFile) : formData.imageUrl;
+
   return (
     <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-      <div className="bg-gray-800 border border-gray-700 rounded-2xl w-full max-w-lg shadow-2xl overflow-hidden">
+      <div className="bg-gray-800 border border-gray-700 rounded-2xl w-full max-w-4xl shadow-2xl overflow-hidden flex flex-col">
         <div className="flex justify-between items-center p-6 border-b border-gray-700 bg-gray-800/50">
           <h2 className="text-xl font-bold text-white">
             {formData.id ? 'Edit Karakter' : 'Tambah Karakter'}
@@ -30,8 +32,40 @@ export default function KarakterFormModal({
           </button>
         </div>
         
-        <form onSubmit={handleSubmit} className="p-6 space-y-4">
-          <div>
+        <form onSubmit={handleSubmit} className="p-6 flex flex-col">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-6">
+            {/* Kolom Kiri: Image Preview */}
+            <div className="col-span-1 flex flex-col gap-4">
+              <label className="block text-sm font-medium text-gray-400">Foto Karakter</label>
+              <div className="aspect-square w-full bg-gray-900 border-2 border-dashed border-gray-700 rounded-xl flex items-center justify-center overflow-hidden relative group transition-colors hover:border-blue-500">
+                {previewUrl ? (
+                  <img src={previewUrl} alt="Preview" className="w-full h-full object-cover group-hover:opacity-50 transition-opacity" />
+                ) : (
+                  <div className="text-gray-500 text-center p-4">
+                    <span className="block text-4xl mb-2">📸</span>
+                    <span className="text-sm">Klik untuk memilih foto</span>
+                  </div>
+                )}
+                {/* Input File Overlay (Invisible but clickable) */}
+                <input 
+                  type="file" 
+                  accept="image/*"
+                  onChange={handleFileChange}
+                  required={!formData.imageUrl} 
+                  className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+                  title="Klik untuk memilih foto"
+                />
+                {previewUrl && (
+                  <div className="absolute inset-0 pointer-events-none flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                    <span className="bg-black/70 text-white px-3 py-1.5 text-sm font-medium rounded-lg backdrop-blur-sm">Ganti Foto</span>
+                  </div>
+                )}
+              </div>
+            </div>
+            
+            {/* Kolom Kanan: Input Data */}
+            <div className="col-span-1 md:col-span-2 space-y-5">
+              <div>
             <label className="block text-sm font-medium text-gray-400 mb-1">Nama Karakter</label>
             <input 
               type="text" 
@@ -94,21 +128,10 @@ export default function KarakterFormModal({
             <p className="text-xs text-gray-500 mt-1">*Cost akan dihitung otomatis oleh server.</p>
           </div>
 
-          <div>
-            <label className="block text-sm font-medium text-gray-400 mb-1">Foto Karakter</label>
-            {formData.imageUrl && !imageFile && (
-              <div className="mb-2 text-sm text-green-400">Gambar saat ini sudah tersimpan. Pilih file baru untuk mengganti.</div>
-            )}
-            <input 
-              type="file" 
-              accept="image/*"
-              onChange={handleFileChange}
-              required={!formData.imageUrl} 
-              className="w-full bg-gray-900 border border-gray-700 rounded-lg px-4 py-2 text-gray-300 focus:outline-none file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-600 file:text-white hover:file:bg-blue-500 transition-all"
-            />
+            </div>
           </div>
 
-          <div className="pt-4 flex justify-end gap-3 border-t border-gray-700 mt-6">
+          <div className="pt-5 flex justify-end gap-3 border-t border-gray-700">
             <button 
               type="button" 
               onClick={handleCloseModal}
