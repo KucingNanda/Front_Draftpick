@@ -1,5 +1,5 @@
 import { X } from 'lucide-react';
-import { VISIONS, SENJATAS, RARITIES } from '../../utils/constants';
+import { VISIONS, SENJATAS, RARITIES, REGIONS, SINERGIS } from '../../utils/constants';
 
 export default function KarakterFormModal({
   isOpen,
@@ -16,6 +16,15 @@ export default function KarakterFormModal({
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleDateChange = (e) => {
+    const dateVal = e.target.value;
+    if (!dateVal) return;
+    const dateObj = new Date(dateVal);
+    // Pastikan locale bahasa indonesia ("27 September")
+    const text = dateObj.toLocaleDateString('id-ID', { day: 'numeric', month: 'long' });
+    setFormData((prev) => ({ ...prev, ulangTahun: text }));
   };
 
   const previewUrl = imageFile ? URL.createObjectURL(imageFile) : formData.imageUrl;
@@ -64,69 +73,143 @@ export default function KarakterFormModal({
             </div>
             
             {/* Kolom Kanan: Input Data */}
-            <div className="col-span-1 md:col-span-2 space-y-5">
-              <div>
-            <label className="block text-sm font-medium text-gray-400 mb-1">Nama Karakter</label>
-            <input 
-              type="text" 
-              name="nama"
-              value={formData.nama}
-              onChange={handleChange}
-              required
-              className="w-full bg-gray-900 border border-gray-700 rounded-lg px-4 py-2.5 text-white focus:outline-none focus:border-blue-500 transition-colors"
-            />
-          </div>
-          
-          <div>
-            <label className="block text-sm font-medium text-gray-400 mb-2">Vision</label>
-            <div className="flex flex-wrap gap-2">
-              {VISIONS.map(v => (
-                <div 
-                  key={v.name}
-                  onClick={() => setFormData(prev => ({...prev, vision: v.name}))}
-                  className={`w-10 h-10 rounded-lg border-2 cursor-pointer flex items-center justify-center transition-all ${formData.vision === v.name ? 'border-blue-500 bg-blue-500/20 scale-110' : 'border-gray-700 bg-gray-900 hover:border-gray-500'}`}
-                  title={v.name}
-                >
-                  {v.icon ? (
-                    <img src={v.icon} alt={v.name} className="w-6 h-6" />
-                  ) : (
-                    <span className="text-xs font-bold text-gray-500">FLX</span>
-                  )}
+            <div className="col-span-1 md:col-span-2 flex flex-col gap-6 overflow-y-auto custom-scrollbar max-h-[70vh] pr-2">
+              
+              {/* KATEGORI 1: Informasi Turnamen */}
+              <div className="bg-gray-900/50 p-5 rounded-xl border border-gray-700 space-y-4">
+                <h3 className="text-xs font-bold text-blue-400 border-b border-gray-700 pb-2 uppercase tracking-wider">Informasi Turnamen</h3>
+                
+                <div>
+                  <label className="block text-sm font-medium text-gray-400 mb-1">Nama Karakter</label>
+                  <input 
+                    type="text" 
+                    name="nama"
+                    value={formData.nama || ''}
+                    onChange={handleChange}
+                    required
+                    className="w-full bg-gray-900 border border-gray-700 rounded-lg px-4 py-2.5 text-white focus:outline-none focus:border-blue-500 transition-colors"
+                  />
                 </div>
-              ))}
-            </div>
-          </div>
 
-          <div>
-            <label className="block text-sm font-medium text-gray-400 mb-2">Senjata</label>
-            <div className="flex flex-wrap gap-2">
-              {SENJATAS.map(s => (
-                <div 
-                  key={s.name}
-                  onClick={() => setFormData(prev => ({...prev, senjata: s.name}))}
-                  className={`w-10 h-10 rounded-lg border-2 cursor-pointer flex items-center justify-center transition-all ${formData.senjata === s.name ? 'border-blue-500 bg-blue-500/20 scale-110' : 'border-gray-700 bg-gray-900 hover:border-gray-500'}`}
-                  title={s.name}
-                >
-                  {s.icon && <img src={s.icon} alt={s.name} className="w-6 h-6 opacity-80" />}
+                <div>
+                  <label className="block text-sm font-medium text-gray-400 mb-1">Rarity</label>
+                  <select 
+                    name="rarity"
+                    value={formData.rarity || ''}
+                    onChange={handleChange}
+                    required
+                    className="w-full bg-gray-900 border border-gray-700 rounded-lg px-4 py-2.5 text-white focus:outline-none focus:border-blue-500 transition-colors appearance-none"
+                  >
+                    <option value="" disabled>--- Pilih ---</option>
+                    {RARITIES.map(r => <option key={r} value={r}>{r}</option>)}
+                  </select>
+                  <p className="text-xs text-gray-500 mt-1">*Cost akan dihitung otomatis oleh server berdasarkan Rarity.</p>
                 </div>
-              ))}
-            </div>
-          </div>
+              
+                <div>
+                  <label className="block text-sm font-medium text-gray-400 mb-2">Vision</label>
+                  <div className="flex flex-wrap gap-2">
+                    {VISIONS.map(v => (
+                      <div 
+                        key={v.name}
+                        onClick={() => setFormData(prev => ({...prev, vision: v.name}))}
+                        className={`w-10 h-10 rounded-lg border-2 cursor-pointer flex items-center justify-center transition-all ${formData.vision === v.name ? 'border-blue-500 bg-blue-500/20 scale-110' : 'border-gray-700 bg-gray-900 hover:border-gray-500'}`}
+                        title={v.name}
+                      >
+                        {v.icon ? (
+                          <img src={v.icon} alt={v.name} className="w-6 h-6" />
+                        ) : (
+                          <span className="text-xs font-bold text-gray-500">FLX</span>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                </div>
 
-          <div>
-            <label className="block text-sm font-medium text-gray-400 mb-1">Rarity</label>
-            <select 
-              name="rarity"
-              value={formData.rarity}
-              onChange={handleChange}
-              required
-              className="w-full bg-gray-900 border border-gray-700 rounded-lg px-4 py-2.5 text-white focus:outline-none focus:border-blue-500 transition-colors appearance-none"
-            >
-              <option value="" disabled>--- Pilih ---</option>
-              {RARITIES.map(r => <option key={r} value={r}>{r}</option>)}
-            </select>
-            <p className="text-xs text-gray-500 mt-1">*Cost akan dihitung otomatis oleh server.</p>
-          </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-400 mb-2">Senjata</label>
+                  <div className="flex flex-wrap gap-2">
+                    {SENJATAS.map(s => (
+                      <div 
+                        key={s.name}
+                        onClick={() => setFormData(prev => ({...prev, senjata: s.name}))}
+                        className={`w-10 h-10 rounded-lg border-2 cursor-pointer flex items-center justify-center transition-all ${formData.senjata === s.name ? 'border-blue-500 bg-blue-500/20 scale-110' : 'border-gray-700 bg-gray-900 hover:border-gray-500'}`}
+                        title={s.name}
+                      >
+                        {s.icon && <img src={s.icon} alt={s.name} className="w-6 h-6 opacity-80" />}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-400 mb-1">Sinergi / Buff Khusus</label>
+                  <select 
+                    name="sinergi"
+                    value={formData.sinergi || 'Tidak Ada'}
+                    onChange={handleChange}
+                    className="w-full bg-gray-900 border border-gray-700 rounded-lg px-4 py-2.5 text-white focus:outline-none focus:border-blue-500 transition-colors appearance-none"
+                  >
+                    {SINERGIS.map(s => <option key={s} value={s}>{s}</option>)}
+                  </select>
+                </div>
+              </div>
+
+              {/* KATEGORI 2: Biodata Karakter */}
+              <div className="bg-gray-900/50 p-5 rounded-xl border border-gray-700 space-y-4">
+                <h3 className="text-xs font-bold text-purple-400 border-b border-gray-700 pb-2 uppercase tracking-wider">Biodata Karakter (Lore)</h3>
+                
+                <div>
+                  <label className="block text-sm font-medium text-gray-400 mb-1">Konstelasi</label>
+                  <input 
+                    type="text" 
+                    name="konstelasi"
+                    value={formData.konstelasi || ''}
+                    onChange={handleChange}
+                    placeholder="Contoh: Viator"
+                    className="w-full bg-gray-900 border border-gray-700 rounded-lg px-4 py-2.5 text-white focus:outline-none focus:border-purple-500 transition-colors"
+                  />
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-sm font-medium text-gray-400 mb-1">Region Asal</label>
+                    <select 
+                      name="region"
+                      value={formData.region || 'Tidak Ada'}
+                      onChange={handleChange}
+                      className="w-full bg-gray-900 border border-gray-700 rounded-lg px-4 py-2.5 text-white focus:outline-none focus:border-purple-500 transition-colors appearance-none"
+                    >
+                      {REGIONS.map(r => <option key={r} value={r}>{r}</option>)}
+                    </select>
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium text-gray-400 mb-1">Ulang Tahun</label>
+                    <div className="flex items-center gap-2">
+                      <div className="relative">
+                        <input 
+                          type="date" 
+                          onChange={handleDateChange}
+                          className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+                          title="Buka Kalender"
+                        />
+                        <div className="bg-gray-900 border border-gray-700 rounded-lg p-2.5 flex items-center justify-center hover:border-purple-500 transition-colors">
+                          📅
+                        </div>
+                      </div>
+                      <input 
+                        type="text"
+                        name="ulangTahun"
+                        value={formData.ulangTahun || ''}
+                        onChange={handleChange}
+                        placeholder="Misal: 27 September"
+                        className="flex-1 w-full bg-gray-900 border border-gray-700 rounded-lg px-3 py-2.5 text-white focus:outline-none focus:border-purple-500 transition-colors"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
 
             </div>
           </div>

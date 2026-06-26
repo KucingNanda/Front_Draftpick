@@ -23,3 +23,21 @@ export const RARITIES = [
   "5 Star Standar", 
   "5 Star Khusus"
 ];
+
+export const REGIONS = [
+  "Mondstadt",
+  "Liyue",
+  "Inazuma",
+  "Sumeru",
+  "Fontaine",
+  "Natlan",
+  "Nod-Krai",
+  "Snezhnaya",
+  "Tidak Ada"
+];
+
+export const SINERGIS = [
+  "Moonsign",
+  "Hexerei",
+  "Tidak Ada"
+];

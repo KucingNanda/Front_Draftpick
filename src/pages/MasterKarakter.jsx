@@ -35,7 +35,11 @@ export default function MasterKarakter() {
     vision: '',
     senjata: '',
     rarity: '',
-    imageUrl: ''
+    imageUrl: '',
+    konstelasi: '',
+    ulangTahun: '',
+    region: 'Tidak Ada',
+    sinergi: 'Tidak Ada'
   });
 
   const fetchKarakters = () => {
@@ -66,7 +70,11 @@ export default function MasterKarakter() {
         vision: '',
         senjata: '',
         rarity: '',
-        imageUrl: ''
+        imageUrl: '',
+        konstelasi: '',
+        ulangTahun: '',
+        region: 'Tidak Ada',
+        sinergi: 'Tidak Ada'
       });
     }
     setImageFile(null); // Reset file input
@@ -96,7 +104,11 @@ export default function MasterKarakter() {
       vision: formData.vision,
       senjata: formData.senjata,
       rarity: formData.rarity,
-      imageUrl: finalImageUrl || formData.imageUrl
+      imageUrl: finalImageUrl || formData.imageUrl,
+      konstelasi: formData.konstelasi,
+      ulangTahun: formData.ulangTahun,
+      region: formData.region,
+      sinergi: formData.sinergi
     };
 
     const url = formData.id 

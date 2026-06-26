@@ -40,22 +40,47 @@ export default function KarakterPreviewModal({ previewKarakter, setPreviewKarakt
             <p className="text-yellow-500 font-semibold text-sm mb-6">{previewKarakter.rarity}</p>
 
             <div className="space-y-4">
-              <div className="flex flex-col">
-                <span className="text-gray-500 text-xs uppercase tracking-wider font-semibold mb-1">Vision</span>
-                <div className="flex items-center gap-2">
-                  {VISIONS.find(v => v.name === previewKarakter.vision)?.icon && (
-                    <img src={VISIONS.find(v => v.name === previewKarakter.vision).icon} alt={previewKarakter.vision} className="w-8 h-8" />
-                  )}
-                  <span className="text-white text-lg font-medium">{previewKarakter.vision || '-'}</span>
+              <div className="grid grid-cols-2 gap-4">
+                <div className="flex flex-col">
+                  <span className="text-gray-500 text-[10px] uppercase tracking-wider font-semibold mb-1">Vision</span>
+                  <div className="flex items-center gap-2">
+                    {VISIONS.find(v => v.name === previewKarakter.vision)?.icon && (
+                      <img src={VISIONS.find(v => v.name === previewKarakter.vision).icon} alt={previewKarakter.vision} className="w-6 h-6" />
+                    )}
+                    <span className="text-white text-sm font-medium">{previewKarakter.vision || '-'}</span>
+                  </div>
                 </div>
+                <div className="flex flex-col">
+                  <span className="text-gray-500 text-[10px] uppercase tracking-wider font-semibold mb-1">Senjata</span>
+                  <div className="flex items-center gap-2">
+                    {SENJATAS.find(s => s.name === previewKarakter.senjata)?.icon && (
+                      <img src={SENJATAS.find(s => s.name === previewKarakter.senjata).icon} alt={previewKarakter.senjata} className="w-6 h-6 opacity-80" />
+                    )}
+                    <span className="text-white text-sm font-medium">{previewKarakter.senjata || '-'}</span>
+                  </div>
+                </div>
+                {previewKarakter.sinergi && previewKarakter.sinergi !== 'Tidak Ada' && (
+                  <div className="flex flex-col col-span-2 mt-1">
+                    <span className="text-gray-500 text-[10px] uppercase tracking-wider font-semibold mb-1">Sinergi Turnamen</span>
+                    <span className="text-blue-400 text-sm font-medium bg-blue-900/20 px-2.5 py-1 rounded-md inline-block w-fit border border-blue-900/50 shadow-sm shadow-blue-900/20">{previewKarakter.sinergi}</span>
+                  </div>
+                )}
               </div>
-              <div className="flex flex-col">
-                <span className="text-gray-500 text-xs uppercase tracking-wider font-semibold mb-1">Senjata</span>
-                <div className="flex items-center gap-2">
-                  {SENJATAS.find(s => s.name === previewKarakter.senjata)?.icon && (
-                    <img src={SENJATAS.find(s => s.name === previewKarakter.senjata).icon} alt={previewKarakter.senjata} className="w-8 h-8 opacity-80" />
-                  )}
-                  <span className="text-white text-lg font-medium">{previewKarakter.senjata || '-'}</span>
+
+              <hr className="border-gray-700/80 my-4" />
+
+              <div className="grid grid-cols-2 gap-y-3 gap-x-4">
+                <div className="flex flex-col">
+                  <span className="text-gray-500 text-[10px] uppercase tracking-wider font-semibold mb-0.5">Region Asal</span>
+                  <span className="text-gray-300 text-sm">{previewKarakter.region || '-'}</span>
+                </div>
+                <div className="flex flex-col">
+                  <span className="text-gray-500 text-[10px] uppercase tracking-wider font-semibold mb-0.5">Ulang Tahun</span>
+                  <span className="text-gray-300 text-sm">{previewKarakter.ulangTahun || '-'}</span>
+                </div>
+                <div className="flex flex-col col-span-2">
+                  <span className="text-gray-500 text-[10px] uppercase tracking-wider font-semibold mb-0.5">Konstelasi</span>
+                  <span className="text-gray-300 text-sm">{previewKarakter.konstelasi || '-'}</span>
                 </div>
               </div>
             </div>
