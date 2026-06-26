@@ -1,5 +1,5 @@
 import { X, Edit2, Trash2, Image as ImageIcon } from 'lucide-react';
-import { ELEMENS, SENJATAS } from '../../utils/constants';
+import { ELEMENS, SENJATAS, REGIONS } from '../../utils/constants';
 import { useAuth } from '../../context/AuthContext';
 
 export default function KarakterPreviewModal({ previewKarakter, setPreviewKarakter, handleOpenModal, handleDelete }) {
@@ -72,7 +72,12 @@ export default function KarakterPreviewModal({ previewKarakter, setPreviewKarakt
               <div className="grid grid-cols-2 gap-y-3 gap-x-4">
                 <div className="flex flex-col">
                   <span className="text-gray-500 text-[10px] uppercase tracking-wider font-semibold mb-0.5">Region Asal</span>
-                  <span className="text-gray-300 text-sm">{previewKarakter.region || '-'}</span>
+                  <div className="flex items-center gap-2">
+                    {REGIONS.find(r => r.name === previewKarakter.region)?.icon && (
+                      <img src={REGIONS.find(r => r.name === previewKarakter.region).icon} alt={previewKarakter.region} className="w-5 h-5 opacity-90" />
+                    )}
+                    <span className="text-gray-300 text-sm">{previewKarakter.region || '-'}</span>
+                  </div>
                 </div>
                 <div className="flex flex-col">
                   <span className="text-gray-500 text-[10px] uppercase tracking-wider font-semibold mb-0.5">Ulang Tahun</span>

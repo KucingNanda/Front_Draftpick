@@ -180,7 +180,7 @@ export default function KarakterFormModal({
                       onChange={handleChange}
                       className="w-full bg-gray-900 border border-gray-700 rounded-lg px-4 py-2.5 text-white focus:outline-none focus:border-purple-500 transition-colors appearance-none"
                     >
-                      {REGIONS.map(r => <option key={r} value={r}>{r}</option>)}
+                      {REGIONS.map(r => <option key={r.name} value={r.name}>{r.name}</option>)}
                     </select>
                   </div>
 

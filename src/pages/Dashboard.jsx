@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { Swords, Users, UserPlus, Sparkles, Clock, Crown, Star } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { useApi } from '../hooks/useApi';
-import { ELEMENS } from '../utils/constants';
+import { ELEMENS, REGIONS } from '../utils/constants';
 
 export default function Dashboard() {
   const { isGuest } = useAuth();
@@ -55,6 +55,12 @@ export default function Dashboard() {
   const getElemenIcon = (elemenName) => {
     const el = ELEMENS.find(e => e.name === elemenName);
     return el && el.icon ? el.icon : null;
+  };
+
+  // Helper untuk mendapatkan icon region
+  const getRegionIcon = (regionName) => {
+    const r = REGIONS.find(e => e.name === regionName);
+    return r && r.icon ? r.icon : null;
   };
 
   return (
@@ -126,7 +132,10 @@ export default function Dashboard() {
                       <span className="text-xs bg-gray-900/60 border border-gray-700 text-gray-300 px-3 py-1 rounded-full backdrop-blur-sm">
                         {specialKarakter.senjata}
                       </span>
-                      <span className="text-xs bg-gray-900/60 border border-gray-700 text-gray-300 px-3 py-1 rounded-full backdrop-blur-sm">
+                      <span className="text-xs bg-gray-900/60 border border-gray-700 text-gray-300 px-3 py-1 rounded-full backdrop-blur-sm flex items-center gap-1.5">
+                        {getRegionIcon(specialKarakter.region) && (
+                          <img src={getRegionIcon(specialKarakter.region)} alt={specialKarakter.region} className="w-4 h-4 opacity-90" />
+                        )}
                         {specialKarakter.region}
                       </span>
                     </div>
@@ -175,6 +184,12 @@ export default function Dashboard() {
                         </p>
                         <span className="text-[10px] bg-gray-900/60 border border-gray-700 text-gray-300 px-2 py-0.5 rounded-full inline-block">
                           {k.senjata}
+                        </span>
+                        <span className="text-[10px] bg-gray-900/60 border border-gray-700 text-gray-300 px-2 py-0.5 rounded-full inline-flex items-center gap-1 ml-1">
+                          {getRegionIcon(k.region) && (
+                            <img src={getRegionIcon(k.region)} alt={k.region} className="w-3 h-3 opacity-90" />
+                          )}
+                          {k.region}
                         </span>
                       </div>
                     </div>

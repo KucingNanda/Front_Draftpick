@@ -25,15 +25,15 @@ export const RARITIES = [
 ];
 
 export const REGIONS = [
-  "Mondstadt",
-  "Liyue",
-  "Inazuma",
-  "Sumeru",
-  "Fontaine",
-  "Natlan",
-  "Nod-Krai",
-  "Snezhnaya",
-  "Tidak Ada"
+  { name: "Mondstadt", icon: "https://res.cloudinary.com/dene5omzy/image/upload/v1782484929/Mondstadt_Emblem_Night_wlycsw.png" },
+  { name: "Liyue", icon: "https://res.cloudinary.com/dene5omzy/image/upload/v1782484929/Liyue_Emblem_Night_zqzjxx.png" },
+  { name: "Inazuma", icon: "https://res.cloudinary.com/dene5omzy/image/upload/v1782484929/Inazuma_Emblem_Night_evo22p.png" },
+  { name: "Sumeru", icon: "https://res.cloudinary.com/dene5omzy/image/upload/v1782484930/Sumeru_Emblem_Night_bq7yer.png" },
+  { name: "Fontaine", icon: "https://res.cloudinary.com/dene5omzy/image/upload/v1782484929/Fontaine_Emblem_Night_brwyyc.png" },
+  { name: "Natlan", icon: "https://res.cloudinary.com/dene5omzy/image/upload/v1782484930/Natlan_Emblem_Night_kbnrf6.png" },
+  { name: "Snezhnaya", icon: "https://res.cloudinary.com/dene5omzy/image/upload/v1782485066/Emblem_Snezhnaya_qabfzf.png" },
+  { name: "Nod-Krai", icon: "https://res.cloudinary.com/dene5omzy/image/upload/v1782484930/Nod-Krai_Emblem_Night_se8wyv.png" },
+  { name: "Tidak Ada", icon: null }
 ];
 
 export const SINERGIS = [
