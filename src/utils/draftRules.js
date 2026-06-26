@@ -50,11 +50,21 @@ export const getLockedIdsForPlayer = (draftState, settings, currentPlayer, curre
         if (!isTraveler) {
           if (half === currentHalf) {
             const isFree = settings.free4StarId > 0 && c.id === settings.free4StarId && (settings.free4StarHalf === 'all' || settings.free4StarHalf === currentHalf);
-            if (c.cost === 1 && registeredIds.includes(c.id)) {
-              // Pengecualian C1: Boleh Mirror Match
+            
+            const isB5Standard = c.rarity === '5 Star Standar';
+            const isB5LimitedRegistered = c.rarity === '5 Star Limited' && registeredIds.includes(c.id);
+            const isB4 = c.rarity === '4 Star';
+
+            if (isB5Standard) {
+              // Bebas mirror B5 Standard
+            } else if (isB5LimitedRegistered) {
+              // Bebas mirror B5 Limited yang didaftarkan (Punya Sendiri)
             } else if (isFree) {
-              // Free 4-Star Rule: Boleh Mirror Match
+              // Bebas mirror Karakter Spesial
+            } else if (isB4) {
+              // B4 bisa di-mirror 1x per pemain. Sistem tidak memblokir UI agar referee bisa mengizinkan pick 1x tersebut.
             } else {
+              // Yang diblokir adalah B5 Limited yang TIDAK didaftarkan (milik lawan murni)
               locked.push(c.id);
             }
           }

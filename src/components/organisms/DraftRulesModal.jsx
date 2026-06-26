@@ -57,14 +57,14 @@ export default function DraftRulesModal({ isOpen, onClose }) {
           {/* Rule 3: Sistem Pick & Mirror Match */}
           <div className="bg-gray-800/50 p-6 rounded-2xl border border-gray-700/50 shadow-inner">
             <h3 className="text-lg font-bold text-purple-400 flex items-center gap-2 mb-4">
-              <Zap size={20} /> 3. Sistem Pick & Pengecualian (Mirror)
+              <Zap size={20} /> 3. Sistem Pick & Pengecualian (Mirror Match)
             </h3>
             <ul className="list-disc list-inside text-gray-300 space-y-2 text-sm md:text-base ml-2">
               <li>Secara umum, pemain <strong>tidak boleh</strong> memilih karakter yang sudah di-pick oleh lawan.</li>
-              <li><strong>Pengecualian (Boleh Mirror Match):</strong> Anda tetap bisa memilih karakter yang dipakai lawan JIKA karakter tersebut adalah:
-                <ul className="list-[circle] list-inside ml-6 mt-1 text-gray-400">
-                  <li><strong>Karakter C1:</strong> Karakter Bintang 5 yang terdaftar dengan Konstelasi 1.</li>
-                  <li><strong>Karakter Spesial:</strong> Karakter Bintang 4 Gratis minggu ini (sesuai babak yang ditentukan).</li>
+              <li><strong>Pengecualian (Boleh Mirror Match):</strong>
+                <ul className="list-[circle] list-inside ml-6 mt-1 text-gray-400 space-y-1">
+                  <li><strong>Karakter Bintang 5:</strong> B5 Limited yang Anda daftarkan dan semua B5 Standar <strong>bebas</strong> di-mirror kapan saja tanpa batas.</li>
+                  <li><strong>Karakter Bintang 4 (1x Kesempatan):</strong> Setiap pemain memiliki jatah maksimal <strong>1x Mirror Pick Bintang 4</strong> dalam satu pertandingan (bisa dipakai di First atau Second Half).</li>
                 </ul>
               </li>
             </ul>
@@ -76,8 +76,8 @@ export default function DraftRulesModal({ isOpen, onClose }) {
               <Crown size={20} /> 4. Keistimewaan Khusus
             </h3>
             <ul className="list-disc list-inside text-gray-300 space-y-2 text-sm md:text-base ml-2">
-              <li><strong>Traveler</strong> memiliki keistimewaan absolut. Mereka kebal terhadap semua aturan Ban dan bebas digunakan kapan saja.</li>
-              <li><strong>Karakter Spesial (Free 4-Star)</strong> kebal terhadap aturan Ban jika dimainkan pada babak yang telah diizinkan oleh sistem.</li>
+              <li><strong>Traveler</strong> memiliki keistimewaan absolut. Mereka kebal terhadap aturan Ban maupun Mirror Match, dan bebas digunakan kapan saja.</li>
+              <li><strong>Karakter Spesial (Free 4-Star)</strong> kebal terhadap aturan Ban dan kebal dari larangan Mirror Match jika dimainkan pada babak yang telah diizinkan oleh sistem.</li>
             </ul>
           </div>
 
