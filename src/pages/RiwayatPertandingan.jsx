@@ -14,12 +14,6 @@ export default function RiwayatPertandingan() {
   const [selectedHistory, setSelectedHistory] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
-  useEffect(() => {
-    if (token && (isWasit || isPeserta)) {
-      fetchHistories();
-    }
-  }, [token, role]);
-
   const fetchHistories = async () => {
     setIsLoading(true);
     try {
@@ -35,6 +29,11 @@ export default function RiwayatPertandingan() {
     }
   };
 
+  useEffect(() => {
+    if (token && (isWasit || isPeserta)) {
+      fetchHistories();
+    }
+  }, [token, role, api, isWasit, isPeserta]);
   const handleDelete = async (id) => {
     Swal.fire({
       title: 'Hapus Riwayat?',

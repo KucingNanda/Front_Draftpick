@@ -21,10 +21,6 @@ export default function MasterPeserta() {
   // Format state: { "charId": isC1_boolean } -> { "1": true, "5": false }
   const [selectedChars, setSelectedChars] = useState({});
 
-  useEffect(() => {
-    fetchData();
-  }, []);
-
   const fetchData = async () => {
     try {
       const resP = await api(`${import.meta.env.VITE_API_BASE_URL}/api/peserta`);
@@ -40,6 +36,9 @@ export default function MasterPeserta() {
     }
   };
 
+  useEffect(() => {
+    fetchData();
+  }, [api]);
   const handleOpenModal = (peserta = null) => {
     if (peserta) {
       setEditingId(peserta.id);

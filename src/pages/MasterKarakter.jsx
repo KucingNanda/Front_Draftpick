@@ -130,14 +130,22 @@ export default function MasterKarakter() {
       method: method,
       body: JSON.stringify(payload)
     })
-      .then((res) => res.json())
+      .then(async (res) => {
+        const data = await res.json();
+        if (!res.ok) {
+          throw new Error(data.message || data.error || "Gagal menyimpan data karakter.");
+        }
+        return data;
+      })
       .then((data) => {
         fetchKarakters();
         handleCloseModal();
         setIsSubmitting(false);
+        Swal.fire('Berhasil!', data.message || 'Karakter berhasil disimpan.', 'success');
       })
       .catch((err) => {
         console.error("Error saving data:", err);
+        Swal.fire('Gagal!', err.message, 'error');
         setIsSubmitting(false);
       });
   };
