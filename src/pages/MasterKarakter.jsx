@@ -1,5 +1,5 @@
 import { useState, useEffect, useMemo } from 'react';
-import { Plus, Image as ImageIcon, Search, Filter, LayoutGrid, List, Eye, Pencil, Trash2 } from 'lucide-react';
+import { Plus, Image as ImageIcon, Search, Filter, LayoutGrid, List, Eye, Pencil, Trash2, ArrowUp, ArrowDown } from 'lucide-react';
 import Swal from 'sweetalert2';
 import { useAuth } from '../context/AuthContext';
 import { useApi } from '../hooks/useApi';
@@ -18,6 +18,15 @@ export default function MasterKarakter() {
   const [searchQuery, setSearchQuery] = useState('');
   const [filterRarity, setFilterRarity] = useState('');
   const [viewMode, setViewMode] = useState('grid');
+  const [sortConfig, setSortConfig] = useState({ key: 'id', direction: 'asc' });
+
+  const requestSort = (key) => {
+    let direction = 'asc';
+    if (sortConfig.key === key && sortConfig.direction === 'asc') {
+      direction = 'desc';
+    }
+    setSortConfig({ key, direction });
+  };
 
   // Modal State
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -197,14 +206,28 @@ export default function MasterKarakter() {
     });
   };
 
-  // Logika Filter Data
-  const filteredKarakters = useMemo(() => {
-    return karakters.filter(k => {
+  // Logika Filter dan Sort Data
+  const sortedAndFilteredKarakters = useMemo(() => {
+    let filtered = karakters.filter(k => {
       const matchSearch = k.nama.toLowerCase().includes(searchQuery.toLowerCase());
       const matchRarity = filterRarity === '' || k.rarity === filterRarity;
       return matchSearch && matchRarity;
     });
-  }, [karakters, searchQuery, filterRarity]);
+
+    filtered.sort((a, b) => {
+      let aVal = a[sortConfig.key];
+      let bVal = b[sortConfig.key];
+      
+      if (typeof aVal === 'string') aVal = aVal.toLowerCase();
+      if (typeof bVal === 'string') bVal = bVal.toLowerCase();
+
+      if (aVal < bVal) return sortConfig.direction === 'asc' ? -1 : 1;
+      if (aVal > bVal) return sortConfig.direction === 'asc' ? 1 : -1;
+      return 0;
+    });
+
+    return filtered;
+  }, [karakters, searchQuery, filterRarity, sortConfig]);
 
   return (
     <div className="max-w-7xl mx-auto pb-12">
@@ -276,7 +299,7 @@ export default function MasterKarakter() {
         </div>
       ) : viewMode === 'grid' ? (
         <div className="grid grid-cols-4 sm:grid-cols-5 md:grid-cols-6 lg:grid-cols-7 gap-3">
-          {filteredKarakters.map((karakter) => (
+          {sortedAndFilteredKarakters.map((karakter) => (
             <div
               key={karakter.id}
               onClick={() => setPreviewKarakter(karakter)}
@@ -307,7 +330,7 @@ export default function MasterKarakter() {
             </div>
           ))}
 
-          {filteredKarakters.length === 0 && (
+          {sortedAndFilteredKarakters.length === 0 && (
             <div className="col-span-full text-center py-16 bg-gray-800/50 rounded-xl border border-dashed border-gray-700">
               <p className="text-gray-400 text-lg mb-2">Tidak ada karakter yang ditemukan.</p>
             </div>
@@ -319,9 +342,33 @@ export default function MasterKarakter() {
             <table className="w-full text-left border-collapse">
               <thead>
                 <tr className="bg-gray-900/50 text-gray-400 border-b border-gray-700 text-sm">
-                  <th className="p-4 font-medium w-16 text-center">ID</th>
+                  <th 
+                    className="p-4 font-medium w-16 text-center cursor-pointer hover:text-white transition-colors group"
+                    onClick={() => requestSort('id')}
+                  >
+                    <div className="flex items-center justify-center gap-1">
+                      ID
+                      {sortConfig.key === 'id' ? (
+                        sortConfig.direction === 'asc' ? <ArrowUp size={14} className="text-blue-400" /> : <ArrowDown size={14} className="text-blue-400" />
+                      ) : (
+                        <ArrowUp size={14} className="opacity-0 group-hover:opacity-50" />
+                      )}
+                    </div>
+                  </th>
                   <th className="p-4 font-medium w-24 text-center">Gambar</th>
-                  <th className="p-4 font-medium">Nama Karakter</th>
+                  <th 
+                    className="p-4 font-medium cursor-pointer hover:text-white transition-colors group"
+                    onClick={() => requestSort('nama')}
+                  >
+                    <div className="flex items-center gap-1">
+                      Nama Karakter
+                      {sortConfig.key === 'nama' ? (
+                        sortConfig.direction === 'asc' ? <ArrowUp size={14} className="text-blue-400" /> : <ArrowDown size={14} className="text-blue-400" />
+                      ) : (
+                        <ArrowUp size={14} className="opacity-0 group-hover:opacity-50" />
+                      )}
+                    </div>
+                  </th>
                   <th className="p-4 font-medium">Elemen</th>
                   <th className="p-4 font-medium">Senjata</th>
                   <th className="p-4 font-medium">Rarity</th>
@@ -330,14 +377,14 @@ export default function MasterKarakter() {
                 </tr>
               </thead>
               <tbody>
-                {filteredKarakters.length === 0 ? (
+                {sortedAndFilteredKarakters.length === 0 ? (
                   <tr>
                     <td colSpan="8" className="p-8 text-center text-gray-500 bg-gray-800/50 border border-dashed border-gray-700">
                       Tidak ada karakter yang ditemukan.
                     </td>
                   </tr>
                 ) : (
-                  filteredKarakters.map((karakter) => (
+                  sortedAndFilteredKarakters.map((karakter) => (
                     <tr key={karakter.id} className="border-b border-gray-700/50 hover:bg-gray-700/20 transition-colors">
                       <td className="p-4 text-gray-400 text-center">#{karakter.id}</td>
                       <td className="p-4">
