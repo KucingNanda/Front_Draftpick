@@ -331,7 +331,7 @@ export default function MasterKarakter() {
               
               {/* Overlay Gradient Name */}
               <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent pt-6 pb-2 px-2">
-                <h2 className="text-xs font-bold text-white text-center truncate drop-shadow-md">
+                <h2 className="text-sm font-black tracking-wide text-white text-center truncate drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)]">
                   {karakter.nama}
                 </h2>
               </div>
