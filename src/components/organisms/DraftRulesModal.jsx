@@ -25,7 +25,7 @@ export default function DraftRulesModal({ isOpen, onClose }) {
         </div>
 
         {/* Content */}
-        <div className="p-6 md:p-8 overflow-y-auto custom-scrollbar flex flex-col gap-6">
+        <div className="rules-modal p-6 md:p-8 overflow-y-auto custom-scrollbar flex flex-col gap-6">
           
           {/* Rule 1: Struktur Pertandingan */}
           <div className="bg-slate-100 dark:bg-gray-800/50 p-6 rounded-2xl border border-slate-300 dark:border-gray-700/50 shadow-inner">

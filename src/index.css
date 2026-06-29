@@ -41,3 +41,25 @@
   display: inline-block;
   animation: scrollText 12s linear infinite;
 }
+
+/* Global Font Override for Gaming Aesthetic */
+@layer base {
+  body {
+    @apply font-bold;
+  }
+  p, span, div, a, button, input, select, td, th {
+    @apply font-bold;
+  }
+}
+
+/* Pengecualian untuk Modal Aturan */
+.rules-modal, .rules-modal * {
+  font-weight: 500 !important;
+}
+
+.rules-modal h2, 
+.rules-modal h3, 
+.rules-modal strong, 
+.rules-modal b {
+  font-weight: 800 !important;
+}
