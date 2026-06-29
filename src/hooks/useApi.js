@@ -1,10 +1,11 @@
+import { useCallback } from 'react';
 import { useAuth } from '../context/AuthContext';
 import Swal from 'sweetalert2';
 
 export function useApi() {
   const { logout } = useAuth();
 
-  const callApi = async (url, options = {}) => {
+  const callApi = useCallback(async (url, options = {}) => {
     // 1. Ambil token terbaru dari localStorage
     const token = localStorage.getItem('userToken');
 
@@ -50,7 +51,7 @@ export function useApi() {
       console.error('API Call Error:', error);
       throw error;
     }
-  };
+  }, [logout]);
 
   return callApi;
 }
