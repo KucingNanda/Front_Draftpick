@@ -82,7 +82,7 @@ export default function RiwayatPertandingan() {
   if (!isWasit && !isPeserta) {
     return (
       <div className="flex justify-center items-center h-[70vh]">
-        <h1 className="text-xl text-gray-400 dark:text-slate-500 dark:text-gray-400">Anda tidak memiliki akses ke Riwayat.</h1>
+        <h1 className="text-xl text-slate-500 dark:text-gray-400">Anda tidak memiliki akses ke Riwayat.</h1>
       </div>
     );
   }
@@ -94,7 +94,7 @@ export default function RiwayatPertandingan() {
           <h1 className="text-3xl font-bold text-blue-400 flex items-center gap-3">
             <Clock size={32} /> Riwayat Pertandingan
           </h1>
-          <p className="text-gray-400 dark:text-slate-500 dark:text-gray-400 mt-2">
+          <p className="text-slate-500 dark:text-gray-400 mt-2">
             Anda dapat menyimpan hingga {isWasit ? '20' : '10'} riwayat. Jika penuh, riwayat terlama akan otomatis ditimpa.
           </p>
         </div>
@@ -104,12 +104,12 @@ export default function RiwayatPertandingan() {
       </div>
 
       {isLoading ? (
-        <div className="text-center py-20 text-gray-400 dark:text-slate-500 dark:text-gray-400">Memuat riwayat...</div>
+        <div className="text-center py-20 text-slate-500 dark:text-gray-400">Memuat riwayat...</div>
       ) : histories.length === 0 ? (
-        <div className="text-center py-20 bg-slate-100 dark:bg-gray-800/50 rounded-xl border border-slate-300 dark:border-gray-700">
-          <Clock size={48} className="mx-auto text-gray-600 mb-4" />
-          <h2 className="text-xl font-bold text-gray-400 dark:text-slate-500 dark:text-gray-400">Belum Ada Riwayat</h2>
-          <p className="text-gray-400 dark:text-gray-500">Hasil pertandingan yang Anda simpan akan muncul di sini.</p>
+        <div className="text-center py-20 bg-slate-100 dark:bg-gray-800/50 rounded-xl border border-slate-300 dark:border-gray-700 shadow-sm">
+          <Clock size={48} className="mx-auto text-gray-400 dark:text-gray-600 mb-4" />
+          <h2 className="text-xl font-bold text-slate-500 dark:text-gray-400">Belum Ada Riwayat</h2>
+          <p className="text-slate-500 dark:text-gray-500">Hasil pertandingan yang Anda simpan akan muncul di sini.</p>
         </div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -118,7 +118,7 @@ export default function RiwayatPertandingan() {
             return (
               <div key={h.id} className="bg-slate-100 dark:bg-gray-800 border border-slate-300 dark:border-gray-700 rounded-xl p-5 shadow-lg hover:border-blue-500 transition-colors">
                 <div className="flex justify-between items-start mb-4">
-                  <div className="text-xs text-gray-400 dark:text-slate-500 dark:text-gray-400 font-mono bg-slate-300 dark:bg-gray-900 px-2 py-1 rounded">ID: {h.id}</div>
+                  <div className="text-xs text-slate-500 dark:text-gray-400 font-mono bg-slate-200 dark:bg-gray-900 px-2 py-1 rounded">ID: {h.id}</div>
                   <div className="text-xs text-blue-400">{date}</div>
                 </div>
                 
