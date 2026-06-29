@@ -92,11 +92,11 @@ export default function PlaylistManager({ token }) {
 
   return (
     <>
-      <div className="bg-gray-900/50 p-6 rounded-xl border border-gray-700">
+      <div className="bg-gray-100 dark:bg-gray-900/50 p-6 rounded-xl border border-gray-200 dark:border-gray-700">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
           <div>
             <h2 className="text-xl font-bold text-purple-400 mb-1">Playlist Manager (BGM)</h2>
-            <p className="text-gray-400 text-sm">Kelola daftar lagu yang akan diputar otomatis di Arena Draft Pick.</p>
+            <p className="text-gray-400 dark:text-gray-500 dark:text-gray-400 text-sm">Kelola daftar lagu yang akan diputar otomatis di Arena Draft Pick.</p>
           </div>
           <button
             type="button"
@@ -109,19 +109,19 @@ export default function PlaylistManager({ token }) {
         
         <div className="space-y-3 max-h-[300px] overflow-y-auto pr-2 custom-scrollbar">
           {bgms.length === 0 ? (
-            <div className="text-center py-8 bg-gray-800/50 rounded-lg border border-gray-700 border-dashed">
+            <div className="text-center py-8 bg-white dark:bg-gray-800/50 rounded-lg border border-gray-200 dark:border-gray-700 border-dashed">
               <Music size={32} className="mx-auto text-gray-600 mb-2" />
-              <p className="text-gray-400">Belum ada lagu di Playlist.</p>
+              <p className="text-gray-400 dark:text-gray-500 dark:text-gray-400">Belum ada lagu di Playlist.</p>
             </div>
           ) : (
             bgms.map((bgm, index) => (
-              <div key={bgm.id} className="bg-gray-800 border border-purple-500/30 p-3 rounded-lg flex flex-col sm:flex-row items-center justify-between gap-4 hover:border-purple-500/60 transition-colors">
+              <div key={bgm.id} className="bg-white dark:bg-gray-800 border border-purple-500/30 p-3 rounded-lg flex flex-col sm:flex-row items-center justify-between gap-4 hover:border-purple-500/60 transition-colors">
                 <div className="flex items-center gap-4 w-full">
-                  <div className="w-8 h-8 rounded-full bg-gray-700 text-gray-400 font-bold flex items-center justify-center shrink-0 border border-gray-600">
+                  <div className="w-8 h-8 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-400 dark:text-gray-500 dark:text-gray-400 font-bold flex items-center justify-center shrink-0 border border-gray-300 dark:border-gray-600">
                     {index + 1}
                   </div>
                   <div className="flex-1 min-w-0">
-                    <h3 className="text-white font-medium truncate" title={bgm.nama}>{bgm.nama}</h3>
+                    <h3 className="text-gray-900 dark:text-white font-medium truncate" title={bgm.nama}>{bgm.nama}</h3>
                   </div>
                 </div>
                 <div className="flex items-center gap-3 w-full sm:w-auto">
@@ -144,34 +144,34 @@ export default function PlaylistManager({ token }) {
       {/* Modal Tambah BGM */}
       {isBgmModalOpen && (
         <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-          <div className="bg-gray-800 rounded-xl shadow-2xl w-full max-w-md border border-gray-700 overflow-hidden">
-            <div className="flex justify-between items-center p-4 border-b border-gray-700">
-              <h2 className="text-xl font-bold text-white flex items-center gap-2"><Music size={20} className="text-purple-400" /> Tambah Lagu Playlist</h2>
-              <button onClick={() => { setIsBgmModalOpen(false); setNewBgmFile(null); setNewBgmName(''); }} className="text-gray-400 hover:text-white">
+          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-2xl w-full max-w-md border border-gray-200 dark:border-gray-700 overflow-hidden">
+            <div className="flex justify-between items-center p-4 border-b border-gray-200 dark:border-gray-700">
+              <h2 className="text-xl font-bold text-gray-900 dark:text-white flex items-center gap-2"><Music size={20} className="text-purple-400" /> Tambah Lagu Playlist</h2>
+              <button onClick={() => { setIsBgmModalOpen(false); setNewBgmFile(null); setNewBgmName(''); }} className="text-gray-400 dark:text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:text-white">
                 <X size={24} />
               </button>
             </div>
             
             <form onSubmit={handleUploadBgm} className="p-6 space-y-5">
               <div>
-                <label className="block text-gray-400 text-sm font-bold mb-2">Nama Lagu (Judul)</label>
+                <label className="block text-gray-400 dark:text-gray-500 dark:text-gray-400 text-sm font-bold mb-2">Nama Lagu (Judul)</label>
                 <input 
                   type="text" 
                   value={newBgmName}
                   onChange={(e) => setNewBgmName(e.target.value)}
-                  className="w-full bg-gray-900 border border-gray-600 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-purple-500"
+                  className="w-full bg-gray-100 dark:bg-gray-900 border border-gray-300 dark:border-gray-600 rounded-lg px-4 py-3 text-gray-900 dark:text-white focus:outline-none focus:border-purple-500"
                   placeholder="Misal: Epic Battle Phase 1"
                   required
                 />
               </div>
 
               <div>
-                <label className="block text-gray-400 text-sm font-bold mb-2">File Audio</label>
+                <label className="block text-gray-400 dark:text-gray-500 dark:text-gray-400 text-sm font-bold mb-2">File Audio</label>
                 <div className="flex items-center justify-center w-full">
-                  <label className="flex flex-col items-center justify-center w-full h-32 border-2 border-gray-600 border-dashed rounded-lg cursor-pointer bg-gray-900 hover:bg-gray-800 hover:border-purple-500 transition-all">
+                  <label className="flex flex-col items-center justify-center w-full h-32 border-2 border-gray-300 dark:border-gray-600 border-dashed rounded-lg cursor-pointer bg-gray-100 dark:bg-gray-900 hover:bg-white dark:bg-gray-800 hover:border-purple-500 transition-all">
                     <div className="flex flex-col items-center justify-center pt-5 pb-6">
-                      <UploadCloud className="w-8 h-8 text-gray-400 mb-2" />
-                      <p className="mb-2 text-sm text-gray-400 font-semibold">Klik untuk memilih file audio</p>
+                      <UploadCloud className="w-8 h-8 text-gray-400 dark:text-gray-500 dark:text-gray-400 mb-2" />
+                      <p className="mb-2 text-sm text-gray-400 dark:text-gray-500 dark:text-gray-400 font-semibold">Klik untuk memilih file audio</p>
                       <p className="text-xs text-purple-400 truncate max-w-[250px]">{newBgmFile ? newBgmFile.name : 'Belum ada file'}</p>
                     </div>
                     <input 

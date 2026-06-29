@@ -1,5 +1,6 @@
 import { Outlet, Link, useLocation, useNavigate } from 'react-router-dom';
 import { Home, Users, UserCheck, Swords, History, LogOut, Settings, User } from 'lucide-react';
+import ThemeToggle from '../atoms/ThemeToggle';
 import Swal from 'sweetalert2';
 import { useState } from 'react';
 import { useAuth } from '../../context/AuthContext';
@@ -22,11 +23,11 @@ export default function MainLayout() {
   ];
 
   return (
-    <div className="flex h-screen bg-gray-900 text-gray-300 font-sans">
+    <div className="flex h-screen bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-300 font-sans transition-colors duration-300">
       {/* Sidebar */}
-      <aside className="w-64 bg-gray-800 border-r border-gray-700 flex flex-col">
+      <aside className="w-64 bg-white dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700 flex flex-col transition-colors duration-300">
         <div className="p-6">
-          <h1 className="text-2xl font-bold text-white tracking-wider text-center">
+          <h1 className="text-2xl font-bold text-gray-900 dark:text-white tracking-wider text-center">
             DRAFT PICK
           </h1>
           {isWasit && (
@@ -40,10 +41,13 @@ export default function MainLayout() {
             </div>
           )}
           {isGuest && (
-            <div className="mt-3 text-center bg-gray-500/20 border border-gray-500/50 text-gray-400 text-xs font-bold py-1 px-3 rounded-full w-max mx-auto">
+            <div className="mt-3 text-center bg-gray-500/20 border border-gray-500/50 text-gray-600 dark:text-gray-400 text-xs font-bold py-1 px-3 rounded-full w-max mx-auto">
               👁️ GUEST MODE
             </div>
           )}
+          <div className="mt-6">
+            <ThemeToggle />
+          </div>
         </div>
 
         <nav className="flex-1 px-4 space-y-2 mt-4">
@@ -53,8 +57,8 @@ export default function MainLayout() {
               to={item.path}
               className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${
                 location.pathname === item.path
-                  ? 'bg-gray-700 text-white font-medium'
-                  : 'hover:bg-gray-700/50 hover:text-white'
+                  ? 'bg-blue-50 dark:bg-gray-700 text-blue-600 dark:text-white font-medium'
+                  : 'hover:bg-gray-100 dark:hover:bg-gray-700/50 hover:text-gray-900 dark:hover:text-white'
               }`}
             >
               {item.icon}
@@ -67,8 +71,8 @@ export default function MainLayout() {
         {/* Main Content Area */}
       <main className="flex-1 flex flex-col overflow-hidden">
         {/* Top Header & Navbar Login */}
-        <header className="h-16 bg-gray-800 border-b border-gray-700 flex items-center justify-between px-8 shadow-sm">
-          <div className="text-sm font-medium text-gray-400 capitalize flex items-center gap-2">
+        <header className="h-16 bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 flex items-center justify-between px-8 shadow-sm transition-colors duration-300">
+          <div className="text-sm font-medium text-gray-500 dark:text-gray-400 capitalize flex items-center gap-2">
             {location.pathname === '/' ? 'Dashboard' : location.pathname.substring(1).replace('/', ' > ')}
           </div>
           
@@ -227,11 +231,11 @@ export default function MainLayout() {
             </>
             ) : (
               <div className="flex items-center gap-4">
-                <div className="flex items-center gap-2 text-sm text-gray-300">
-                  <div className="w-8 h-8 rounded-full bg-gray-700 flex items-center justify-center border border-gray-600">
-                    <User size={16} className={isWasit ? 'text-yellow-400' : 'text-blue-400'} />
+                <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-300">
+                  <div className="w-8 h-8 rounded-full bg-gray-100 dark:bg-gray-700 flex items-center justify-center border border-gray-300 dark:border-gray-600">
+                    <User size={16} className={isWasit ? 'text-yellow-500 dark:text-yellow-400' : 'text-blue-500 dark:text-blue-400'} />
                   </div>
-                  <span>Halo, <strong className="text-white capitalize">{role}</strong></span>
+                  <span>Halo, <strong className="text-gray-900 dark:text-white capitalize">{role}</strong></span>
                 </div>
                 <button 
                   onClick={() => {
@@ -260,7 +264,7 @@ export default function MainLayout() {
         </header>
 
         {/* Scrollable content inside Outlet */}
-        <div className="flex-1 overflow-y-auto p-8 bg-gray-900">
+        <div className="flex-1 overflow-y-auto p-8 bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
           <Outlet />
         </div>
       </main>

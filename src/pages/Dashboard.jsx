@@ -73,12 +73,12 @@ export default function Dashboard() {
         <h1 className="text-4xl md:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-400 to-blue-400 mb-4 pb-2 tracking-tight">
           Selamat Datang di Draft Pick
         </h1>
-        <p className="text-lg text-gray-400 max-w-2xl mx-auto mb-6">
+        <p className="text-lg text-gray-400 dark:text-gray-500 dark:text-gray-400 max-w-2xl mx-auto mb-6">
           Mulai persaingan strategi tingkat tinggi, kelola daftar pahlawan Anda, dan pantau peserta turnamen.
         </p>
         <button 
           onClick={() => setIsRulesOpen(true)} 
-          className="inline-flex items-center gap-2 bg-gray-900/60 hover:bg-gray-800 border border-blue-500/30 hover:border-blue-500/80 text-blue-400 px-6 py-2.5 rounded-full transition-all shadow-lg hover:shadow-blue-500/20 backdrop-blur-md font-medium"
+          className="inline-flex items-center gap-2 bg-gray-100 dark:bg-gray-900/60 hover:bg-white dark:bg-gray-800 border border-blue-500/30 hover:border-blue-500/80 text-blue-400 px-6 py-2.5 rounded-full transition-all shadow-lg hover:shadow-blue-500/20 backdrop-blur-md font-medium"
         >
           <ShieldAlert size={18} /> Baca Panduan & Aturan
         </button>
@@ -88,7 +88,7 @@ export default function Dashboard() {
       <div className="mb-16 relative z-10">
         <div className="flex items-center justify-center gap-3 mb-8">
           <div className="h-px w-16 bg-gradient-to-r from-transparent to-gray-500"></div>
-          <h2 className="text-2xl font-bold text-white flex items-center gap-2">
+          <h2 className="text-2xl font-bold text-gray-900 dark:text-white flex items-center gap-2">
             <Sparkles className="text-yellow-400" size={24} />
             Spotlight Karakter
             <Sparkles className="text-yellow-400" size={24} />
@@ -100,7 +100,7 @@ export default function Dashboard() {
           <div className="flex justify-center p-12">
             <div className="animate-pulse flex space-x-4 items-center">
               <div className="w-8 h-8 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
-              <span className="text-gray-400">Memuat Info Karakter...</span>
+              <span className="text-gray-400 dark:text-gray-500 dark:text-gray-400">Memuat Info Karakter...</span>
             </div>
           </div>
         ) : (
@@ -126,7 +126,7 @@ export default function Dashboard() {
 
                   <div className="mt-6 z-10 relative w-full">
                     <div className="flex items-center justify-center gap-2 mb-2">
-                      <h3 className="text-3xl font-bold text-white tracking-tight truncate">{specialKarakter.nama}</h3>
+                      <h3 className="text-3xl font-bold text-gray-900 dark:text-white tracking-tight truncate">{specialKarakter.nama}</h3>
                       {getElemenIcon(specialKarakter.elemen) && (
                         <img src={getElemenIcon(specialKarakter.elemen)} alt={specialKarakter.elemen} className="w-6 h-6 drop-shadow-md" />
                       )}
@@ -137,10 +137,10 @@ export default function Dashboard() {
                     </p>
                     
                     <div className="flex flex-wrap justify-center gap-2">
-                      <span className="text-xs bg-gray-900/60 border border-gray-700 text-gray-300 px-3 py-1 rounded-full backdrop-blur-sm">
+                      <span className="text-xs bg-gray-100 dark:bg-gray-900/60 border border-gray-200 dark:border-gray-700 text-gray-600 dark:text-gray-300 px-3 py-1 rounded-full backdrop-blur-sm">
                         {specialKarakter.senjata}
                       </span>
-                      <span className="text-xs bg-gray-900/60 border border-gray-700 text-gray-300 px-3 py-1 rounded-full backdrop-blur-sm flex items-center gap-1.5">
+                      <span className="text-xs bg-gray-100 dark:bg-gray-900/60 border border-gray-200 dark:border-gray-700 text-gray-600 dark:text-gray-300 px-3 py-1 rounded-full backdrop-blur-sm flex items-center gap-1.5">
                         {getRegionIcon(specialKarakter.region) && (
                           <img src={getRegionIcon(specialKarakter.region)} alt={specialKarakter.region} className="w-4 h-4 opacity-90" />
                         )}
@@ -150,16 +150,16 @@ export default function Dashboard() {
                   </div>
                 </div>
               ) : (
-                <div className="bg-gray-800/50 rounded-3xl border border-dashed border-gray-700 p-8 flex flex-col items-center justify-center text-center h-full min-h-[300px]">
+                <div className="bg-white dark:bg-gray-800/50 rounded-3xl border border-dashed border-gray-200 dark:border-gray-700 p-8 flex flex-col items-center justify-center text-center h-full min-h-[300px]">
                   <Crown className="text-gray-600 mb-3" size={32} />
-                  <p className="text-gray-400">Belum ada Karakter Spesial yang ditentukan.</p>
+                  <p className="text-gray-400 dark:text-gray-500 dark:text-gray-400">Belum ada Karakter Spesial yang ditentukan.</p>
                 </div>
               )}
             </div>
 
             {/* Karakter Terbaru (Grid 2x2 of Mini Cards) */}
             <div className="lg:col-span-2 flex flex-col">
-              <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2 px-2">
+              <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-2 px-2">
                 <Clock className="text-blue-400" size={20} /> Baru Rilis (Patch Terkini)
               </h3>
               
@@ -182,7 +182,7 @@ export default function Dashboard() {
                       
                       <div className="flex-1 min-w-0 z-10">
                         <div className="flex items-center gap-2 mb-1">
-                          <h4 className="text-lg font-bold text-white truncate">{k.nama}</h4>
+                          <h4 className="text-lg font-bold text-gray-900 dark:text-white truncate">{k.nama}</h4>
                           {getElemenIcon(k.elemen) && (
                             <img src={getElemenIcon(k.elemen)} alt={k.elemen} className="w-4 h-4 shrink-0 drop-shadow-sm" />
                           )}
@@ -190,10 +190,10 @@ export default function Dashboard() {
                         <p className="text-blue-400 text-xs font-medium truncate mb-2">
                           {k.rarity}
                         </p>
-                        <span className="text-[10px] bg-gray-900/60 border border-gray-700 text-gray-300 px-2 py-0.5 rounded-full inline-block">
+                        <span className="text-[10px] bg-gray-100 dark:bg-gray-900/60 border border-gray-200 dark:border-gray-700 text-gray-600 dark:text-gray-300 px-2 py-0.5 rounded-full inline-block">
                           {k.senjata}
                         </span>
-                        <span className="text-[10px] bg-gray-900/60 border border-gray-700 text-gray-300 px-2 py-0.5 rounded-full inline-flex items-center gap-1 ml-1">
+                        <span className="text-[10px] bg-gray-100 dark:bg-gray-900/60 border border-gray-200 dark:border-gray-700 text-gray-600 dark:text-gray-300 px-2 py-0.5 rounded-full inline-flex items-center gap-1 ml-1">
                           {getRegionIcon(k.region) && (
                             <img src={getRegionIcon(k.region)} alt={k.region} className="w-3 h-3 opacity-90" />
                           )}
@@ -204,9 +204,9 @@ export default function Dashboard() {
                   ))}
                 </div>
               ) : (
-                <div className="bg-gray-800/50 rounded-3xl border border-dashed border-gray-700 p-8 flex flex-col items-center justify-center text-center flex-1">
+                <div className="bg-white dark:bg-gray-800/50 rounded-3xl border border-dashed border-gray-200 dark:border-gray-700 p-8 flex flex-col items-center justify-center text-center flex-1">
                   <Clock className="text-gray-600 mb-3" size={32} />
-                  <p className="text-gray-400">Belum ada karakter di database.</p>
+                  <p className="text-gray-400 dark:text-gray-500 dark:text-gray-400">Belum ada karakter di database.</p>
                 </div>
               )}
             </div>
@@ -219,7 +219,7 @@ export default function Dashboard() {
       <div className="mb-12">
         <div className="flex items-center justify-center gap-3 mb-8">
           <div className="h-px w-12 bg-gradient-to-r from-transparent to-gray-600"></div>
-          <h2 className="text-xl font-semibold text-gray-300 uppercase tracking-widest">
+          <h2 className="text-xl font-semibold text-gray-600 dark:text-gray-300 uppercase tracking-widest">
             Menu Utama
           </h2>
           <div className="h-px w-12 bg-gradient-to-l from-transparent to-gray-600"></div>
@@ -229,14 +229,14 @@ export default function Dashboard() {
           {/* Card Draft Pick */}
           <Link 
             to="/draft"
-            className="group block bg-gray-800/80 backdrop-blur-sm p-8 rounded-3xl border border-gray-700/50 hover:border-blue-500/50 hover:bg-gray-800 transition-all duration-300 shadow-xl hover:shadow-blue-900/20"
+            className="group block bg-white dark:bg-gray-800/80 backdrop-blur-sm p-8 rounded-3xl border border-gray-200 dark:border-gray-700/50 hover:border-blue-500/50 hover:bg-white dark:bg-gray-800 transition-all duration-300 shadow-xl hover:shadow-blue-900/20"
           >
             <div className="flex flex-col items-center text-center">
               <div className="bg-gradient-to-br from-blue-900/50 to-blue-800/20 p-5 rounded-2xl mb-6 group-hover:scale-110 group-hover:rotate-3 transition-transform duration-300 shadow-inner">
                 <Swords size={42} className="text-blue-400" />
               </div>
-              <h2 className="text-2xl font-bold text-white mb-3 group-hover:text-blue-300 transition-colors">Mulai Draft Pick</h2>
-              <p className="text-gray-400 leading-relaxed">
+              <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-3 group-hover:text-blue-300 transition-colors">Mulai Draft Pick</h2>
+              <p className="text-gray-400 dark:text-gray-500 dark:text-gray-400 leading-relaxed">
                 Masuk ke arena untuk melakukan sesi Ban dan Pick karakter melawan tim lawan dengan UI interaktif.
               </p>
             </div>
@@ -245,14 +245,14 @@ export default function Dashboard() {
           {/* Card Master Karakter */}
           <Link 
             to="/karakter"
-            className="group block bg-gray-800/80 backdrop-blur-sm p-8 rounded-3xl border border-gray-700/50 hover:border-purple-500/50 hover:bg-gray-800 transition-all duration-300 shadow-xl hover:shadow-purple-900/20"
+            className="group block bg-white dark:bg-gray-800/80 backdrop-blur-sm p-8 rounded-3xl border border-gray-200 dark:border-gray-700/50 hover:border-purple-500/50 hover:bg-white dark:bg-gray-800 transition-all duration-300 shadow-xl hover:shadow-purple-900/20"
           >
             <div className="flex flex-col items-center text-center">
               <div className="bg-gradient-to-br from-purple-900/50 to-purple-800/20 p-5 rounded-2xl mb-6 group-hover:scale-110 group-hover:-rotate-3 transition-transform duration-300 shadow-inner">
                 <Users size={42} className="text-purple-400" />
               </div>
-              <h2 className="text-2xl font-bold text-white mb-3 group-hover:text-purple-300 transition-colors">Master Karakter</h2>
-              <p className="text-gray-400 leading-relaxed">
+              <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-3 group-hover:text-purple-300 transition-colors">Master Karakter</h2>
+              <p className="text-gray-400 dark:text-gray-500 dark:text-gray-400 leading-relaxed">
                 Lihat, tambah, ubah, atau hapus daftar karakter yang tersedia dalam database sistem secara *real-time*.
               </p>
             </div>
@@ -264,14 +264,14 @@ export default function Dashboard() {
           {!isGuest && (
             <Link 
               to="/peserta"
-              className="group block bg-gray-800/80 backdrop-blur-sm p-8 rounded-3xl border border-gray-700/50 hover:border-emerald-500/50 hover:bg-gray-800 transition-all duration-300 shadow-xl hover:shadow-emerald-900/20 md:col-span-2 max-w-2xl mx-auto w-full"
+              className="group block bg-white dark:bg-gray-800/80 backdrop-blur-sm p-8 rounded-3xl border border-gray-200 dark:border-gray-700/50 hover:border-emerald-500/50 hover:bg-white dark:bg-gray-800 transition-all duration-300 shadow-xl hover:shadow-emerald-900/20 md:col-span-2 max-w-2xl mx-auto w-full"
             >
               <div className="flex flex-col items-center text-center">
                 <div className="bg-gradient-to-br from-emerald-900/50 to-emerald-800/20 p-5 rounded-2xl mb-6 group-hover:scale-110 transition-transform duration-300 shadow-inner">
                   <UserPlus size={42} className="text-emerald-400" />
                 </div>
-                <h2 className="text-2xl font-bold text-white mb-3 group-hover:text-emerald-300 transition-colors">Master Peserta</h2>
-                <p className="text-gray-400 leading-relaxed">
+                <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-3 group-hover:text-emerald-300 transition-colors">Master Peserta</h2>
+                <p className="text-gray-400 dark:text-gray-500 dark:text-gray-400 leading-relaxed">
                   Kelola data peserta turnamen dan lihat 8 karakter andalan pilihan mereka untuk persaingan sengit.
                 </p>
               </div>

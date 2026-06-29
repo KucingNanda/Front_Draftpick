@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
+import { ThemeProvider } from './context/ThemeContext';
 
 // Layouts & Routes
 import MainLayout from './components/layout/MainLayout';
@@ -16,33 +17,35 @@ import Profil from './pages/Profil';
 
 function App() {
   return (
-    <AuthProvider>
-      <Router>
-        <Routes>
-          {/* Rute Standalone (Layar Penuh, tanpa Sidebar) */}
-          <Route path="/draft" element={<DraftPick />} />
+    <ThemeProvider>
+      <AuthProvider>
+        <Router>
+          <Routes>
+            {/* Rute Standalone (Layar Penuh, tanpa Sidebar) */}
+            <Route path="/draft" element={<DraftPick />} />
 
-          {/* MainLayout membungkus route biasa */}
-          <Route element={<MainLayout />}>
-            {/* Rute Terbuka (Public) */}
-            <Route path="/" element={<Dashboard />} />
-            <Route path="/karakter" element={<MasterKarakter />} />
-            <Route path="/peserta" element={<MasterPeserta />} />
-            <Route path="/history" element={<RiwayatPertandingan />} />
-            
-            {/* Rute Khusus User Login */}
-            <Route element={<PrivateRoute />}>
-              <Route path="/profil" element={<Profil />} />
-            </Route>
+            {/* MainLayout membungkus route biasa */}
+            <Route element={<MainLayout />}>
+              {/* Rute Terbuka (Public) */}
+              <Route path="/" element={<Dashboard />} />
+              <Route path="/karakter" element={<MasterKarakter />} />
+              <Route path="/peserta" element={<MasterPeserta />} />
+              <Route path="/history" element={<RiwayatPertandingan />} />
+              
+              {/* Rute Khusus User Login */}
+              <Route element={<PrivateRoute />}>
+                <Route path="/profil" element={<Profil />} />
+              </Route>
 
-            {/* Rute Khusus Wasit / Admin */}
-            <Route element={<PrivateRoute allowedRoles={['wasit']} />}>
-              <Route path="/admin" element={<AdminDashboard />} />
+              {/* Rute Khusus Wasit / Admin */}
+              <Route element={<PrivateRoute allowedRoles={['wasit']} />}>
+                <Route path="/admin" element={<AdminDashboard />} />
+              </Route>
             </Route>
-          </Route>
-        </Routes>
-      </Router>
-    </AuthProvider>
+          </Routes>
+        </Router>
+      </AuthProvider>
+    </ThemeProvider>
   );
 }
 

@@ -12,7 +12,7 @@ export default function PermaBanSlot({ data, player, index, onSlotClick, onRemov
             <div className="absolute inset-0 bg-red-900/50 flex items-center justify-center pointer-events-none">
               <X size={48} className="text-red-500/80 drop-shadow-md" />
             </div>
-            <button onClick={(e) => onRemove(e, player, 'globalBans', 'globalBans', index)} className="absolute bottom-2 right-2 bg-gray-900/90 p-1 rounded md:rounded-md text-white opacity-0 group-hover:opacity-100 transition-opacity z-10 hover:text-red-400">
+            <button onClick={(e) => onRemove(e, player, 'globalBans', 'globalBans', index)} className="absolute bottom-2 right-2 bg-gray-100 dark:bg-gray-900/90 p-1 rounded md:rounded-md text-gray-900 dark:text-white opacity-0 group-hover:opacity-100 transition-opacity z-10 hover:text-red-400">
               <X size={16} />
             </button>
           </>

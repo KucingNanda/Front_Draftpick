@@ -4,7 +4,7 @@ export default function PickSlot({ data, player, type, index, onSlotClick, onRem
   return (
     <div 
       onClick={() => onSlotClick(player, type, 'picks', index)}
-      className={`w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 2xl:w-32 2xl:h-32 bg-gray-800 border-2 ${data ? 'border-blue-500/50' : 'border-gray-700'} rounded-xl shadow-inner flex flex-col items-center justify-center hover:border-blue-400 transition-all cursor-pointer shrink-0 relative overflow-hidden group`}
+      className={`w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 2xl:w-32 2xl:h-32 bg-white dark:bg-gray-800 border-2 ${data ? 'border-blue-500/50' : 'border-gray-200 dark:border-gray-700'} rounded-xl shadow-inner flex flex-col items-center justify-center hover:border-blue-400 transition-all cursor-pointer shrink-0 relative overflow-hidden group`}
     >
       {data ? (
         <>
@@ -13,9 +13,9 @@ export default function PickSlot({ data, player, type, index, onSlotClick, onRem
           <button 
             onClick={(e) => onToggleWeapon(e, player, type, index)}
             className={`absolute top-1 right-1 p-1.5 rounded-md backdrop-blur shadow-md transition-all z-10 
-              ${!data.weaponLevel ? 'bg-gray-900/60 text-gray-400 hover:bg-gray-700/80' : ''}
+              ${!data.weaponLevel ? 'bg-gray-100 dark:bg-gray-900/60 text-gray-400 dark:text-gray-500 dark:text-gray-400 hover:bg-gray-200 dark:bg-gray-700/80' : ''}
               ${data.weaponLevel === 1 ? 'bg-yellow-500/80 text-white border border-yellow-400' : ''}
-              ${data.weaponLevel === 2 ? 'bg-orange-600/90 text-white border border-orange-500 shadow-[0_0_10px_rgba(234,88,12,0.6)]' : ''}
+              ${data.weaponLevel === 2 ? 'bg-orange-600/90 text-gray-900 dark:text-white border border-orange-500 shadow-[0_0_10px_rgba(234,88,12,0.6)]' : ''}
             `}
             title="Klik untuk Toggle Senjata B5 (0 -> R1 -> R2)"
           >
