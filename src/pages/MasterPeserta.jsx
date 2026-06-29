@@ -188,12 +188,12 @@ export default function MasterPeserta() {
   if (isGuest) {
     return (
       <div className="min-h-[70vh] flex items-center justify-center p-4">
-        <div className="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-2xl w-full max-w-md border border-gray-200 dark:border-gray-700 text-center">
+        <div className="bg-slate-100 dark:bg-gray-800 p-8 rounded-2xl shadow-2xl w-full max-w-md border border-slate-300 dark:border-gray-700 text-center">
           <h1 className="text-2xl font-bold text-red-400 mb-4">Akses Ditolak</h1>
-          <p className="text-gray-400 dark:text-gray-500 dark:text-gray-400 mb-6">Guest tidak diizinkan untuk melihat data peserta turnamen.</p>
+          <p className="text-gray-400 dark:text-slate-500 dark:text-gray-400 mb-6">Guest tidak diizinkan untuk melihat data peserta turnamen.</p>
           <button 
             onClick={() => navigate('/')}
-            className="w-full bg-gray-200 dark:bg-gray-700 hover:bg-gray-600 text-gray-900 dark:text-white font-bold py-3 px-4 rounded-lg transition-colors"
+            className="w-full bg-gray-200 dark:bg-gray-700 hover:bg-gray-600 text-slate-800 dark:text-white font-bold py-3 px-4 rounded-lg transition-colors"
           >
             Kembali ke Beranda
           </button>
@@ -206,8 +206,8 @@ export default function MasterPeserta() {
     <div className="max-w-7xl mx-auto">
       <div className="flex justify-between items-center mb-8">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">Data Peserta</h1>
-          <p className="text-gray-400 dark:text-gray-500 dark:text-gray-400">Kelola peserta turnamen dan 8 karakter Limited andalan mereka.</p>
+          <h1 className="text-3xl font-bold text-slate-800 dark:text-white mb-2">Data Peserta</h1>
+          <p className="text-gray-400 dark:text-slate-500 dark:text-gray-400">Kelola peserta turnamen dan 8 karakter Limited andalan mereka.</p>
         </div>
         {isWasit && (
           <button 
@@ -223,9 +223,9 @@ export default function MasterPeserta() {
       {/* Grid Peserta */}
       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
         {pesertas.map(peserta => (
-          <div key={peserta.id} className="bg-white dark:bg-gray-800 rounded-xl overflow-hidden border border-gray-200 dark:border-gray-700 shadow-xl flex flex-col">
-            <div className="p-4 border-b border-gray-200 dark:border-gray-700 bg-gray-100 dark:bg-gray-900/50 flex justify-between items-center">
-              <h2 className="text-xl font-bold text-gray-900 dark:text-white truncate pr-4">{peserta.nama}</h2>
+          <div key={peserta.id} className="bg-slate-100 dark:bg-gray-800 rounded-xl overflow-hidden border border-slate-300 dark:border-gray-700 shadow-xl flex flex-col">
+            <div className="p-4 border-b border-slate-300 dark:border-gray-700 bg-slate-300 dark:bg-gray-900/50 flex justify-between items-center">
+              <h2 className="text-xl font-bold text-slate-800 dark:text-white truncate pr-4">{peserta.nama}</h2>
               {isWasit && (
                 <div className="flex gap-2 shrink-0">
                   <button onClick={() => handleOpenModal(peserta)} className="p-2 text-blue-400 hover:bg-blue-900/30 rounded transition-colors">
@@ -237,9 +237,9 @@ export default function MasterPeserta() {
                 </div>
               )}
             </div>
-            <div className="p-4 grid grid-cols-4 gap-2 bg-white dark:bg-gray-800 flex-1">
+            <div className="p-4 grid grid-cols-4 gap-2 bg-slate-100 dark:bg-gray-800 flex-1">
               {peserta.karakters && peserta.karakters.map((pk, idx) => (
-                <div key={idx} className="aspect-square bg-gray-100 dark:bg-gray-900 rounded-lg overflow-hidden relative border border-gray-200 dark:border-gray-700 group">
+                <div key={idx} className="aspect-square bg-slate-300 dark:bg-gray-900 rounded-lg overflow-hidden relative border border-slate-300 dark:border-gray-700 group">
                   {pk.karakter && pk.karakter.imageUrl ? (
                     <img src={pk.karakter.imageUrl} alt={pk.karakter.nama} className="w-full h-full object-contain p-1" />
                   ) : (
@@ -258,7 +258,7 @@ export default function MasterPeserta() {
         ))}
 
         {pesertas.length === 0 && (
-          <div className="col-span-full text-center py-12 text-gray-400 dark:text-gray-500 bg-white dark:bg-gray-800/50 rounded-xl border border-dashed border-gray-300 dark:border-gray-600">
+          <div className="col-span-full text-center py-12 text-gray-400 dark:text-gray-500 bg-slate-100 dark:bg-gray-800/50 rounded-xl border border-dashed border-gray-300 dark:border-gray-600">
             Belum ada data peserta yang didaftarkan.
           </div>
         )}

@@ -239,32 +239,32 @@ export default function MasterKarakter() {
 
   return (
     <div className="max-w-7xl mx-auto pb-12">
-      <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-6 border-b border-gray-200 dark:border-gray-700 pb-4 gap-4">
+      <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-6 border-b border-slate-300 dark:border-gray-700 pb-4 gap-4">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">Master Karakter</h1>
-          <p className="text-gray-400 dark:text-gray-500 dark:text-gray-400">Daftar {karakters.length} karakter yang tersedia dalam database.</p>
+          <h1 className="text-3xl font-bold text-slate-800 dark:text-white mb-2">Master Karakter</h1>
+          <p className="text-gray-400 dark:text-slate-500 dark:text-gray-400">Daftar {karakters.length} karakter yang tersedia dalam database.</p>
         </div>
         
         <div className="flex flex-wrap items-center gap-3 w-full md:w-auto">
           {/* Kolom Pencarian */}
           <div className="relative flex-1 md:w-64">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 dark:text-gray-500 dark:text-gray-400" size={18} />
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 dark:text-slate-500 dark:text-gray-400" size={18} />
             <input 
               type="text" 
               placeholder="Cari karakter..." 
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg pl-10 pr-4 py-2 text-gray-900 dark:text-white focus:outline-none focus:border-blue-500 transition-colors text-sm"
+              className="w-full bg-slate-100 dark:bg-gray-800 border border-slate-300 dark:border-gray-700 rounded-lg pl-10 pr-4 py-2 text-slate-800 dark:text-white focus:outline-none focus:border-blue-500 transition-colors text-sm"
             />
           </div>
           
           {/* Dropdown Filter Rarity */}
           <div className="relative">
-            <Filter className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 dark:text-gray-500 dark:text-gray-400" size={18} />
+            <Filter className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 dark:text-slate-500 dark:text-gray-400" size={18} />
             <select 
               value={filterRarity}
               onChange={(e) => setFilterRarity(e.target.value)}
-              className="appearance-none bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg pl-10 pr-8 py-2 text-gray-900 dark:text-white focus:outline-none focus:border-blue-500 transition-colors text-sm cursor-pointer"
+              className="appearance-none bg-slate-100 dark:bg-gray-800 border border-slate-300 dark:border-gray-700 rounded-lg pl-10 pr-8 py-2 text-slate-800 dark:text-white focus:outline-none focus:border-blue-500 transition-colors text-sm cursor-pointer"
             >
               <option value="">Semua Rarity</option>
               {RARITIES.map(r => <option key={r} value={r}>{r}</option>)}
@@ -272,17 +272,17 @@ export default function MasterKarakter() {
           </div>
 
           {/* Toggle View Mode */}
-          <div className="flex bg-white dark:bg-gray-800 rounded-lg p-1 border border-gray-200 dark:border-gray-700">
+          <div className="flex bg-slate-100 dark:bg-gray-800 rounded-lg p-1 border border-slate-300 dark:border-gray-700">
             <button
               onClick={() => setViewMode('grid')}
-              className={`p-1.5 rounded-md transition-colors ${viewMode === 'grid' ? 'bg-gray-200 dark:bg-gray-700 text-gray-900 dark:text-white shadow' : 'text-gray-400 dark:text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:text-white hover:bg-gray-200 dark:bg-gray-700/50'}`}
+              className={`p-1.5 rounded-md transition-colors ${viewMode === 'grid' ? 'bg-gray-200 dark:bg-gray-700 text-slate-800 dark:text-white shadow' : 'text-gray-400 dark:text-slate-500 dark:text-gray-400 hover:text-slate-800 dark:text-white hover:bg-gray-200 dark:bg-gray-700/50'}`}
               title="Grid View"
             >
               <LayoutGrid size={18} />
             </button>
             <button
               onClick={() => setViewMode('table')}
-              className={`p-1.5 rounded-md transition-colors ${viewMode === 'table' ? 'bg-gray-200 dark:bg-gray-700 text-gray-900 dark:text-white shadow' : 'text-gray-400 dark:text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:text-white hover:bg-gray-200 dark:bg-gray-700/50'}`}
+              className={`p-1.5 rounded-md transition-colors ${viewMode === 'table' ? 'bg-gray-200 dark:bg-gray-700 text-slate-800 dark:text-white shadow' : 'text-gray-400 dark:text-slate-500 dark:text-gray-400 hover:text-slate-800 dark:text-white hover:bg-gray-200 dark:bg-gray-700/50'}`}
               title="Table View"
             >
               <List size={18} />
@@ -303,7 +303,7 @@ export default function MasterKarakter() {
 
       {loading ? (
         <div className="flex justify-center items-center h-64">
-          <p className="text-gray-400 dark:text-gray-500 dark:text-gray-400 animate-pulse text-lg">Memuat data dari server...</p>
+          <p className="text-gray-400 dark:text-slate-500 dark:text-gray-400 animate-pulse text-lg">Memuat data dari server...</p>
         </div>
       ) : viewMode === 'grid' ? (
         <div className="grid grid-cols-4 sm:grid-cols-5 md:grid-cols-6 lg:grid-cols-7 gap-3">
@@ -331,7 +331,7 @@ export default function MasterKarakter() {
               
               {/* Overlay Gradient Name */}
               <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent pt-6 pb-2 px-2">
-                <h2 className="text-xs font-bold text-gray-900 dark:text-white text-center truncate drop-shadow-md">
+                <h2 className="text-xs font-bold text-slate-800 dark:text-white text-center truncate drop-shadow-md">
                   {karakter.nama}
                 </h2>
               </div>
@@ -339,19 +339,19 @@ export default function MasterKarakter() {
           ))}
 
           {sortedAndFilteredKarakters.length === 0 && (
-            <div className="col-span-full text-center py-16 bg-white dark:bg-gray-800/50 rounded-xl border border-dashed border-gray-200 dark:border-gray-700">
-              <p className="text-gray-400 dark:text-gray-500 dark:text-gray-400 text-lg mb-2">Tidak ada karakter yang ditemukan.</p>
+            <div className="col-span-full text-center py-16 bg-slate-100 dark:bg-gray-800/50 rounded-xl border border-dashed border-slate-300 dark:border-gray-700">
+              <p className="text-gray-400 dark:text-slate-500 dark:text-gray-400 text-lg mb-2">Tidak ada karakter yang ditemukan.</p>
             </div>
           )}
         </div>
       ) : (
-        <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 overflow-hidden shadow-xl">
+        <div className="bg-slate-100 dark:bg-gray-800 rounded-xl border border-slate-300 dark:border-gray-700 overflow-hidden shadow-xl">
           <div className="overflow-x-auto">
             <table className="w-full text-left border-collapse">
               <thead>
-                <tr className="bg-gray-100 dark:bg-gray-900/50 text-gray-400 dark:text-gray-500 dark:text-gray-400 border-b border-gray-200 dark:border-gray-700 text-sm">
+                <tr className="bg-slate-300 dark:bg-gray-900/50 text-gray-400 dark:text-slate-500 dark:text-gray-400 border-b border-slate-300 dark:border-gray-700 text-sm">
                   <th 
-                    className="p-4 font-medium w-16 text-center cursor-pointer hover:text-gray-900 dark:text-white transition-colors group"
+                    className="p-4 font-medium w-16 text-center cursor-pointer hover:text-slate-800 dark:text-white transition-colors group"
                     onClick={() => requestSort('id')}
                   >
                     <div className="flex items-center justify-center gap-1">
@@ -365,7 +365,7 @@ export default function MasterKarakter() {
                   </th>
                   <th className="p-4 font-medium w-24 text-center">Gambar</th>
                   <th 
-                    className="p-4 font-medium cursor-pointer hover:text-gray-900 dark:text-white transition-colors group"
+                    className="p-4 font-medium cursor-pointer hover:text-slate-800 dark:text-white transition-colors group"
                     onClick={() => requestSort('nama')}
                   >
                     <div className="flex items-center gap-1">
@@ -387,16 +387,16 @@ export default function MasterKarakter() {
               <tbody>
                 {sortedAndFilteredKarakters.length === 0 ? (
                   <tr>
-                    <td colSpan="8" className="p-8 text-center text-gray-400 dark:text-gray-500 bg-white dark:bg-gray-800/50 border border-dashed border-gray-200 dark:border-gray-700">
+                    <td colSpan="8" className="p-8 text-center text-gray-400 dark:text-gray-500 bg-slate-100 dark:bg-gray-800/50 border border-dashed border-slate-300 dark:border-gray-700">
                       Tidak ada karakter yang ditemukan.
                     </td>
                   </tr>
                 ) : (
                   sortedAndFilteredKarakters.map((karakter) => (
-                    <tr key={karakter.id} className="border-b border-gray-200 dark:border-gray-700/50 hover:bg-gray-200 dark:bg-gray-700/20 transition-colors">
-                      <td className="p-4 text-gray-400 dark:text-gray-500 dark:text-gray-400 text-center">#{karakter.id}</td>
+                    <tr key={karakter.id} className="border-b border-slate-300 dark:border-gray-700/50 hover:bg-gray-200 dark:bg-gray-700/20 transition-colors">
+                      <td className="p-4 text-gray-400 dark:text-slate-500 dark:text-gray-400 text-center">#{karakter.id}</td>
                       <td className="p-4">
-                        <div className="w-12 h-12 rounded-lg bg-gray-100 dark:bg-gray-900 border border-gray-200 dark:border-gray-700 overflow-hidden mx-auto flex items-center justify-center">
+                        <div className="w-12 h-12 rounded-lg bg-slate-300 dark:bg-gray-900 border border-slate-300 dark:border-gray-700 overflow-hidden mx-auto flex items-center justify-center">
                           {karakter.imageUrl ? (
                             <img src={karakter.imageUrl} alt={karakter.nama} className="w-full h-full object-contain p-0.5" />
                           ) : (
@@ -404,9 +404,9 @@ export default function MasterKarakter() {
                           )}
                         </div>
                       </td>
-                      <td className="p-4 font-bold text-gray-900 dark:text-white">{karakter.nama}</td>
-                      <td className="p-4 text-gray-600 dark:text-gray-300">{karakter.elemen}</td>
-                      <td className="p-4 text-gray-600 dark:text-gray-300">{karakter.senjata}</td>
+                      <td className="p-4 font-bold text-slate-800 dark:text-white">{karakter.nama}</td>
+                      <td className="p-4 text-slate-600 dark:text-gray-300">{karakter.elemen}</td>
+                      <td className="p-4 text-slate-600 dark:text-gray-300">{karakter.senjata}</td>
                       <td className="p-4">
                         <span className={`text-xs px-2 py-1 rounded-full border ${karakter.rarity.includes('5 Star') ? 'bg-yellow-500/20 text-yellow-400 border-yellow-500/30' : 'bg-purple-500/20 text-purple-400 border-purple-500/30'}`}>
                           {karakter.rarity}

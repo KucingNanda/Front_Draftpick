@@ -31,7 +31,7 @@ export default function TeamPanel({
       {/* Dropdown Nama Peserta */}
       <div className={`flex items-center gap-3 shrink-0 ${isRightSide ? 'flex-row-reverse' : ''}`}>
         <div className={`p-2 md:p-3 rounded-full ${glowColor} bg-opacity-20 backdrop-blur-md`}>
-          <User size={24} className="text-gray-900 dark:text-white" />
+          <User size={24} className="text-slate-800 dark:text-white" />
         </div>
         {isGuest ? (
           <input 
@@ -39,13 +39,13 @@ export default function TeamPanel({
             value={pesertaProfile ? pesertaProfile.nama : ''}
             onChange={(e) => onNameChange(playerKey, e.target.value)}
             placeholder={`Nama ${playerKey === 'playerA' ? 'Player A' : 'Player B'}`}
-            className={`bg-transparent text-xl md:text-2xl font-bold text-gray-900 dark:text-white border-b-2 border-transparent hover:border-gray-500 focus:border-white focus:outline-none transition-colors w-full max-w-[250px] ${isRightSide ? 'text-right' : 'text-left'}`}
+            className={`bg-transparent text-xl md:text-2xl font-bold text-slate-800 dark:text-white border-b-2 border-transparent hover:border-gray-500 focus:border-white focus:outline-none transition-colors w-full max-w-[250px] ${isRightSide ? 'text-right' : 'text-left'}`}
           />
         ) : (
           <select 
             value={pesertaProfile ? pesertaProfile.id : ''}
             onChange={(e) => onSelectPeserta(playerKey, e.target.value)}
-            className={`bg-transparent text-xl md:text-2xl font-bold text-gray-900 dark:text-white border-b-2 border-transparent hover:border-gray-500 focus:border-white focus:outline-none transition-colors w-full max-w-[250px] ${isRightSide ? 'text-right' : 'text-left'}`}
+            className={`bg-transparent text-xl md:text-2xl font-bold text-slate-800 dark:text-white border-b-2 border-transparent hover:border-gray-500 focus:border-white focus:outline-none transition-colors w-full max-w-[250px] ${isRightSide ? 'text-right' : 'text-left'}`}
           >
             <option value="" className="text-gray-900">-- Pilih Peserta --</option>
             {pesertas.map(p => (
@@ -88,7 +88,7 @@ export default function TeamPanel({
         {/* First Half Team */}
         <div className={`flex flex-col ${isRightSide ? 'items-end' : 'items-start'}`}>
           <div className={`flex items-center gap-3 mb-2 ${isRightSide ? 'flex-row-reverse' : ''}`}>
-            <h3 className="text-gray-400 dark:text-gray-500 dark:text-gray-400 font-bold tracking-widest uppercase text-xs md:text-sm">First Half</h3>
+            <h3 className="text-gray-400 dark:text-slate-500 dark:text-gray-400 font-bold tracking-widest uppercase text-xs md:text-sm">First Half</h3>
             <span className={`px-2 py-0.5 rounded text-xs font-bold ${fhCost > settings.maxCost ? 'bg-red-500/20 text-red-400' : 'bg-blue-500/20 text-blue-400'}`}>Cost: {fhCost}/{settings.maxCost}</span>
           </div>
           <div className={`flex gap-3 items-center ${isRightSide ? 'flex-row-reverse' : ''}`}>
@@ -108,7 +108,7 @@ export default function TeamPanel({
         {/* Second Half Team */}
         <div className={`flex flex-col ${isRightSide ? 'items-end' : 'items-start'}`}>
           <div className={`flex items-center gap-3 mb-2 ${isRightSide ? 'flex-row-reverse' : ''}`}>
-            <h3 className="text-gray-400 dark:text-gray-500 dark:text-gray-400 font-bold tracking-widest uppercase text-xs md:text-sm">Second Half</h3>
+            <h3 className="text-gray-400 dark:text-slate-500 dark:text-gray-400 font-bold tracking-widest uppercase text-xs md:text-sm">Second Half</h3>
             <span className={`px-2 py-0.5 rounded text-xs font-bold ${shCost > settings.maxCost ? 'bg-red-500/20 text-red-400' : 'bg-blue-500/20 text-blue-400'}`}>Cost: {shCost}/{settings.maxCost}</span>
           </div>
           <div className={`flex gap-3 items-center ${isRightSide ? 'flex-row-reverse' : ''}`}>

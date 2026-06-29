@@ -99,16 +99,16 @@ export default function ArenaHeader({
   };
 
   return (
-    <header className="h-16 bg-gray-100 dark:bg-gray-900/50 backdrop-blur-md border-b border-gray-300 dark:border-gray-800 flex justify-between items-center px-8 shrink-0 relative z-10 shadow-lg">
+    <header className="h-16 bg-slate-300 dark:bg-gray-900/50 backdrop-blur-md border-b border-gray-300 dark:border-gray-800 flex justify-between items-center px-8 shrink-0 relative z-10 shadow-lg">
       <div className="flex-1 flex items-center gap-3">
         {currentBgm && (
-          <div className="bg-white dark:bg-gray-800/80 p-2 px-3 rounded-lg flex items-center gap-4 border border-gray-200 dark:border-gray-700 shadow-inner">
+          <div className="bg-slate-100 dark:bg-gray-800/80 p-2 px-3 rounded-lg flex items-center gap-4 border border-slate-300 dark:border-gray-700 shadow-inner">
             <div className="flex items-center gap-1">
-              <button onClick={togglePlay} className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:text-white transition-colors bg-gray-200 dark:bg-gray-700 hover:bg-gray-600 p-1.5 rounded-full" title="Play/Pause">
+              <button onClick={togglePlay} className="text-slate-600 dark:text-gray-300 hover:text-slate-800 dark:text-white transition-colors bg-gray-200 dark:bg-gray-700 hover:bg-gray-600 p-1.5 rounded-full" title="Play/Pause">
                 {isPlaying ? <Pause size={14} /> : <Play size={14} className="ml-0.5" />}
               </button>
               {bgms.length > 1 && (
-                <button onClick={handleNextTrack} className="text-gray-400 dark:text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:text-white transition-colors p-1.5 rounded-full hover:bg-gray-200 dark:bg-gray-700" title="Next Track">
+                <button onClick={handleNextTrack} className="text-gray-400 dark:text-slate-500 dark:text-gray-400 hover:text-slate-800 dark:text-white transition-colors p-1.5 rounded-full hover:bg-gray-200 dark:bg-gray-700" title="Next Track">
                   <SkipForward size={14} />
                 </button>
               )}
@@ -117,7 +117,7 @@ export default function ArenaHeader({
               <span className="text-[10px] text-green-400 font-bold uppercase tracking-wider mb-0.5 leading-none bg-transparent relative z-10">Now Playing</span>
               <div className="w-full overflow-hidden relative">
                 <span 
-                  className={`text-xs text-gray-900 dark:text-white leading-none whitespace-nowrap ${currentBgm.nama.length > 20 ? 'animate-scroll-text group-hover:[animation-play-state:paused]' : 'truncate block'}`} 
+                  className={`text-xs text-slate-800 dark:text-white leading-none whitespace-nowrap ${currentBgm.nama.length > 20 ? 'animate-scroll-text group-hover:[animation-play-state:paused]' : 'truncate block'}`} 
                   title={currentBgm.nama}
                 >
                   {currentBgm.nama.length > 20 ? `${currentBgm.nama} \u00A0\u00A0\u00A0\u00A0\u00A0 ${currentBgm.nama}` : currentBgm.nama}
@@ -125,7 +125,7 @@ export default function ArenaHeader({
               </div>
             </div>
             <div className="flex items-center gap-2 border-l border-gray-300 dark:border-gray-600 pl-3">
-              <button onClick={() => setIsMuted(!isMuted)} className="text-gray-400 dark:text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:text-white transition-colors">
+              <button onClick={() => setIsMuted(!isMuted)} className="text-gray-400 dark:text-slate-500 dark:text-gray-400 hover:text-slate-800 dark:text-white transition-colors">
                 {isMuted || volume === 0 ? <VolumeX size={16} /> : <Volume2 size={16} />}
               </button>
               <input 
@@ -147,7 +147,7 @@ export default function ArenaHeader({
         <span className={`font-bold tracking-widest uppercase text-sm md:text-base animate-pulse ${draftState.phase === 'REGISTRATION' ? 'text-yellow-400' : 'text-blue-400'}`}>
           {draftState.phase === 'REGISTRATION' ? 'Fase Persiapan' : 'Fase Draft Pick'}
         </span>
-        <span className="text-gray-400 dark:text-gray-500 dark:text-gray-400 text-xs md:text-sm">
+        <span className="text-gray-400 dark:text-slate-500 dark:text-gray-400 text-xs md:text-sm">
           {draftState.phase === 'REGISTRATION' 
             ? 'Silakan Pilih Peserta dari Dropdown' 
             : 'Pilih & Larang Karakter Secara Bergantian'}

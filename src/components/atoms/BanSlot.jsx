@@ -12,7 +12,7 @@ export default function BanSlot({ data, player, type, index, onSlotClick, onRemo
             <div className="absolute inset-0 bg-red-900/40 flex items-center justify-center pointer-events-none">
               <X size={32} className="text-red-500/70" />
             </div>
-            <button onClick={(e) => onRemove(e, player, type, 'bans', index)} className="absolute bottom-1 right-1 bg-gray-100 dark:bg-gray-900/80 p-0.5 rounded text-gray-900 dark:text-white opacity-0 group-hover:opacity-100 z-10">
+            <button onClick={(e) => onRemove(e, player, type, 'bans', index)} className="absolute bottom-1 right-1 bg-slate-300 dark:bg-gray-900/80 p-0.5 rounded text-slate-800 dark:text-white opacity-0 group-hover:opacity-100 z-10">
               <X size={10} />
             </button>
           </>

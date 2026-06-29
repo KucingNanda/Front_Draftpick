@@ -58,78 +58,78 @@ export default function Profil() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-[#0f172a] text-gray-900 dark:text-white p-6 md:p-12 font-sans">
+    <div className="min-h-screen bg-slate-200 dark:bg-[#0f172a] text-slate-800 dark:text-white p-6 md:p-12 font-sans">
       <div className="max-w-2xl mx-auto">
         <button 
           onClick={() => navigate('/')}
-          className="flex items-center gap-2 text-gray-400 dark:text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:text-white mb-6 transition-colors"
+          className="flex items-center gap-2 text-gray-400 dark:text-slate-500 dark:text-gray-400 hover:text-slate-800 dark:text-white mb-6 transition-colors"
         >
           <ArrowLeft size={20} />
           Kembali ke Beranda
         </button>
 
-        <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl border border-gray-200 dark:border-gray-700 overflow-hidden">
-          <div className="p-6 border-b border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800/50 flex items-center gap-3">
+        <div className="bg-slate-100 dark:bg-gray-800 rounded-2xl shadow-2xl border border-slate-300 dark:border-gray-700 overflow-hidden">
+          <div className="p-6 border-b border-slate-300 dark:border-gray-700 bg-slate-100 dark:bg-gray-800/50 flex items-center gap-3">
             <User className="text-blue-500" size={28} />
             <h1 className="text-2xl font-bold">Profil Pengguna</h1>
           </div>
 
           <div className="p-6 md:p-8 space-y-8">
             {/* Info Akun */}
-            <div className="bg-gray-100 dark:bg-gray-900/50 p-6 rounded-xl border border-gray-200 dark:border-gray-700 flex items-center gap-4">
-              <div className="w-16 h-16 rounded-full bg-white dark:bg-gray-800 border-2 border-gray-300 dark:border-gray-600 flex items-center justify-center">
+            <div className="bg-slate-300 dark:bg-gray-900/50 p-6 rounded-xl border border-slate-300 dark:border-gray-700 flex items-center gap-4">
+              <div className="w-16 h-16 rounded-full bg-slate-100 dark:bg-gray-800 border-2 border-gray-300 dark:border-gray-600 flex items-center justify-center">
                 <User size={32} className={role === 'wasit' ? 'text-yellow-400' : 'text-blue-400'} />
               </div>
               <div>
-                <p className="text-gray-400 dark:text-gray-500 dark:text-gray-400 text-sm">Status Akun</p>
-                <h2 className="text-2xl font-bold text-gray-900 dark:text-white capitalize">{role}</h2>
+                <p className="text-gray-400 dark:text-slate-500 dark:text-gray-400 text-sm">Status Akun</p>
+                <h2 className="text-2xl font-bold text-slate-800 dark:text-white capitalize">{role}</h2>
               </div>
             </div>
 
             {/* Ganti Password */}
-            <form onSubmit={handleSubmit} className="bg-gray-100 dark:bg-gray-900/50 p-6 rounded-xl border border-gray-200 dark:border-gray-700 space-y-4">
+            <form onSubmit={handleSubmit} className="bg-slate-300 dark:bg-gray-900/50 p-6 rounded-xl border border-slate-300 dark:border-gray-700 space-y-4">
               <div className="flex items-center gap-2 mb-6">
                 <Lock className="text-yellow-500" size={24} />
-                <h2 className="text-xl font-bold text-gray-900 dark:text-white">Ganti Password</h2>
+                <h2 className="text-xl font-bold text-slate-800 dark:text-white">Ganti Password</h2>
               </div>
 
               <div>
-                <label className="block text-gray-400 dark:text-gray-500 dark:text-gray-400 text-sm mb-2">Password Lama</label>
+                <label className="block text-gray-400 dark:text-slate-500 dark:text-gray-400 text-sm mb-2">Password Lama</label>
                 <input 
                   type="password"
                   required
                   value={passwords.oldPassword}
                   onChange={(e) => setPasswords({...passwords, oldPassword: e.target.value})}
-                  className="w-full bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-lg px-4 py-3 text-gray-900 dark:text-white focus:outline-none focus:border-blue-500"
+                  className="w-full bg-slate-100 dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-lg px-4 py-3 text-slate-800 dark:text-white focus:outline-none focus:border-blue-500"
                   placeholder="Masukkan password lama"
                 />
               </div>
 
               <div>
-                <label className="block text-gray-400 dark:text-gray-500 dark:text-gray-400 text-sm mb-2">Password Baru</label>
+                <label className="block text-gray-400 dark:text-slate-500 dark:text-gray-400 text-sm mb-2">Password Baru</label>
                 <input 
                   type="password"
                   required
                   value={passwords.newPassword}
                   onChange={(e) => setPasswords({...passwords, newPassword: e.target.value})}
-                  className="w-full bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-lg px-4 py-3 text-gray-900 dark:text-white focus:outline-none focus:border-blue-500"
+                  className="w-full bg-slate-100 dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-lg px-4 py-3 text-slate-800 dark:text-white focus:outline-none focus:border-blue-500"
                   placeholder="Masukkan password baru"
                 />
               </div>
 
               <div>
-                <label className="block text-gray-400 dark:text-gray-500 dark:text-gray-400 text-sm mb-2">Konfirmasi Password Baru</label>
+                <label className="block text-gray-400 dark:text-slate-500 dark:text-gray-400 text-sm mb-2">Konfirmasi Password Baru</label>
                 <input 
                   type="password"
                   required
                   value={passwords.confirmPassword}
                   onChange={(e) => setPasswords({...passwords, confirmPassword: e.target.value})}
-                  className="w-full bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-lg px-4 py-3 text-gray-900 dark:text-white focus:outline-none focus:border-blue-500"
+                  className="w-full bg-slate-100 dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-lg px-4 py-3 text-slate-800 dark:text-white focus:outline-none focus:border-blue-500"
                   placeholder="Ulangi password baru"
                 />
               </div>
 
-              <div className="pt-4 mt-4 border-t border-gray-200 dark:border-gray-700 flex justify-end">
+              <div className="pt-4 mt-4 border-t border-slate-300 dark:border-gray-700 flex justify-end">
                 <button 
                   type="submit"
                   disabled={isSubmitting}
