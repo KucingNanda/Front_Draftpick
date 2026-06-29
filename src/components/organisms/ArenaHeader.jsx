@@ -108,7 +108,7 @@ export default function ArenaHeader({
                 {isPlaying ? <Pause size={14} /> : <Play size={14} className="ml-0.5" />}
               </button>
               {bgms.length > 1 && (
-                <button onClick={handleNextTrack} className="text-gray-400 dark:text-slate-500 dark:text-gray-400 hover:text-slate-800 dark:text-white transition-colors p-1.5 rounded-full hover:bg-gray-200 dark:bg-gray-700" title="Next Track">
+                <button onClick={handleNextTrack} className="text-slate-500 dark:text-gray-400 hover:text-slate-800 dark:text-white transition-colors p-1.5 rounded-full hover:bg-gray-200 dark:bg-gray-700" title="Next Track">
                   <SkipForward size={14} />
                 </button>
               )}
@@ -125,7 +125,7 @@ export default function ArenaHeader({
               </div>
             </div>
             <div className="flex items-center gap-2 border-l border-gray-300 dark:border-gray-600 pl-3">
-              <button onClick={() => setIsMuted(!isMuted)} className="text-gray-400 dark:text-slate-500 dark:text-gray-400 hover:text-slate-800 dark:text-white transition-colors">
+              <button onClick={() => setIsMuted(!isMuted)} className="text-slate-500 dark:text-gray-400 hover:text-slate-800 dark:text-white transition-colors">
                 {isMuted || volume === 0 ? <VolumeX size={16} /> : <Volume2 size={16} />}
               </button>
               <input 
@@ -144,10 +144,10 @@ export default function ArenaHeader({
       </div>
       
       <div className="flex flex-col items-center justify-center flex-1 shrink-0">
-        <span className={`font-bold tracking-widest uppercase text-sm md:text-base animate-pulse ${draftState.phase === 'REGISTRATION' ? 'text-yellow-400' : 'text-blue-400'}`}>
+        <span className={`font-bold tracking-widest uppercase text-sm md:text-base animate-pulse ${draftState.phase === 'REGISTRATION' ? 'text-yellow-600 dark:text-yellow-400' : 'text-blue-600 dark:text-blue-400'}`}>
           {draftState.phase === 'REGISTRATION' ? 'Fase Persiapan' : 'Fase Draft Pick'}
         </span>
-        <span className="text-gray-400 dark:text-slate-500 dark:text-gray-400 text-xs md:text-sm">
+        <span className="text-slate-500 dark:text-gray-400 text-xs md:text-sm">
           {draftState.phase === 'REGISTRATION' 
             ? 'Silakan Pilih Peserta dari Dropdown' 
             : 'Pilih & Larang Karakter Secara Bergantian'}

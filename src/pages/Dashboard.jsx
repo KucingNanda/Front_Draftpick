@@ -109,7 +109,7 @@ export default function Dashboard() {
             {/* Karakter Spesial Card (Large Vertical Card) */}
             <div className="lg:col-span-1">
               {specialKarakter ? (
-                <div className="bg-gradient-to-b from-gray-800 via-gray-800 to-yellow-900/30 rounded-3xl border border-yellow-500/30 p-6 flex flex-col items-center text-center shadow-2xl relative overflow-hidden group h-full">
+                <div className="bg-gradient-to-b from-slate-100 dark:from-gray-800 via-slate-100 dark:via-gray-800 to-yellow-900/30 rounded-3xl border border-yellow-500/30 p-6 flex flex-col items-center text-center shadow-2xl relative overflow-hidden group h-full">
                   <div className="absolute top-0 right-0 w-32 h-32 bg-yellow-500/10 blur-[50px] rounded-full group-hover:bg-yellow-500/20 transition-all duration-700"></div>
                   
                   {/* Label dipindah ke dalam bounds agar tidak terpotong (top-0 left-0) */}
@@ -117,7 +117,7 @@ export default function Dashboard() {
                     <Crown size={14} /> Karakter Spesial
                   </div>
                   
-                  <div className="w-48 h-48 mt-6 shrink-0 bg-gradient-to-br from-gray-900 to-gray-800 rounded-2xl border-2 border-yellow-500/50 p-2 relative shadow-inner overflow-hidden group-hover:scale-105 transition-transform duration-500">
+                  <div className="w-48 h-48 mt-6 shrink-0 bg-gradient-to-br from-slate-200 dark:from-gray-900 to-slate-100 dark:to-gray-800 rounded-2xl border-2 border-yellow-500/50 p-2 relative shadow-inner overflow-hidden group-hover:scale-105 transition-transform duration-500">
                     {specialKarakter.imageUrl && (
                       <img src={specialKarakter.imageUrl} alt={specialKarakter.nama} className="w-full h-full object-contain drop-shadow-2xl z-10 relative" />
                     )}
@@ -166,7 +166,7 @@ export default function Dashboard() {
               {newestKarakters.length > 0 ? (
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 flex-1">
                   {newestKarakters.map((k, index) => (
-                    <div key={k.id} className="bg-gradient-to-r from-gray-800 to-blue-900/10 rounded-2xl border border-blue-500/20 p-4 flex items-center gap-4 hover:border-blue-500/50 transition-all duration-300 group overflow-hidden relative shadow-lg">
+                    <div key={k.id} className="bg-gradient-to-r from-slate-100 dark:from-gray-800 to-blue-900/10 rounded-2xl border border-blue-500/20 p-4 flex items-center gap-4 hover:border-blue-500/50 transition-all duration-300 group overflow-hidden relative shadow-lg">
                       {/* Label Baru */}
                       {index === 0 && (
                          <div className="absolute top-0 right-0 bg-blue-500 text-white text-[9px] font-black uppercase px-2 py-0.5 rounded-bl-lg shadow-md z-20 tracking-wider">
@@ -174,7 +174,7 @@ export default function Dashboard() {
                          </div>
                       )}
 
-                      <div className="w-20 h-20 shrink-0 bg-gradient-to-br from-gray-900 to-gray-800 rounded-xl border border-blue-500/30 p-1 group-hover:scale-105 transition-transform duration-300 shadow-inner">
+                      <div className="w-20 h-20 shrink-0 bg-gradient-to-br from-slate-200 dark:from-gray-900 to-slate-100 dark:to-gray-800 rounded-xl border border-blue-500/30 p-1 group-hover:scale-105 transition-transform duration-300 shadow-inner">
                         {k.imageUrl && (
                           <img src={k.imageUrl} alt={k.nama} className="w-full h-full object-contain drop-shadow-md" />
                         )}

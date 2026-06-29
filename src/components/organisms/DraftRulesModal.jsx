@@ -10,7 +10,7 @@ export default function DraftRulesModal({ isOpen, onClose }) {
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
-        <div className="flex justify-between items-center p-6 border-b border-gray-300 dark:border-gray-800 bg-gradient-to-r from-gray-900 to-gray-800 relative overflow-hidden">
+        <div className="flex justify-between items-center p-6 border-b border-gray-300 dark:border-gray-800 bg-gradient-to-r from-slate-200 dark:from-gray-900 to-slate-100 dark:to-gray-800 relative overflow-hidden">
           <div className="absolute top-0 right-0 w-64 h-64 bg-blue-500/10 blur-[80px] rounded-full pointer-events-none"></div>
           <h2 className="text-2xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400 flex items-center gap-3 relative z-10">
             <ShieldAlert className="text-blue-500" size={28} />
@@ -71,7 +71,7 @@ export default function DraftRulesModal({ isOpen, onClose }) {
           </div>
 
           {/* Rule 4: Kekebalan Khusus */}
-          <div className="bg-gradient-to-br from-yellow-900/20 to-gray-800 p-6 rounded-2xl border border-yellow-500/30 shadow-inner">
+          <div className="bg-gradient-to-br from-yellow-900/20 to-slate-100 dark:to-gray-800 p-6 rounded-2xl border border-yellow-500/30 shadow-inner">
             <h3 className="text-lg font-bold text-yellow-500 flex items-center gap-2 mb-4">
               <Crown size={20} /> 4. Keistimewaan Khusus
             </h3>

@@ -88,7 +88,7 @@ export default function TeamPanel({
         {/* First Half Team */}
         <div className={`flex flex-col ${isRightSide ? 'items-end' : 'items-start'}`}>
           <div className={`flex items-center gap-3 mb-2 ${isRightSide ? 'flex-row-reverse' : ''}`}>
-            <h3 className="text-gray-400 dark:text-slate-500 dark:text-gray-400 font-bold tracking-widest uppercase text-xs md:text-sm">First Half</h3>
+            <h3 className="text-slate-500 dark:text-gray-400 font-bold tracking-widest uppercase text-xs md:text-sm">First Half</h3>
             <span className={`px-2 py-0.5 rounded text-xs font-bold ${fhCost > settings.maxCost ? 'bg-red-500/20 text-red-400' : 'bg-blue-500/20 text-blue-400'}`}>Cost: {fhCost}/{settings.maxCost}</span>
           </div>
           <div className={`flex gap-3 items-center ${isRightSide ? 'flex-row-reverse' : ''}`}>
@@ -108,7 +108,7 @@ export default function TeamPanel({
         {/* Second Half Team */}
         <div className={`flex flex-col ${isRightSide ? 'items-end' : 'items-start'}`}>
           <div className={`flex items-center gap-3 mb-2 ${isRightSide ? 'flex-row-reverse' : ''}`}>
-            <h3 className="text-gray-400 dark:text-slate-500 dark:text-gray-400 font-bold tracking-widest uppercase text-xs md:text-sm">Second Half</h3>
+            <h3 className="text-slate-500 dark:text-gray-400 font-bold tracking-widest uppercase text-xs md:text-sm">Second Half</h3>
             <span className={`px-2 py-0.5 rounded text-xs font-bold ${shCost > settings.maxCost ? 'bg-red-500/20 text-red-400' : 'bg-blue-500/20 text-blue-400'}`}>Cost: {shCost}/{settings.maxCost}</span>
           </div>
           <div className={`flex gap-3 items-center ${isRightSide ? 'flex-row-reverse' : ''}`}>

@@ -313,8 +313,8 @@ export default function MasterKarakter() {
               onClick={() => setPreviewKarakter(karakter)}
               className={`aspect-square rounded-xl border-2 shadow-md hover:scale-105 cursor-pointer overflow-hidden transition-all flex flex-col relative group ${
                 karakter.rarity.includes('5 Star') 
-                  ? 'bg-gradient-to-b from-gray-800 to-yellow-900/40 border-yellow-600/50 hover:border-yellow-400' 
-                  : 'bg-gradient-to-b from-gray-800 to-purple-900/40 border-purple-600/50 hover:border-purple-400'
+                  ? 'bg-gradient-to-b from-slate-100 dark:from-gray-800 to-yellow-900/40 border-yellow-600/50 hover:border-yellow-400' 
+                  : 'bg-gradient-to-b from-slate-100 dark:from-gray-800 to-purple-900/40 border-purple-600/50 hover:border-purple-400'
               }`}
             >
               {karakter.imageUrl ? (
