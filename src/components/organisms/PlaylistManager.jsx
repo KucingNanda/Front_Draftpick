@@ -152,7 +152,7 @@ export default function PlaylistManager({ token }) {
               </button>
             </div>
             
-            <form onSubmit={handleUploadBgm} className="p-6 space-y-5">
+            <div className="p-6 space-y-5">
               <div>
                 <label className="block text-gray-400 dark:text-slate-500 dark:text-gray-400 text-sm font-bold mb-2">Nama Lagu (Judul)</label>
                 <input 
@@ -194,14 +194,15 @@ export default function PlaylistManager({ token }) {
               </div>
 
               <button 
-                type="submit"
+                type="button"
+                onClick={handleUploadBgm}
                 disabled={isUploadingBgm}
                 className="w-full bg-purple-600 hover:bg-purple-500 text-white font-bold py-3 px-4 rounded-lg transition-colors flex justify-center items-center gap-2 disabled:opacity-50"
               >
                 {isUploadingBgm ? <div className="w-5 h-5 border-2 border-white/20 border-t-white rounded-full animate-spin"></div> : <Save size={20} />}
                 {isUploadingBgm ? 'Mengunggah...' : 'Simpan ke Playlist'}
               </button>
-            </form>
+            </div>
           </div>
         </div>
       )}
