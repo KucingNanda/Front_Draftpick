@@ -55,7 +55,8 @@ export default function PlaylistManager({ token }) {
         setNewBgmName('');
         setNewBgmFile(null);
       } else {
-        throw new Error('Gagal menyimpan BGM ke database');
+        const errorText = await bgmRes.text();
+        throw new Error(`Gagal menyimpan BGM ke database. Status: ${bgmRes.status}, Pesan: ${errorText}`);
       }
     } catch (err) {
       Swal.fire('Error', err.message, 'error');
