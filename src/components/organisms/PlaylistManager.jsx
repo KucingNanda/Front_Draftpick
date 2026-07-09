@@ -27,6 +27,13 @@ export default function PlaylistManager({ token }) {
       return;
     }
 
+    // Validasi ukuran file (Maksimal 15 MB)
+    const MAX_FILE_SIZE = 15 * 1024 * 1024;
+    if (newBgmFile.size > MAX_FILE_SIZE) {
+      Swal.fire('Peringatan', 'Ukuran file lagu terlalu besar! Maksimal 15 MB.', 'warning');
+      return;
+    }
+
     setIsUploadingBgm(true);
     const formData = new FormData();
     formData.append('audio', newBgmFile);
