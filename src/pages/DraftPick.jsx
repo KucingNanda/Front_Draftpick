@@ -125,6 +125,7 @@ export default function DraftPick() {
         handleExit={handleExit}
         playerA={playerA}
         playerB={playerB}
+        calculateCost={calculateCost}
         onOpenRules={() => setIsRulesOpen(true)}
       />
 

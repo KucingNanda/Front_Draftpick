@@ -22,8 +22,12 @@ export default function TeamPanel({
   const isRightSide = playerKey === 'playerB';
   const state = draftState[playerKey];
   
-  const fhCost = calculateCost(state.firstHalf.picks, pesertaProfile);
-  const shCost = calculateCost(state.secondHalf.picks, pesertaProfile);
+  // Gunakan cost yang tersimpan di state (riwayat) jika calculateCost mengembalikan 0 (di mode riwayat)
+  let fhCost = calculateCost ? calculateCost(state.firstHalf.picks, pesertaProfile) : 0;
+  let shCost = calculateCost ? calculateCost(state.secondHalf.picks, pesertaProfile) : 0;
+  
+  if (fhCost === 0 && state.firstHalf.cost !== undefined) fhCost = state.firstHalf.cost;
+  if (shCost === 0 && state.secondHalf.cost !== undefined) shCost = state.secondHalf.cost;
 
   return (
     <div className={`flex flex-col h-full w-full px-6 py-4 md:py-6 ${isRightSide ? 'items-end' : 'items-start'}`}>

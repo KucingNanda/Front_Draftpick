@@ -19,6 +19,7 @@ export default function ArenaHeader({
   handleExit,
   playerA,
   playerB,
+  calculateCost,
   onOpenRules
 }) {
   const { isGuest, role } = useAuth();
@@ -64,11 +65,20 @@ export default function ArenaHeader({
     });
 
     try {
+      // Menyuntikkan cost yang sudah dihitung ke dalam draftState sebelum disimpan
+      const finalDraftState = JSON.parse(JSON.stringify(draftState));
+      if (calculateCost) {
+        finalDraftState.playerA.firstHalf.cost = calculateCost(draftState.playerA.firstHalf.picks, playerA);
+        finalDraftState.playerA.secondHalf.cost = calculateCost(draftState.playerA.secondHalf.picks, playerA);
+        finalDraftState.playerB.firstHalf.cost = calculateCost(draftState.playerB.firstHalf.picks, playerB);
+        finalDraftState.playerB.secondHalf.cost = calculateCost(draftState.playerB.secondHalf.picks, playerB);
+      }
+
       const payload = {
         role: role,
         playerA: playerA?.nama || 'Player A',
         playerB: playerB?.nama || 'Player B',
-        draftData: JSON.stringify(draftState)
+        draftData: JSON.stringify(finalDraftState)
       };
 
       const res = await api(`${import.meta.env.VITE_API_BASE_URL}/api/history`, {
