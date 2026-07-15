@@ -55,6 +55,8 @@ export default function Profil() {
     } finally {
       setIsSubmitting(false);
     }
+  };
+
   const handleShowToken = () => {
     Swal.fire({
       title: 'Token Akses (JWT)',
