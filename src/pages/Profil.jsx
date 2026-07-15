@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
-import { User, Lock, Save, ArrowLeft } from 'lucide-react';
+import { User, Lock, Save, ArrowLeft, Key } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import { useApi } from '../hooks/useApi';
@@ -55,6 +55,22 @@ export default function Profil() {
     } finally {
       setIsSubmitting(false);
     }
+  const handleShowToken = () => {
+    Swal.fire({
+      title: 'Token Akses (JWT)',
+      html: `
+        <div style="text-align: left;">
+          <label style="font-size: 0.75rem; color: #94a3b8; font-weight: bold; text-transform: uppercase; letter-spacing: 0.05em;">Bearer Token</label>
+          <input type="text" readonly value="${token}" onclick="this.select()" style="width: 100%; box-sizing: border-box; margin-top: 0.25rem; padding: 0.5rem; background-color: #0f172a; border: 1px solid #334155; border-radius: 0.25rem; font-size: 0.875rem; color: #4ade80; font-family: monospace; outline: none; cursor: copy;" />
+          <p style="font-size: 0.65rem; color: #64748b; margin-top: 0.25rem;">Klik teks di atas untuk menyalin. Gunakan token ini untuk otentikasi API eksternal (contoh: Postman).</p>
+        </div>
+      `,
+      icon: 'info',
+      background: '#1e293b',
+      color: '#fff',
+      confirmButtonText: 'Tutup',
+      confirmButtonColor: '#3b82f6'
+    });
   };
 
   return (
@@ -76,14 +92,23 @@ export default function Profil() {
 
           <div className="p-6 md:p-8 space-y-8">
             {/* Info Akun */}
-            <div className="bg-slate-300 dark:bg-gray-900/50 p-6 rounded-xl border border-slate-300 dark:border-gray-700 flex items-center gap-4">
-              <div className="w-16 h-16 rounded-full bg-slate-100 dark:bg-gray-800 border-2 border-gray-300 dark:border-gray-600 flex items-center justify-center">
-                <User size={32} className={role === 'wasit' ? 'text-yellow-400' : 'text-blue-400'} />
+            <div className="bg-slate-300 dark:bg-gray-900/50 p-6 rounded-xl border border-slate-300 dark:border-gray-700 flex flex-col md:flex-row items-center justify-between gap-4">
+              <div className="flex items-center gap-4">
+                <div className="w-16 h-16 rounded-full bg-slate-100 dark:bg-gray-800 border-2 border-gray-300 dark:border-gray-600 flex items-center justify-center">
+                  <User size={32} className={role === 'wasit' ? 'text-yellow-400' : 'text-blue-400'} />
+                </div>
+                <div>
+                  <p className="text-gray-400 dark:text-slate-500 dark:text-gray-400 text-sm">Status Akun</p>
+                  <h2 className="text-2xl font-bold text-slate-800 dark:text-white capitalize">{role}</h2>
+                </div>
               </div>
-              <div>
-                <p className="text-gray-400 dark:text-slate-500 dark:text-gray-400 text-sm">Status Akun</p>
-                <h2 className="text-2xl font-bold text-slate-800 dark:text-white capitalize">{role}</h2>
-              </div>
+              <button 
+                onClick={handleShowToken}
+                className="flex items-center gap-2 bg-emerald-600 hover:bg-emerald-500 text-white px-4 py-2.5 rounded-lg font-bold shadow-lg shadow-emerald-900/20 transition-all"
+              >
+                <Key size={18} />
+                Lihat Token JWT
+              </button>
             </div>
 
             {/* Ganti Password */}
