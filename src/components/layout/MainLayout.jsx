@@ -140,7 +140,22 @@ export default function MainLayout() {
                         const data = await res.json();
                         if (res.ok) {
                           login(data.role, data.token);
-                          Swal.fire({ title: 'Berhasil', text: data.message, icon: 'success', timer: 1500, showConfirmButton: false, background: '#1e293b', color: '#fff' });
+                          Swal.fire({
+                            title: 'Login Berhasil',
+                            html: `
+                              <p style="margin-bottom: 1rem;">${data.message}</p>
+                              <div style="text-align: left;">
+                                <label style="font-size: 0.75rem; color: #94a3b8; font-weight: bold; text-transform: uppercase; letter-spacing: 0.05em;">JWT Token</label>
+                                <input type="text" readonly value="${data.token}" onclick="this.select()" style="width: 95%; box-sizing: border-box; margin-top: 0.25rem; padding: 0.5rem; background-color: #0f172a; border: 1px solid #334155; border-radius: 0.25rem; font-size: 0.875rem; color: #4ade80; font-family: monospace; outline: none; cursor: copy;" />
+                                <p style="font-size: 0.65rem; color: #64748b; margin-top: 0.25rem;">Klik kotak di atas untuk menyalin token.</p>
+                              </div>
+                            `,
+                            icon: 'success',
+                            background: '#1e293b',
+                            color: '#fff',
+                            confirmButtonText: 'Tutup',
+                            confirmButtonColor: '#3b82f6'
+                          });
                         } else {
                           Swal.fire('Gagal', data.error || 'Login gagal', 'error');
                         }
