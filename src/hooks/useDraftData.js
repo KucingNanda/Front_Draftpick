@@ -24,9 +24,15 @@ export function useDraftData() {
       .then(data => setKarakters(data || []))
       .catch(err => console.error("Error fetch karakter:", err));
 
+    const token = localStorage.getItem('userToken');
+    const headers = token ? { 'Authorization': `Bearer ${token}` } : {};
+
     // Fetch Master Peserta
-    fetch(`${import.meta.env.VITE_API_BASE_URL}/api/peserta`)
-      .then(res => res.json())
+    fetch(`${import.meta.env.VITE_API_BASE_URL}/api/peserta`, { headers })
+      .then(res => {
+        if (!res.ok) return [];
+        return res.json();
+      })
       .then(data => setPesertas(data || []))
       .catch(err => console.error("Error fetch peserta:", err));
   }, []);
