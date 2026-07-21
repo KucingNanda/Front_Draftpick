@@ -8,9 +8,13 @@ export const calculateCost = (teamPicks, pesertaProfile) => {
       if (p.weaponLevel === 2) cost += 3; // Penalti Senjata B5 R2 (+3)
       
       // Penalti C1 (+2)
-      if (p.cost === 1 && pesertaProfile && pesertaProfile.karakters) {
-        const match = pesertaProfile.karakters.find(pk => pk.karakter.id === p.id);
-        if (match && match.isC1) cost += 2;
+      if (p.cost === 1) {
+        if (p.isC1) {
+          cost += 2;
+        } else if (pesertaProfile && pesertaProfile.karakters) {
+          const match = pesertaProfile.karakters.find(pk => pk.karakter.id === p.id);
+          if (match && match.isC1) cost += 2;
+        }
       }
     }
   });

@@ -2,39 +2,53 @@ import { createContext, useContext, useState, useEffect, useCallback } from 'rea
 
 const AuthContext = createContext();
 
+const parseJwt = (token) => {
+  try {
+    const base64Url = token.split('.')[1];
+    const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+    const jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+    }).join(''));
+    return JSON.parse(jsonPayload);
+  } catch (e) {
+    return null;
+  }
+};
+
 export function AuthProvider({ children }) {
   const [role, setRole] = useState('guest');
   const [token, setToken] = useState(null);
 
   useEffect(() => {
-    const savedRole = localStorage.getItem('userRole');
-    const savedToken = localStorage.getItem('userToken');
+    localStorage.removeItem('userRole'); // Bersihkan sisa-sisa lama
+    localStorage.removeItem('adminToken');
     
-    // Migrasi adminToken lama jika ada
-    if (!savedRole && localStorage.getItem('adminToken')) {
-      const oldToken = localStorage.getItem('adminToken');
-      localStorage.setItem('userRole', 'wasit');
-      localStorage.setItem('userToken', oldToken);
-      localStorage.removeItem('adminToken');
-      setRole('wasit');
-      setToken(oldToken);
-    } else if (savedRole && savedToken) {
-      setRole(savedRole);
-      setToken(savedToken);
+    const savedToken = localStorage.getItem('userToken');
+    if (savedToken) {
+      const decoded = parseJwt(savedToken);
+      if (decoded && decoded.role) {
+        if (decoded.exp * 1000 < Date.now()) {
+          localStorage.removeItem('userToken');
+        } else {
+          setRole(decoded.role);
+          setToken(savedToken);
+        }
+      }
     }
   }, []);
 
-  const login = useCallback((newRole, newToken) => {
-    localStorage.setItem('userRole', newRole);
+  const login = useCallback((newToken) => {
     localStorage.setItem('userToken', newToken);
-    setRole(newRole);
+    const decoded = parseJwt(newToken);
+    if (decoded && decoded.role) {
+      setRole(decoded.role);
+    }
     setToken(newToken);
   }, []);
 
   const logout = useCallback(() => {
-    localStorage.removeItem('userRole');
+    localStorage.removeItem('userRole'); // Just in case
     localStorage.removeItem('userToken');
-    localStorage.removeItem('adminToken'); // Just in case
     setRole('guest');
     setToken(null);
   }, []);

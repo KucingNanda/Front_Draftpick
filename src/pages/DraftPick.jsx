@@ -69,6 +69,7 @@ export default function DraftPick() {
     handleSelectCharacter,
     handleRemoveCharacter,
     toggleWeapon,
+    toggleConstellation,
     handleNameChange
   } = useDraftLogic();
 
@@ -162,6 +163,7 @@ export default function DraftPick() {
             onSlotClick={handleSlotClick}
             onRemoveCharacter={handleRemoveCharacter}
             onToggleWeapon={toggleWeapon}
+            onToggleConstellation={toggleConstellation}
             isGuest={isGuest}
             onNameChange={handleNameChange}
           />
@@ -181,6 +183,7 @@ export default function DraftPick() {
             onSlotClick={handleSlotClick}
             onRemoveCharacter={handleRemoveCharacter}
             onToggleWeapon={toggleWeapon}
+            onToggleConstellation={toggleConstellation}
             isGuest={isGuest}
             onNameChange={handleNameChange}
           />

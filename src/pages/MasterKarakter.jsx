@@ -20,6 +20,10 @@ export default function MasterKarakter() {
   const [viewMode, setViewMode] = useState('grid');
   const [sortConfig, setSortConfig] = useState({ key: 'id', direction: 'asc' });
 
+  // Pagination State
+  const [currentPage, setCurrentPage] = useState(1);
+  const ITEMS_PER_PAGE = 35;
+
   const requestSort = (key) => {
     let direction = 'asc';
     if (sortConfig.key === key && sortConfig.direction === 'asc') {
@@ -100,6 +104,11 @@ export default function MasterKarakter() {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
+
+  // Reset pagination on filter change
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [searchQuery, filterRarity, sortConfig]);
 
   const handleFileChange = (e) => {
     if (e.target.files && e.target.files[0]) {
@@ -237,6 +246,13 @@ export default function MasterKarakter() {
     return filtered;
   }, [karakters, searchQuery, filterRarity, sortConfig]);
 
+  // Pagination calculations
+  const totalPages = Math.ceil(sortedAndFilteredKarakters.length / ITEMS_PER_PAGE);
+  const paginatedKarakters = sortedAndFilteredKarakters.slice(
+    (currentPage - 1) * ITEMS_PER_PAGE,
+    currentPage * ITEMS_PER_PAGE
+  );
+
   return (
     <div className="max-w-7xl mx-auto pb-12">
       <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-6 border-b border-slate-300 dark:border-gray-700 pb-4 gap-4">
@@ -306,8 +322,8 @@ export default function MasterKarakter() {
           <p className="text-gray-400 dark:text-slate-500 dark:text-gray-400 animate-pulse text-lg">Memuat data dari server...</p>
         </div>
       ) : viewMode === 'grid' ? (
-        <div className="grid grid-cols-4 sm:grid-cols-5 md:grid-cols-6 lg:grid-cols-7 gap-3">
-          {sortedAndFilteredKarakters.map((karakter) => (
+        <div className="grid grid-cols-4 sm:grid-cols-5 md:grid-cols-6 lg:grid-cols-7 gap-3 mb-6">
+          {paginatedKarakters.map((karakter) => (
             <div
               key={karakter.id}
               onClick={() => setPreviewKarakter(karakter)}
@@ -338,7 +354,7 @@ export default function MasterKarakter() {
             </div>
           ))}
 
-          {sortedAndFilteredKarakters.length === 0 && (
+          {paginatedKarakters.length === 0 && (
             <div className="col-span-full text-center py-16 bg-slate-100 dark:bg-gray-800/50 rounded-xl border border-dashed border-slate-300 dark:border-gray-700">
               <p className="text-gray-400 dark:text-slate-500 dark:text-gray-400 text-lg mb-2">Tidak ada karakter yang ditemukan.</p>
             </div>
@@ -385,14 +401,14 @@ export default function MasterKarakter() {
                 </tr>
               </thead>
               <tbody>
-                {sortedAndFilteredKarakters.length === 0 ? (
+                {paginatedKarakters.length === 0 ? (
                   <tr>
                     <td colSpan="8" className="p-8 text-center text-gray-400 dark:text-gray-500 bg-slate-100 dark:bg-gray-800/50 border border-dashed border-slate-300 dark:border-gray-700">
                       Tidak ada karakter yang ditemukan.
                     </td>
                   </tr>
                 ) : (
-                  sortedAndFilteredKarakters.map((karakter) => (
+                  paginatedKarakters.map((karakter) => (
                     <tr key={karakter.id} className="border-b border-slate-300 dark:border-gray-700/50 hover:bg-gray-200 dark:bg-gray-700/20 transition-colors">
                       <td className="p-4 text-gray-400 dark:text-slate-500 dark:text-gray-400 text-center">#{karakter.id}</td>
                       <td className="p-4">
@@ -436,6 +452,43 @@ export default function MasterKarakter() {
               </tbody>
             </table>
           </div>
+        </div>
+      )}
+
+      {/* Pagination Controls */}
+      {!loading && totalPages > 1 && (
+        <div className="flex justify-center items-center gap-2 mt-6">
+          <button
+            onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
+            disabled={currentPage === 1}
+            className="px-3 py-1 rounded-md bg-slate-100 dark:bg-gray-800 text-slate-800 dark:text-white disabled:opacity-50 border border-slate-300 dark:border-gray-700 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
+          >
+            Prev
+          </button>
+          
+          <div className="flex gap-1 overflow-x-auto max-w-[200px] md:max-w-md px-2 custom-scrollbar">
+            {Array.from({ length: totalPages }).map((_, i) => (
+              <button
+                key={i}
+                onClick={() => setCurrentPage(i + 1)}
+                className={`px-3 py-1 rounded-md min-w-[32px] transition-colors border ${
+                  currentPage === i + 1
+                    ? 'bg-blue-600 text-white border-blue-600'
+                    : 'bg-slate-100 dark:bg-gray-800 text-slate-800 dark:text-white border-slate-300 dark:border-gray-700 hover:bg-gray-200 dark:hover:bg-gray-700'
+                }`}
+              >
+                {i + 1}
+              </button>
+            ))}
+          </div>
+
+          <button
+            onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
+            disabled={currentPage === totalPages}
+            className="px-3 py-1 rounded-md bg-slate-100 dark:bg-gray-800 text-slate-800 dark:text-white disabled:opacity-50 border border-slate-300 dark:border-gray-700 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
+          >
+            Next
+          </button>
         </div>
       )}
 

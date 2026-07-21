@@ -106,9 +106,16 @@ export function useDraftLogic() {
     const { player, type, action, index } = activeSlot;
     const selectedProfile = player === 'playerA' ? playerA : playerB;
     
+    const checkIsC1 = (charId, profile) => {
+      if (!profile || !profile.karakters) return false;
+      const match = profile.karakters.find(pk => pk.karakter.id === charId);
+      return match ? match.isC1 : false;
+    };
+    const charWithC1 = { ...karakter, isC1: checkIsC1(karakter.id, selectedProfile) };
+
     if (action === 'picks') {
       const currentTeamPicks = [...draftState[player][type].picks];
-      currentTeamPicks[index] = { ...karakter, weaponLevel: 0 };
+      currentTeamPicks[index] = { ...charWithC1, weaponLevel: 0 };
       
       if (calculateCost(currentTeamPicks, selectedProfile) > settings.maxCost) {
         Swal.fire({
@@ -125,13 +132,13 @@ export function useDraftLogic() {
     setDraftState(prev => {
       const newState = structuredClone(prev);
       if (action === 'reg') {
-        newState[player].registered[index] = karakter;
+        newState[player].registered[index] = charWithC1;
       } else if (action === 'globalBans') {
-        newState[player].globalBans[index] = karakter;
+        newState[player].globalBans[index] = charWithC1;
       } else {
         newState[player][type][action][index] = (action === 'picks') 
-          ? { ...karakter, weaponLevel: 0 } 
-          : karakter;
+          ? { ...charWithC1, weaponLevel: 0 } 
+          : charWithC1;
       }
       return newState;
     });
@@ -184,6 +191,37 @@ export function useDraftLogic() {
         
         // Simpan langsung state objek baru di index
         newState[player][type].picks[index] = { ...char, weaponLevel: nextLevel };
+      }
+      return newState;
+    });
+  };
+
+  const toggleConstellation = (e, player, type, index) => {
+    e.stopPropagation();
+    setDraftState(prev => {
+      const newState = structuredClone(prev);
+      const char = newState[player][type].picks[index];
+      const selectedProfile = player === 'playerA' ? playerA : playerB;
+      
+      if (char) {
+        let currentC1 = char.isC1 || false;
+        let nextC1 = !currentC1;
+        
+        const simulatedPicks = [...newState[player][type].picks];
+        simulatedPicks[index] = { ...char, isC1: nextC1 };
+        
+        if (nextC1 && calculateCost(simulatedPicks, selectedProfile) > settings.maxCost) {
+          Swal.fire({
+            title: 'Cost Penuh',
+            text: `Batas maksimal tim adalah ${settings.maxCost} Cost! Tidak bisa mengaktifkan C1.`,
+            icon: 'error',
+            background: '#1e293b',
+            color: '#fff'
+          });
+          return prev;
+        }
+        
+        newState[player][type].picks[index] = { ...char, isC1: nextC1 };
       }
       return newState;
     });
@@ -250,6 +288,7 @@ export function useDraftLogic() {
     handleSlotClick,
     handleSelectCharacter,
     handleRemoveCharacter,
-    toggleWeapon
+    toggleWeapon,
+    toggleConstellation
   };
 }

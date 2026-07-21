@@ -138,8 +138,8 @@ export default function MainLayout() {
                           body: JSON.stringify(result.value)
                         });
                         const data = await res.json();
-                        if (res.ok) {
-                          login(data.role, data.token);
+                        if (data.token) {
+                          login(data.token);
                           Swal.fire({ title: 'Berhasil', text: data.message, icon: 'success', timer: 1500, showConfirmButton: false, background: '#1e293b', color: '#fff' });
                         } else {
                           Swal.fire('Gagal', data.error || 'Login gagal', 'error');

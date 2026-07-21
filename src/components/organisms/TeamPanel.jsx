@@ -16,6 +16,7 @@ export default function TeamPanel({
   onSlotClick,
   onRemoveCharacter,
   onToggleWeapon,
+  onToggleConstellation,
   isGuest,
   onNameChange
 }) {
@@ -98,7 +99,7 @@ export default function TeamPanel({
           <div className={`flex gap-3 items-center ${isRightSide ? 'flex-row-reverse' : ''}`}>
             <div className="flex gap-2">
               {state.firstHalf.picks.map((data, i) => (
-                <PickSlot key={`fh-pick-${i}`} index={i} data={data} player={playerKey} type="firstHalf" onSlotClick={onSlotClick} onRemove={onRemoveCharacter} onToggleWeapon={onToggleWeapon} />
+                <PickSlot key={`fh-pick-${i}`} index={i} data={data} player={playerKey} type="firstHalf" onSlotClick={onSlotClick} onRemove={onRemoveCharacter} onToggleWeapon={onToggleWeapon} onToggleConstellation={onToggleConstellation} isGuest={isGuest} />
               ))}
             </div>
             <div className="flex gap-2 opacity-90">
@@ -118,7 +119,7 @@ export default function TeamPanel({
           <div className={`flex gap-3 items-center ${isRightSide ? 'flex-row-reverse' : ''}`}>
             <div className="flex gap-2">
               {state.secondHalf.picks.map((data, i) => (
-                <PickSlot key={`sh-pick-${i}`} index={i} data={data} player={playerKey} type="secondHalf" onSlotClick={onSlotClick} onRemove={onRemoveCharacter} onToggleWeapon={onToggleWeapon} />
+                <PickSlot key={`sh-pick-${i}`} index={i} data={data} player={playerKey} type="secondHalf" onSlotClick={onSlotClick} onRemove={onRemoveCharacter} onToggleWeapon={onToggleWeapon} onToggleConstellation={onToggleConstellation} isGuest={isGuest} />
               ))}
             </div>
             <div className="flex gap-2 opacity-90">
