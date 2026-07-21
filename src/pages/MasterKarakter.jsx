@@ -255,32 +255,32 @@ export default function MasterKarakter() {
 
   return (
     <div className="max-w-7xl mx-auto pb-12">
-      <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-6 border-b border-slate-300 dark:border-gray-700 pb-4 gap-4">
+      <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-6 border-b border-theme-border pb-4 gap-4">
         <div>
-          <h1 className="text-3xl font-bold text-slate-800 dark:text-white mb-2">Master Karakter</h1>
-          <p className="text-gray-400 dark:text-slate-500 dark:text-gray-400">Daftar {karakters.length} karakter yang tersedia dalam database.</p>
+          <h1 className="text-3xl font-bold text-theme-textMain mb-2">Master Karakter</h1>
+          <p className="text-theme-textSub">Daftar {karakters.length} karakter yang tersedia dalam database.</p>
         </div>
         
         <div className="flex flex-wrap items-center gap-3 w-full md:w-auto">
           {/* Kolom Pencarian */}
           <div className="relative flex-1 md:w-64">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 dark:text-slate-500 dark:text-gray-400" size={18} />
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-theme-textSub" size={18} />
             <input 
               type="text" 
               placeholder="Cari karakter..." 
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full bg-slate-100 dark:bg-gray-800 border border-slate-300 dark:border-gray-700 rounded-lg pl-10 pr-4 py-2 text-slate-800 dark:text-white focus:outline-none focus:border-blue-500 transition-colors text-sm"
+              className="w-full bg-theme-bgPanel border border-theme-border rounded-lg pl-10 pr-4 py-2 text-theme-textMain focus:outline-none focus:border-blue-500 transition-colors text-sm"
             />
           </div>
           
           {/* Dropdown Filter Rarity */}
           <div className="relative">
-            <Filter className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 dark:text-slate-500 dark:text-gray-400" size={18} />
+            <Filter className="absolute left-3 top-1/2 -translate-y-1/2 text-theme-textSub" size={18} />
             <select 
               value={filterRarity}
               onChange={(e) => setFilterRarity(e.target.value)}
-              className="appearance-none bg-slate-100 dark:bg-gray-800 border border-slate-300 dark:border-gray-700 rounded-lg pl-10 pr-8 py-2 text-slate-800 dark:text-white focus:outline-none focus:border-blue-500 transition-colors text-sm cursor-pointer"
+              className="appearance-none bg-theme-bgPanel border border-theme-border rounded-lg pl-10 pr-8 py-2 text-theme-textMain focus:outline-none focus:border-blue-500 transition-colors text-sm cursor-pointer"
             >
               <option value="">Semua Rarity</option>
               {RARITIES.map(r => <option key={r} value={r}>{r}</option>)}
@@ -288,17 +288,17 @@ export default function MasterKarakter() {
           </div>
 
           {/* Toggle View Mode */}
-          <div className="flex bg-slate-100 dark:bg-gray-800 rounded-lg p-1 border border-slate-300 dark:border-gray-700">
+          <div className="flex bg-theme-bgPanel rounded-lg p-1 border border-theme-border">
             <button
               onClick={() => setViewMode('grid')}
-              className={`p-1.5 rounded-md transition-colors ${viewMode === 'grid' ? 'bg-gray-200 dark:bg-gray-700 text-slate-800 dark:text-white shadow' : 'text-gray-400 dark:text-slate-500 dark:text-gray-400 hover:text-slate-800 dark:text-white hover:bg-gray-200 dark:bg-gray-700/50'}`}
+              className={`p-1.5 rounded-md transition-colors ${viewMode === 'grid' ? 'bg-theme-bgHover text-theme-textMain shadow' : 'text-theme-textSub hover:text-theme-textMain hover:bg-theme-bgHover'}`}
               title="Grid View"
             >
               <LayoutGrid size={18} />
             </button>
             <button
               onClick={() => setViewMode('table')}
-              className={`p-1.5 rounded-md transition-colors ${viewMode === 'table' ? 'bg-gray-200 dark:bg-gray-700 text-slate-800 dark:text-white shadow' : 'text-gray-400 dark:text-slate-500 dark:text-gray-400 hover:text-slate-800 dark:text-white hover:bg-gray-200 dark:bg-gray-700/50'}`}
+              className={`p-1.5 rounded-md transition-colors ${viewMode === 'table' ? 'bg-theme-bgHover text-theme-textMain shadow' : 'text-theme-textSub hover:text-theme-textMain hover:bg-theme-bgHover'}`}
               title="Table View"
             >
               <List size={18} />
@@ -319,7 +319,7 @@ export default function MasterKarakter() {
 
       {loading ? (
         <div className="flex justify-center items-center h-64">
-          <p className="text-gray-400 dark:text-slate-500 dark:text-gray-400 animate-pulse text-lg">Memuat data dari server...</p>
+          <p className="text-theme-textSub animate-pulse text-lg">Memuat data dari server...</p>
         </div>
       ) : viewMode === 'grid' ? (
         <div className="grid grid-cols-4 sm:grid-cols-5 md:grid-cols-6 lg:grid-cols-7 gap-3 mb-6">
@@ -329,8 +329,8 @@ export default function MasterKarakter() {
               onClick={() => setPreviewKarakter(karakter)}
               className={`aspect-square rounded-xl border-2 shadow-md hover:scale-105 cursor-pointer overflow-hidden transition-all flex flex-col relative group ${
                 karakter.rarity.includes('5 Star') 
-                  ? 'bg-gradient-to-b from-slate-100 dark:from-gray-800 to-yellow-900/40 border-yellow-600/50 hover:border-yellow-400' 
-                  : 'bg-gradient-to-b from-slate-100 dark:from-gray-800 to-purple-900/40 border-purple-600/50 hover:border-purple-400'
+                  ? 'bg-gradient-to-b from-theme-bgPanel to-yellow-900/40 border-yellow-600/50 hover:border-yellow-400' 
+                  : 'bg-gradient-to-b from-theme-bgPanel to-purple-900/40 border-purple-600/50 hover:border-purple-400'
               }`}
             >
               {karakter.imageUrl ? (
@@ -340,7 +340,7 @@ export default function MasterKarakter() {
                   className="w-full h-full object-contain p-1"
                 />
               ) : (
-                <div className="flex flex-1 items-center justify-center w-full h-full text-gray-400 dark:text-gray-500 bg-gray-200 dark:bg-gray-700">
+                <div className="flex flex-1 items-center justify-center w-full h-full text-theme-textSub bg-theme-bgHover">
                   <ImageIcon size={32} />
                 </div>
               )}
@@ -355,19 +355,19 @@ export default function MasterKarakter() {
           ))}
 
           {paginatedKarakters.length === 0 && (
-            <div className="col-span-full text-center py-16 bg-slate-100 dark:bg-gray-800/50 rounded-xl border border-dashed border-slate-300 dark:border-gray-700">
-              <p className="text-gray-400 dark:text-slate-500 dark:text-gray-400 text-lg mb-2">Tidak ada karakter yang ditemukan.</p>
+            <div className="col-span-full text-center py-16 bg-theme-bgPanel rounded-xl border border-dashed border-theme-border">
+              <p className="text-theme-textSub text-lg mb-2">Tidak ada karakter yang ditemukan.</p>
             </div>
           )}
         </div>
       ) : (
-        <div className="bg-slate-100 dark:bg-gray-800 rounded-xl border border-slate-300 dark:border-gray-700 overflow-hidden shadow-xl">
+        <div className="bg-theme-bgPanel rounded-xl border border-theme-border overflow-hidden shadow-xl">
           <div className="overflow-x-auto">
             <table className="w-full text-left border-collapse">
               <thead>
-                <tr className="bg-slate-300 dark:bg-gray-900/50 text-gray-400 dark:text-slate-500 dark:text-gray-400 border-b border-slate-300 dark:border-gray-700 text-sm">
+                <tr className="bg-theme-bgBase text-theme-textSub border-b border-theme-border text-sm">
                   <th 
-                    className="p-4 font-medium w-16 text-center cursor-pointer hover:text-slate-800 dark:text-white transition-colors group"
+                    className="p-4 font-medium w-16 text-center cursor-pointer hover:text-theme-textMain transition-colors group"
                     onClick={() => requestSort('id')}
                   >
                     <div className="flex items-center justify-center gap-1">
@@ -381,7 +381,7 @@ export default function MasterKarakter() {
                   </th>
                   <th className="p-4 font-medium w-24 text-center">Gambar</th>
                   <th 
-                    className="p-4 font-medium cursor-pointer hover:text-slate-800 dark:text-white transition-colors group"
+                    className="p-4 font-medium cursor-pointer hover:text-theme-textMain transition-colors group"
                     onClick={() => requestSort('nama')}
                   >
                     <div className="flex items-center gap-1">
@@ -403,16 +403,16 @@ export default function MasterKarakter() {
               <tbody>
                 {paginatedKarakters.length === 0 ? (
                   <tr>
-                    <td colSpan="8" className="p-8 text-center text-gray-400 dark:text-gray-500 bg-slate-100 dark:bg-gray-800/50 border border-dashed border-slate-300 dark:border-gray-700">
+                    <td colSpan="8" className="p-8 text-center text-theme-textSub bg-theme-bgPanel border border-dashed border-theme-border">
                       Tidak ada karakter yang ditemukan.
                     </td>
                   </tr>
                 ) : (
                   paginatedKarakters.map((karakter) => (
-                    <tr key={karakter.id} className="border-b border-slate-300 dark:border-gray-700/50 hover:bg-gray-200 dark:bg-gray-700/20 transition-colors">
-                      <td className="p-4 text-gray-400 dark:text-slate-500 dark:text-gray-400 text-center">#{karakter.id}</td>
+                    <tr key={karakter.id} className="border-b border-theme-border hover:bg-theme-bgHover transition-colors">
+                      <td className="p-4 text-theme-textSub text-center">#{karakter.id}</td>
                       <td className="p-4">
-                        <div className="w-12 h-12 rounded-lg bg-slate-300 dark:bg-gray-900 border border-slate-300 dark:border-gray-700 overflow-hidden mx-auto flex items-center justify-center">
+                        <div className="w-12 h-12 rounded-lg bg-theme-bgBase border border-theme-border overflow-hidden mx-auto flex items-center justify-center">
                           {karakter.imageUrl ? (
                             <img src={karakter.imageUrl} alt={karakter.nama} className="w-full h-full object-contain p-0.5" />
                           ) : (
@@ -420,9 +420,9 @@ export default function MasterKarakter() {
                           )}
                         </div>
                       </td>
-                      <td className="p-4 font-bold text-slate-800 dark:text-white">{karakter.nama}</td>
-                      <td className="p-4 text-slate-600 dark:text-gray-300">{karakter.elemen}</td>
-                      <td className="p-4 text-slate-600 dark:text-gray-300">{karakter.senjata}</td>
+                      <td className="p-4 font-bold text-theme-textMain">{karakter.nama}</td>
+                      <td className="p-4 text-theme-textSub">{karakter.elemen}</td>
+                      <td className="p-4 text-theme-textSub">{karakter.senjata}</td>
                       <td className="p-4">
                         <span className={`text-xs px-2 py-1 rounded-full border ${karakter.rarity.includes('5 Star') ? 'bg-yellow-500/20 text-yellow-400 border-yellow-500/30' : 'bg-purple-500/20 text-purple-400 border-purple-500/30'}`}>
                           {karakter.rarity}
@@ -461,7 +461,7 @@ export default function MasterKarakter() {
           <button
             onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
             disabled={currentPage === 1}
-            className="px-3 py-1 rounded-md bg-slate-100 dark:bg-gray-800 text-slate-800 dark:text-white disabled:opacity-50 border border-slate-300 dark:border-gray-700 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
+            className="px-3 py-1 rounded-md bg-theme-bgPanel text-theme-textMain disabled:opacity-50 border border-theme-border hover:bg-theme-bgHover transition-colors"
           >
             Prev
           </button>
@@ -474,7 +474,7 @@ export default function MasterKarakter() {
                 className={`px-3 py-1 rounded-md min-w-[32px] transition-colors border ${
                   currentPage === i + 1
                     ? 'bg-blue-600 text-white border-blue-600'
-                    : 'bg-slate-100 dark:bg-gray-800 text-slate-800 dark:text-white border-slate-300 dark:border-gray-700 hover:bg-gray-200 dark:hover:bg-gray-700'
+                    : 'bg-theme-bgPanel text-theme-textMain border-theme-border hover:bg-theme-bgHover'
                 }`}
               >
                 {i + 1}
@@ -485,7 +485,7 @@ export default function MasterKarakter() {
           <button
             onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
             disabled={currentPage === totalPages}
-            className="px-3 py-1 rounded-md bg-slate-100 dark:bg-gray-800 text-slate-800 dark:text-white disabled:opacity-50 border border-slate-300 dark:border-gray-700 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
+            className="px-3 py-1 rounded-md bg-theme-bgPanel text-theme-textMain disabled:opacity-50 border border-theme-border hover:bg-theme-bgHover transition-colors"
           >
             Next
           </button>

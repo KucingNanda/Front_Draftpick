@@ -82,57 +82,57 @@ export default function RiwayatPertandingan() {
   if (!isWasit && !isPeserta) {
     return (
       <div className="flex justify-center items-center h-[70vh]">
-        <h1 className="text-xl text-slate-500 dark:text-gray-400">Anda tidak memiliki akses ke Riwayat.</h1>
+        <h1 className="text-xl text-theme-textSub">Anda tidak memiliki akses ke Riwayat.</h1>
       </div>
     );
   }
 
   return (
-    <div className="p-6 md:p-12 max-w-6xl mx-auto text-slate-800 dark:text-white">
-      <div className="flex justify-between items-center mb-8 border-b border-slate-300 dark:border-gray-700 pb-4">
+    <div className="p-6 md:p-12 max-w-6xl mx-auto text-theme-textMain">
+      <div className="flex justify-between items-center mb-8 border-b border-theme-border pb-4">
         <div>
           <h1 className="text-3xl font-bold text-blue-400 flex items-center gap-3">
             <Clock size={32} /> Riwayat Pertandingan
           </h1>
-          <p className="text-slate-500 dark:text-gray-400 mt-2">
+          <p className="text-theme-textSub mt-2">
             Anda dapat menyimpan hingga {isWasit ? '20' : '10'} riwayat. Jika penuh, riwayat terlama akan otomatis ditimpa.
           </p>
         </div>
-        <div className="bg-slate-100 dark:bg-gray-800 px-4 py-2 rounded-lg border border-slate-300 dark:border-gray-700 font-bold text-slate-600 dark:text-gray-300">
+        <div className="bg-theme-bgPanel px-4 py-2 rounded-lg border border-theme-border font-bold text-theme-textMain">
           Tersimpan: <span className={histories.length >= (isWasit ? 20 : 10) ? 'text-red-400' : 'text-green-400'}>{histories.length}</span> / {isWasit ? 20 : 10}
         </div>
       </div>
 
       {isLoading ? (
-        <div className="text-center py-20 text-slate-500 dark:text-gray-400">Memuat riwayat...</div>
+        <div className="text-center py-20 text-theme-textSub">Memuat riwayat...</div>
       ) : histories.length === 0 ? (
-        <div className="text-center py-20 bg-slate-100 dark:bg-gray-800/50 rounded-xl border border-slate-300 dark:border-gray-700 shadow-sm">
-          <Clock size={48} className="mx-auto text-gray-400 dark:text-gray-600 mb-4" />
-          <h2 className="text-xl font-bold text-slate-500 dark:text-gray-400">Belum Ada Riwayat</h2>
-          <p className="text-slate-500 dark:text-gray-500">Hasil pertandingan yang Anda simpan akan muncul di sini.</p>
+        <div className="text-center py-20 bg-theme-bgPanel rounded-xl border border-theme-border shadow-sm">
+          <Clock size={48} className="mx-auto text-theme-textSub mb-4" />
+          <h2 className="text-xl font-bold text-theme-textSub">Belum Ada Riwayat</h2>
+          <p className="text-theme-textSub">Hasil pertandingan yang Anda simpan akan muncul di sini.</p>
         </div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {histories.map(h => {
             const date = new Date(h.updated_at).toLocaleString('id-ID', { dateStyle: 'medium', timeStyle: 'short' });
             return (
-              <div key={h.id} className="bg-slate-100 dark:bg-gray-800 border border-slate-300 dark:border-gray-700 rounded-xl p-5 shadow-lg hover:border-blue-500 transition-colors">
+              <div key={h.id} className="bg-theme-bgPanel border border-theme-border rounded-xl p-5 shadow-lg hover:border-blue-500 transition-colors">
                 <div className="flex justify-between items-start mb-4">
-                  <div className="text-xs text-slate-500 dark:text-gray-400 font-mono bg-slate-200 dark:bg-gray-900 px-2 py-1 rounded">ID: {h.id}</div>
+                  <div className="text-xs text-theme-textSub font-mono bg-theme-bgBase px-2 py-1 rounded">ID: {h.id}</div>
                   <div className="text-xs text-blue-400">{date}</div>
                 </div>
                 
                 <div className="flex items-center justify-between my-6">
-                  <div className="text-center flex-1">
+                  <div className="text-center flex-1 min-w-0">
                     <p className="font-bold text-blue-400 truncate px-2" title={h.playerA}>{h.playerA}</p>
                   </div>
-                  <div className="font-black text-gray-400 dark:text-gray-500 text-xl px-2">VS</div>
-                  <div className="text-center flex-1">
+                  <div className="font-black text-theme-textSub text-xl px-2 shrink-0">VS</div>
+                  <div className="text-center flex-1 min-w-0">
                     <p className="font-bold text-red-400 truncate px-2" title={h.playerB}>{h.playerB}</p>
                   </div>
                 </div>
 
-                <div className="flex justify-between gap-3 pt-4 border-t border-slate-300 dark:border-gray-700">
+                <div className="flex justify-between gap-3 pt-4 border-t border-theme-border">
                   <button 
                     onClick={() => setSelectedHistory(h)}
                     className="flex-1 flex justify-center items-center gap-2 bg-blue-600/20 hover:bg-blue-600/40 text-blue-400 px-3 py-2 rounded-lg font-bold transition-all"
@@ -155,12 +155,12 @@ export default function RiwayatPertandingan() {
 
       {/* Modal Preview Riwayat ala PDF Export */}
       {selectedHistory && (
-        <div className="fixed inset-0 z-[100] bg-slate-200 dark:bg-[#0f172a] flex flex-col overflow-auto">
+        <div className="fixed inset-0 z-[100] bg-theme-bgBase flex flex-col overflow-auto">
           
-          <div className="p-4 border-b border-gray-300 dark:border-gray-800 flex justify-between items-center bg-slate-300 dark:bg-gray-900 sticky top-0 z-50">
-            <h2 className="text-xl font-bold text-slate-800 dark:text-white flex items-center gap-2">
-              <Clock size={20} className="text-blue-400" /> 
-              Riwayat Pertandingan: {selectedHistory.playerA} vs {selectedHistory.playerB}
+          <div className="p-4 border-b border-theme-border flex justify-between items-center bg-theme-bgPanel sticky top-0 z-50">
+            <h2 className="text-xl font-bold text-theme-textMain flex items-center gap-2 min-w-0">
+              <Clock size={20} className="text-blue-400 shrink-0" /> 
+              <span className="truncate">Riwayat: {selectedHistory.playerA} vs {selectedHistory.playerB}</span>
             </h2>
             <div className="flex gap-3">
               <button 
@@ -180,7 +180,7 @@ export default function RiwayatPertandingan() {
 
           {/* Read-Only Arena */}
           <div className="flex-1 p-2 flex justify-center min-h-max overflow-x-auto custom-scrollbar">
-            <div id="capture-history-arena" className="flex w-full min-w-[1100px] max-w-[1920px] min-h-[700px] relative rounded-2xl overflow-hidden border border-gray-300 dark:border-gray-800 shadow-2xl bg-slate-200 dark:bg-[#0f172a]">
+            <div id="capture-history-arena" className="flex w-full min-w-[1100px] max-w-[1920px] min-h-[700px] relative rounded-2xl overflow-hidden border border-theme-border shadow-2xl bg-theme-bgBase">
               {/* Background Glows */}
               <div className="absolute top-1/2 left-0 w-[500px] h-[500px] bg-blue-600/10 rounded-full blur-[120px] -translate-y-1/2 -translate-x-1/2 pointer-events-none"></div>
               <div className="absolute top-1/2 right-0 w-[500px] h-[500px] bg-red-600/10 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
@@ -188,7 +188,7 @@ export default function RiwayatPertandingan() {
               {/* Overlays untuk memblokir klik (Membuatnya Read-Only) */}
               <div className="absolute inset-0 z-50 cursor-default"></div>
 
-              <div className="w-1/2 bg-slate-300 dark:bg-gray-900/40 border-r border-gray-300 dark:border-gray-800 relative z-10 flex shrink-0">
+              <div className="w-1/2 bg-theme-bgPanel border-r border-theme-border relative z-10 flex shrink-0">
                 <TeamPanel 
                   playerKey="playerA" 
                   pesertaProfile={{ nama: selectedHistory.playerA }} 
@@ -205,7 +205,7 @@ export default function RiwayatPertandingan() {
                   onNameChange={() => {}}
                 />
               </div>
-              <div className="w-1/2 bg-slate-300 dark:bg-gray-900/40 relative z-10 flex shrink-0">
+              <div className="w-1/2 bg-theme-bgPanel relative z-10 flex shrink-0">
                 <TeamPanel 
                   playerKey="playerB" 
                   pesertaProfile={{ nama: selectedHistory.playerB }} 

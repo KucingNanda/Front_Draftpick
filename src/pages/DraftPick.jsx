@@ -107,7 +107,7 @@ export default function DraftPick() {
   };
 
   return (
-    <div className="fixed inset-0 bg-slate-200 dark:bg-[#0f172a] text-slate-800 dark:text-white flex flex-col overflow-hidden font-sans">
+    <div className="fixed inset-0 bg-theme-bgBase text-theme-textMain flex flex-col overflow-hidden font-sans">
       
       {/* TOP HEADER */}
       <ArenaHeader 
@@ -150,7 +150,7 @@ export default function DraftPick() {
         <div className="absolute top-1/2 right-0 w-[500px] h-[500px] bg-red-600/10 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
 
         {/* LEFT HALF: Player A */}
-        <div className="w-1/2 bg-slate-300 dark:bg-gray-900/40 border-r border-gray-300 dark:border-gray-800 relative z-10 flex shrink-0">
+        <div className="w-1/2 bg-theme-bgPanel border-r border-theme-border relative z-10 flex shrink-0">
           <TeamPanel 
             playerKey="playerA" 
             pesertaProfile={playerA} 
@@ -170,7 +170,7 @@ export default function DraftPick() {
         </div>
 
         {/* RIGHT HALF: Player B */}
-        <div className="w-1/2 bg-slate-300 dark:bg-gray-900/40 relative z-10 flex shrink-0">
+        <div className="w-1/2 bg-theme-bgPanel relative z-10 flex shrink-0">
           <TeamPanel 
             playerKey="playerB" 
             pesertaProfile={playerB} 

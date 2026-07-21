@@ -23,12 +23,12 @@ export default function PesertaFormModal({
 
   return (
     <div className="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-      <div className="bg-slate-100 dark:bg-gray-800 rounded-xl w-full max-w-5xl max-h-[90vh] flex flex-col shadow-2xl overflow-hidden">
-        <div className="p-6 border-b border-slate-300 dark:border-gray-700 flex justify-between items-center bg-slate-100 dark:bg-gray-800/50">
-          <h2 className="text-xl font-bold text-slate-800 dark:text-white">
+      <div className="bg-theme-bgPanel rounded-xl w-full max-w-5xl max-h-[90vh] flex flex-col shadow-2xl overflow-hidden">
+        <div className="p-6 border-b border-theme-border flex justify-between items-center bg-theme-bgPanel">
+          <h2 className="text-xl font-bold text-theme-textMain">
             {editingId ? 'Edit Data Peserta' : 'Pendaftaran Peserta Baru'}
           </h2>
-          <button onClick={onClose} className="text-gray-400 dark:text-slate-500 dark:text-gray-400 hover:text-slate-800 dark:text-white transition-colors">
+          <button onClick={onClose} className="text-theme-textSub hover:text-theme-textMain transition-colors">
             <X size={24} />
           </button>
         </div>
@@ -39,19 +39,19 @@ export default function PesertaFormModal({
             {/* Kolom Kiri: Input Nama & Ringkasan Slot */}
             <div className="lg:col-span-1 flex flex-col gap-6">
               <div>
-                <label className="block text-sm font-medium text-slate-600 dark:text-gray-300 mb-2">Nama Peserta</label>
+                <label className="block text-sm font-medium text-theme-textSub mb-2">Nama Peserta</label>
                 <input 
                   type="text" 
                   value={formNama}
                   onChange={(e) => setFormNama(e.target.value)}
                   placeholder="Masukkan nama pemain..."
-                  className="w-full bg-slate-300 dark:bg-gray-900 border border-slate-300 dark:border-gray-700 rounded-lg px-4 py-3 text-slate-800 dark:text-white focus:border-blue-500 focus:outline-none transition-colors"
+                  className="w-full bg-theme-bgBase border border-theme-border rounded-lg px-4 py-3 text-theme-textMain focus:border-blue-500 focus:outline-none transition-colors"
                 />
               </div>
 
-              <div className="bg-slate-300 dark:bg-gray-900/50 p-5 rounded-xl border border-slate-300 dark:border-gray-700 flex-1">
+              <div className="bg-theme-bgBase p-5 rounded-xl border border-theme-border flex-1">
                 <div className="flex justify-between items-center mb-4">
-                  <label className="block text-sm font-medium text-slate-600 dark:text-gray-300">
+                  <label className="block text-sm font-medium text-theme-textSub">
                     Slot Terisi
                   </label>
                   <span className={`text-sm font-bold ${Object.keys(selectedChars).length === 8 ? "text-green-400" : "text-yellow-400"}`}>
@@ -67,13 +67,13 @@ export default function PesertaFormModal({
                     const isC1 = charId ? selectedChars[charId] : false;
 
                     return (
-                      <div key={i} className="aspect-square bg-slate-100 dark:bg-gray-800 rounded-lg border border-slate-300 dark:border-gray-700 relative overflow-hidden flex items-center justify-center">
+                      <div key={i} className="aspect-square bg-theme-bgPanel rounded-lg border border-theme-border relative overflow-hidden flex items-center justify-center">
                         {char ? (
                           <>
                             {char.imageUrl ? (
                               <img src={char.imageUrl} alt={char.nama} className="w-full h-full object-contain p-0.5" />
                             ) : (
-                              <span className="text-[9px] text-gray-400 dark:text-gray-500 font-medium text-center truncate px-1">{char.nama}</span>
+                              <span className="text-[9px] text-white font-bold text-center truncate px-1">{char.nama}</span>
                             )}
                             {isC1 && (
                               <div className="absolute top-0 right-0 bg-yellow-500 rounded-bl text-white p-0.5 shadow-sm shadow-yellow-500/50">
@@ -88,7 +88,7 @@ export default function PesertaFormModal({
                     )
                   })}
                 </div>
-                <p className="text-xs text-gray-400 dark:text-gray-500 mt-5 leading-relaxed">
+                <p className="text-xs text-theme-textSub mt-5 leading-relaxed">
                   Pilih tepat 8 karakter andalan. Gunakan ikon bintang pada daftar karakter di samping untuk menyalakan mode C1 (+1 Cost). Ruang kosong ini juga siap menampung atribut peserta lainnya di masa depan.
                 </p>
               </div>
@@ -97,20 +97,20 @@ export default function PesertaFormModal({
             {/* Kolom Kanan: Pencarian & Pemilihan Karakter */}
             <div className="lg:col-span-2 flex flex-col gap-4">
               <div>
-                <label className="block text-sm font-medium text-slate-600 dark:text-gray-300 mb-2">Cari & Pilih Karakter</label>
+                <label className="block text-sm font-medium text-theme-textSub mb-2">Cari & Pilih Karakter</label>
                 <div className="relative">
-                  <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 dark:text-slate-500 dark:text-gray-400" size={18} />
+                  <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-theme-textSub" size={18} />
                   <input 
                     type="text" 
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     placeholder="Cari berdasarkan nama..."
-                    className="w-full bg-slate-300 dark:bg-gray-900 border border-slate-300 dark:border-gray-700 rounded-lg pl-10 pr-4 py-3 text-slate-800 dark:text-white focus:border-blue-500 focus:outline-none transition-colors"
+                    className="w-full bg-theme-bgBase border border-theme-border rounded-lg pl-10 pr-4 py-3 text-theme-textMain focus:border-blue-500 focus:outline-none transition-colors"
                   />
                 </div>
               </div>
 
-              <div className="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-5 gap-3 bg-slate-300 dark:bg-gray-900/50 p-4 rounded-xl border border-slate-300 dark:border-gray-700 content-start flex-1 min-h-[300px]">
+              <div className="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-5 gap-3 bg-theme-bgBase p-4 rounded-xl border border-theme-border content-start flex-1 min-h-[300px]">
                 {filteredKarakters.map(k => {
                   const isSelected = selectedChars[k.id] !== undefined;
                   const isC1 = selectedChars[k.id] === true;
@@ -119,24 +119,24 @@ export default function PesertaFormModal({
                     <div 
                       key={k.id} 
                       onClick={() => handleToggleChar(k.id)}
-                      className={`aspect-square rounded-lg border-2 cursor-pointer relative overflow-hidden transition-all group ${isSelected ? 'border-blue-500 scale-105 shadow-[0_0_15px_rgba(59,130,246,0.3)] z-10' : 'border-slate-300 dark:border-gray-700 bg-slate-100 dark:bg-gray-800 hover:border-gray-500'}`}
+                      className={`aspect-square rounded-lg border-2 cursor-pointer relative overflow-hidden transition-all group ${isSelected ? 'border-blue-500 scale-105 shadow-[0_0_15px_rgba(59,130,246,0.3)] z-10' : 'border-theme-border bg-theme-bgPanel hover:border-gray-500'}`}
                     >
                       {k.imageUrl ? (
                         <img src={k.imageUrl} alt={k.nama} className="w-full h-full object-contain p-1 group-hover:scale-110 transition-transform duration-300" />
                       ) : (
-                        <div className="w-full h-full flex items-center justify-center text-xs text-gray-400 dark:text-gray-500 font-medium text-center p-1">
+                        <div className="w-full h-full flex items-center justify-center text-xs text-white font-bold text-center p-1">
                           {k.nama}
                         </div>
                       )}
                       
-                      <div className="absolute bottom-0 left-0 right-0 bg-black/80 text-[10px] text-center py-1 font-semibold text-slate-800 dark:text-white truncate px-1">
+                      <div className="absolute bottom-0 left-0 right-0 bg-black/80 text-[10px] text-center py-1 font-bold text-white truncate px-1">
                         {k.nama}
                       </div>
 
                       {isSelected && (
                         <button 
                           onClick={(e) => handleToggleC1(e, k.id)}
-                          className={`absolute top-1 right-1 p-1.5 rounded-full shadow-md transition-all z-20 hover:scale-110 ${isC1 ? 'bg-yellow-500 text-white shadow-yellow-500/50' : 'bg-slate-300 dark:bg-gray-900/90 text-gray-400 dark:text-slate-500 dark:text-gray-400 hover:bg-gray-200 dark:bg-gray-700 hover:text-slate-800 dark:text-white border border-gray-300 dark:border-gray-600'}`}
+                          className={`absolute top-1 right-1 p-1.5 rounded-full shadow-md transition-all z-20 hover:scale-110 ${isC1 ? 'bg-yellow-500 text-white shadow-yellow-500/50' : 'bg-theme-bgBase text-theme-textSub hover:bg-theme-bgHover hover:text-theme-textMain border border-theme-border'}`}
                           title={isC1 ? "Batalkan C1" : "Set sebagai C1 (+1 Cost)"}
                         >
                           <Star size={12} className={isC1 ? "fill-current" : ""} />
@@ -146,7 +146,7 @@ export default function PesertaFormModal({
                   )
                 })}
                 {filteredKarakters.length === 0 && (
-                  <div className="col-span-full text-center py-12 text-gray-400 dark:text-gray-500">
+                  <div className="col-span-full text-center py-12 text-theme-textSub">
                     Tidak ada karakter yang cocok dengan "{searchQuery}".
                   </div>
                 )}
@@ -155,7 +155,7 @@ export default function PesertaFormModal({
           </div>
         </div>
 
-        <div className="p-6 border-t border-slate-300 dark:border-gray-700 flex justify-between gap-3 bg-slate-300 dark:bg-gray-900/30">
+        <div className="p-6 border-t border-theme-border flex justify-between gap-3 bg-theme-bgBase">
           <button 
             onClick={handleClearChars}
             className="px-5 py-2.5 rounded-lg font-medium text-red-400 border border-red-900/50 hover:bg-red-900/30 transition-colors"
@@ -166,7 +166,7 @@ export default function PesertaFormModal({
           <div className="flex gap-3">
             <button 
               onClick={onClose}
-              className="px-5 py-2.5 rounded-lg font-medium text-slate-600 dark:text-gray-300 hover:bg-gray-200 dark:bg-gray-700 transition-colors"
+              className="px-5 py-2.5 rounded-lg font-medium text-theme-textSub hover:bg-theme-bgHover transition-colors"
             >
               Batal
             </button>

@@ -5,12 +5,16 @@ import Swal from 'sweetalert2';
 import { useState } from 'react';
 import { useAuth } from '../../context/AuthContext';
 import { useApi } from '../../hooks/useApi';
+import AuthModal from '../organisms/AuthModal';
 
 export default function MainLayout() {
   const location = useLocation();
   const navigate = useNavigate();
   const { role, login, logout, isWasit, isPeserta, isGuest } = useAuth();
   const api = useApi();
+
+  const [isAuthOpen, setIsAuthOpen] = useState(false);
+  const [authMode, setAuthMode] = useState('login');
 
   const navItems = [
     { name: 'Dashboard', path: '/', icon: <Home size={20} />, show: true },
@@ -23,11 +27,11 @@ export default function MainLayout() {
   ];
 
   return (
-    <div className="flex h-screen bg-slate-200 dark:bg-gray-900 text-slate-800 dark:text-gray-300 font-sans transition-colors duration-300">
+    <div className="flex h-screen bg-theme-bgBase text-theme-textMain font-sans transition-colors duration-300">
       {/* Sidebar */}
-      <aside className="w-64 bg-slate-100 dark:bg-gray-800 border-r border-slate-300 dark:border-gray-700 flex flex-col transition-colors duration-300">
+      <aside className="w-64 bg-theme-bgPanel border-r border-theme-border flex flex-col transition-colors duration-300">
         <div className="p-6">
-          <h1 className="text-2xl font-bold text-slate-800 dark:text-white tracking-wider text-center">
+          <h1 className="text-2xl font-bold text-theme-textMain tracking-wider text-center">
             DRAFT PICK
           </h1>
           {isWasit && (
@@ -41,7 +45,7 @@ export default function MainLayout() {
             </div>
           )}
           {isGuest && (
-            <div className="mt-3 text-center bg-gray-500/20 border border-gray-500/50 text-slate-600 dark:text-gray-400 text-xs font-bold py-1 px-3 rounded-full w-max mx-auto">
+            <div className="mt-3 text-center bg-gray-500/20 border border-gray-500/50 text-theme-textSub text-xs font-bold py-1 px-3 rounded-full w-max mx-auto">
               👁️ GUEST MODE
             </div>
           )}
@@ -57,8 +61,8 @@ export default function MainLayout() {
               to={item.path}
               className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${
                 location.pathname === item.path
-                  ? 'bg-blue-50 dark:bg-gray-700 text-blue-600 dark:text-white font-medium'
-                  : 'hover:bg-slate-200 dark:hover:bg-gray-700/50 hover:text-gray-900 dark:hover:text-white'
+                  ? 'bg-theme-bgHover text-theme-textMain font-medium shadow-sm'
+                  : 'text-theme-textSub hover:bg-theme-bgHover hover:text-theme-textMain'
               }`}
             >
               {item.icon}
@@ -71,8 +75,8 @@ export default function MainLayout() {
         {/* Main Content Area */}
       <main className="flex-1 flex flex-col overflow-hidden">
         {/* Top Header & Navbar Login */}
-        <header className="h-16 bg-slate-100 dark:bg-gray-800 border-b border-slate-300 dark:border-gray-700 flex items-center justify-between px-8 shadow-sm transition-colors duration-300">
-          <div className="text-sm font-medium text-slate-500 dark:text-gray-400 capitalize flex items-center gap-2">
+        <header className="h-16 bg-theme-bgPanel border-b border-theme-border flex items-center justify-between px-8 shadow-sm transition-colors duration-300">
+          <div className="text-sm font-medium text-theme-textSub capitalize flex items-center gap-2">
             {location.pathname === '/' ? 'Dashboard' : location.pathname.substring(1).replace('/', ' > ')}
           </div>
           
@@ -81,161 +85,30 @@ export default function MainLayout() {
               <>
               <button 
                 onClick={() => {
-                  Swal.fire({
-                    title: 'Login',
-                    html: `
-                      <input id="swal-input-username" class="swal2-input" placeholder="Username" autocomplete="off" style="width: 80%; background: #1e293b; color: white; border: 1px solid #475569;">
-                      <div style="position: relative; width: 80%; margin: 1em auto 0;">
-                        <input id="swal-input-password" type="password" class="swal2-input" placeholder="Password" autocomplete="off" style="width: 100%; background: #1e293b; color: white; border: 1px solid #475569; margin: 0; padding-right: 40px;">
-                        <span id="toggle-password" style="position: absolute; right: 15px; top: 50%; transform: translateY(-50%); cursor: pointer; user-select: none;">👁️</span>
-                      </div>
-                    `,
-                    background: '#0f172a',
-                    color: '#fff',
-                    showCancelButton: true,
-                    confirmButtonText: 'Login',
-                    cancelButtonText: 'Batal',
-                    confirmButtonColor: '#3b82f6',
-                    focusConfirm: false,
-                    didOpen: () => {
-                      const user = document.getElementById('swal-input-username');
-                      const pass = document.getElementById('swal-input-password');
-                      const toggleBtn = document.getElementById('toggle-password');
-                      user.focus();
-                      
-                      toggleBtn.addEventListener('click', () => {
-                        const type = pass.getAttribute('type') === 'password' ? 'text' : 'password';
-                        pass.setAttribute('type', type);
-                        toggleBtn.textContent = type === 'password' ? '👁️' : '🙈';
-                      });
-
-                      const enterListener = (e) => {
-                        if (e.key === 'Enter') Swal.clickConfirm();
-                      };
-                      user.addEventListener('keypress', enterListener);
-                      pass.addEventListener('keypress', enterListener);
-                    },
-                    preConfirm: () => {
-                      const user = document.getElementById('swal-input-username').value;
-                      const pass = document.getElementById('swal-input-password').value;
-                      if (!user || !pass) {
-                        Swal.showValidationMessage('Username dan Password wajib diisi');
-                      }
-                      return { username: user, password: pass };
-                    }
-                  }).then(async (result) => {
-                    if (result.isConfirmed) {
-                      Swal.fire({
-                        title: 'Memeriksa...',
-                        allowOutsideClick: false,
-                        background: '#0f172a',
-                        color: '#fff',
-                        didOpen: () => Swal.showLoading()
-                      });
-                      try {
-                        const res = await api(`${import.meta.env.VITE_API_BASE_URL}/api/login`, {
-                          method: 'POST',
-                          body: JSON.stringify(result.value)
-                        });
-                        const data = await res.json();
-                        if (data.token) {
-                          login(data.token);
-                          Swal.fire({ title: 'Berhasil', text: data.message, icon: 'success', timer: 1500, showConfirmButton: false, background: '#1e293b', color: '#fff' });
-                        } else {
-                          Swal.fire('Gagal', data.error || 'Login gagal', 'error');
-                        }
-                      } catch (error) {
-                        Swal.fire('Error', 'Koneksi terputus', 'error');
-                      }
-                    }
-                  });
+                  setAuthMode('login');
+                  setIsAuthOpen(true);
                 }}
-                className="bg-blue-600 hover:bg-blue-500 text-white text-sm font-medium px-5 py-2 rounded-lg transition-colors flex items-center gap-2 shadow-lg shadow-blue-900/20"
+                className="bg-blue-600 hover:bg-blue-500 text-white text-sm font-medium px-5 py-2.5 rounded-lg transition-colors flex items-center gap-2 shadow-lg shadow-blue-900/20"
               >
                 <User size={16} /> Login
               </button>
               <button 
                 onClick={() => {
-                  Swal.fire({
-                    title: 'Register Peserta',
-                    html: `
-                      <input id="swal-input-reg-username" class="swal2-input" placeholder="Username" autocomplete="off" style="width: 80%; background: #1e293b; color: white; border: 1px solid #475569;">
-                      <div style="position: relative; width: 80%; margin: 1em auto 0;">
-                        <input id="swal-input-reg-password" type="password" class="swal2-input" placeholder="Password" autocomplete="off" style="width: 100%; background: #1e293b; color: white; border: 1px solid #475569; margin: 0; padding-right: 40px;">
-                        <span id="toggle-reg-password" style="position: absolute; right: 15px; top: 50%; transform: translateY(-50%); cursor: pointer; user-select: none;">👁️</span>
-                      </div>
-                    `,
-                    background: '#0f172a',
-                    color: '#fff',
-                    showCancelButton: true,
-                    confirmButtonText: 'Daftar',
-                    cancelButtonText: 'Batal',
-                    confirmButtonColor: '#10b981',
-                    focusConfirm: false,
-                    didOpen: () => {
-                      const user = document.getElementById('swal-input-reg-username');
-                      const pass = document.getElementById('swal-input-reg-password');
-                      const toggleBtn = document.getElementById('toggle-reg-password');
-                      user.focus();
-                      
-                      toggleBtn.addEventListener('click', () => {
-                        const type = pass.getAttribute('type') === 'password' ? 'text' : 'password';
-                        pass.setAttribute('type', type);
-                        toggleBtn.textContent = type === 'password' ? '👁️' : '🙈';
-                      });
-
-                      const enterListener = (e) => {
-                        if (e.key === 'Enter') Swal.clickConfirm();
-                      };
-                      user.addEventListener('keypress', enterListener);
-                      pass.addEventListener('keypress', enterListener);
-                    },
-                    preConfirm: () => {
-                      const user = document.getElementById('swal-input-reg-username').value;
-                      const pass = document.getElementById('swal-input-reg-password').value;
-                      if (!user || !pass) {
-                        Swal.showValidationMessage('Username dan Password wajib diisi');
-                      }
-                      return { username: user, password: pass, role: 'peserta' };
-                    }
-                  }).then(async (result) => {
-                    if (result.isConfirmed) {
-                      Swal.fire({
-                        title: 'Mendaftarkan...',
-                        allowOutsideClick: false,
-                        background: '#0f172a',
-                        color: '#fff',
-                        didOpen: () => Swal.showLoading()
-                      });
-                      try {
-                        const res = await api(`${import.meta.env.VITE_API_BASE_URL}/api/register`, {
-                          method: 'POST',
-                          body: JSON.stringify(result.value)
-                        });
-                        const data = await res.json();
-                        if (res.ok) {
-                          Swal.fire({ title: 'Berhasil', text: 'Akun peserta berhasil dibuat! Silakan Login.', icon: 'success', background: '#1e293b', color: '#fff' });
-                        } else {
-                          Swal.fire('Gagal', data.error || 'Register gagal', 'error');
-                        }
-                      } catch (error) {
-                        Swal.fire('Error', 'Koneksi terputus', 'error');
-                      }
-                    }
-                  });
+                  setAuthMode('register');
+                  setIsAuthOpen(true);
                 }}
-                className="bg-emerald-600 hover:bg-emerald-500 text-white text-sm font-medium px-5 py-2 rounded-lg transition-colors flex items-center gap-2 shadow-lg shadow-emerald-900/20"
+                className="bg-emerald-600 hover:bg-emerald-500 text-white text-sm font-medium px-5 py-2.5 rounded-lg transition-colors flex items-center gap-2 shadow-lg shadow-emerald-900/20"
               >
                 <UserCheck size={16} /> Register
               </button>
             </>
             ) : (
               <div className="flex items-center gap-4">
-                <div className="flex items-center gap-2 text-sm text-slate-600 dark:text-gray-300">
-                  <div className="w-8 h-8 rounded-full bg-slate-300 dark:bg-gray-700 flex items-center justify-center border border-gray-300 dark:border-gray-600">
+                <div className="flex items-center gap-2 text-sm text-theme-textSub">
+                  <div className="w-8 h-8 rounded-full bg-theme-bgHover flex items-center justify-center border border-theme-border">
                     <User size={16} className={isWasit ? 'text-yellow-500 dark:text-yellow-400' : 'text-blue-500 dark:text-blue-400'} />
                   </div>
-                  <span>Halo, <strong className="text-slate-800 dark:text-white capitalize">{role}</strong></span>
+                  <span>Halo, <strong className="text-theme-textMain capitalize">{role}</strong></span>
                 </div>
                 <button 
                   onClick={() => {
@@ -264,10 +137,16 @@ export default function MainLayout() {
         </header>
 
         {/* Scrollable content inside Outlet */}
-        <div className="flex-1 overflow-y-auto p-8 bg-slate-200 dark:bg-gray-900 transition-colors duration-300">
+        <div className="flex-1 overflow-y-auto p-8 bg-theme-bgBase transition-colors duration-300 relative">
           <Outlet />
         </div>
       </main>
+
+      <AuthModal 
+        isOpen={isAuthOpen} 
+        onClose={() => setIsAuthOpen(false)} 
+        initialMode={authMode} 
+      />
     </div>
   );
 }
