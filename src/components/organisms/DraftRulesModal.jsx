@@ -27,57 +27,56 @@ export default function DraftRulesModal({ isOpen, onClose }) {
         {/* Content */}
         <div className="rules-modal p-6 md:p-8 overflow-y-auto custom-scrollbar flex flex-col gap-6">
           
-          {/* Rule 1: Struktur Pertandingan */}
+          {/* Rule 1: Sistem Cost & Penalti */}
           <div className="bg-theme-bgPanel p-6 rounded-2xl border border-theme-border shadow-inner">
             <h3 className="text-lg font-bold text-blue-400 flex items-center gap-2 mb-4">
-              <Swords size={20} /> 1. Struktur Pertandingan & Cost
+              <Swords size={20} /> 1. Sistem Cost & Penalti
             </h3>
             <ul className="list-disc list-inside text-theme-textSub space-y-2 text-sm md:text-base ml-2">
-              <li>Pertandingan dibagi menjadi <strong>2 Babak</strong> (First Half & Second Half).</li>
-              <li>Setiap karakter memiliki <strong>Cost</strong> bawaan berdasarkan <em>Rarity</em> (Bintang).</li>
-              <li><strong>Penalti Cost:</strong> Penggunaan Senjata Bintang 5 (R1/R2) atau Konstelasi 1 (C1) untuk karakter Bintang 5 akan menambah beban cost tim Anda.</li>
-              <li>Setiap babak memiliki batas maksimal cost yang tidak boleh dilampaui.</li>
+              <li>Pemilihan karakter dibatasi oleh <strong>Max Cost</strong> per babak (First/Second Half).</li>
+              <li>Base Cost karakter mengikuti <em>Rarity</em> aslinya.</li>
+              <li><strong>Penalti Tambahan:</strong> Aktivasi Konstelasi 1 (C1) atau Signature Weapon (B5 R1/R2) akan dikenakan ekstra Cost.</li>
             </ul>
           </div>
 
-          {/* Rule 2: Sistem Ban */}
+          {/* Rule 2: Mekanisme Ban */}
           <div className="bg-theme-bgPanel p-6 rounded-2xl border border-theme-border shadow-inner">
             <h3 className="text-lg font-bold text-red-400 flex items-center gap-2 mb-4">
-              <AlertCircle size={20} /> 2. Sistem Ban (Kutukan)
+              <AlertCircle size={20} /> 2. Mekanisme Ban (Restriction)
             </h3>
             <p className="text-theme-textSub text-sm md:text-base mb-3 ml-2 border-l-2 border-red-500/30 pl-3 italic">
-              "Karakter yang ada di kotak Ban Anda adalah karakter yang <strong>TIDAK BOLEH</strong> Anda pakai."
+              "Karakter yang di-ban oleh lawan akan masuk ke slot Anda, yang berarti <strong>Anda tidak bisa menggunakannya</strong>."
             </p>
             <ul className="list-disc list-inside text-theme-textSub space-y-2 text-sm md:text-base ml-2">
-              <li><strong>Global Ban:</strong> Kutukan permanen. Karakter ini dilarang digunakan di <em>semua babak</em> oleh pemain yang menerima kutukan.</li>
-              <li><strong>Half Ban:</strong> Kutukan sementara. Karakter dilarang hanya pada babak tersebut.</li>
+              <li><strong>Global Ban:</strong> Karakter di-lock secara permanen di sepanjang match (berlaku untuk kedua Half).</li>
+              <li><strong>Phase Ban:</strong> Karakter hanya di-lock spesifik pada half/babak tersebut.</li>
             </ul>
           </div>
 
           {/* Rule 3: Sistem Pick & Mirror Match */}
           <div className="bg-theme-bgPanel p-6 rounded-2xl border border-theme-border shadow-inner">
             <h3 className="text-lg font-bold text-purple-400 flex items-center gap-2 mb-4">
-              <Zap size={20} /> 3. Sistem Pick & Pengecualian (Mirror Match)
+              <Zap size={20} /> 3. Aturan Mirror Pick
             </h3>
             <ul className="list-disc list-inside text-theme-textSub space-y-2 text-sm md:text-base ml-2">
-              <li>Secara umum, pemain <strong>tidak boleh</strong> memilih karakter yang sudah di-pick oleh lawan.</li>
-              <li><strong>Pengecualian (Boleh Mirror Match):</strong>
+              <li>Draft bersifat <strong>Exclusive Pick</strong> secara default (karakter yang di-pick lawan otomatis terkunci).</li>
+              <li><strong>Pengecualian Mirror:</strong>
                 <ul className="list-[circle] list-inside ml-6 mt-1 text-theme-textSub space-y-1">
-                  <li><strong>Karakter Bintang 5:</strong> B5 Limited yang Anda daftarkan dan semua B5 Standar <strong>bebas</strong> di-mirror kapan saja tanpa batas.</li>
-                  <li><strong>Karakter Bintang 4 (1x Kesempatan):</strong> Setiap pemain memiliki jatah maksimal <strong>1x Mirror Pick Bintang 4</strong> dalam satu pertandingan (bisa dipakai di First atau Second Half).</li>
+                  <li><strong>B5 Limited & Standar:</strong> Bebas mirror pick, selama B5 Limited tersebut ada di <em>Registered Pool</em> masing-masing pemain.</li>
+                  <li><strong>Bintang 4 (B4):</strong> Hanya diperbolehkan maksimal <strong>2 karakter B4 kembar</strong> per match secara keseluruhan. Sisa karakter B4 berlaku <em>exclusive pick</em>.</li>
                 </ul>
               </li>
             </ul>
           </div>
 
-          {/* Rule 4: Kekebalan Khusus */}
+          {/* Rule 4: Hak Istimewa (Immunity) */}
           <div className="bg-gradient-to-br from-yellow-900/20 to-theme-bgPanel p-6 rounded-2xl border border-yellow-500/30 shadow-inner">
             <h3 className="text-lg font-bold text-yellow-500 flex items-center gap-2 mb-4">
-              <Crown size={20} /> 4. Keistimewaan Khusus
+              <Crown size={20} /> 4. Hak Istimewa (Immunity)
             </h3>
             <ul className="list-disc list-inside text-theme-textSub space-y-2 text-sm md:text-base ml-2">
-              <li><strong>Traveler</strong> memiliki keistimewaan absolut. Mereka kebal terhadap aturan Ban maupun Mirror Match, dan bebas digunakan kapan saja.</li>
-              <li><strong>Karakter Spesial (Free 4-Star)</strong> kebal terhadap aturan Ban dan kebal dari larangan Mirror Match jika dimainkan pada babak yang telah diizinkan oleh sistem.</li>
+              <li><strong>Traveler (B5 Khusus):</strong> Memiliki <em>Absolute Immunity</em> (Kebal dari Ban dan bebas Mirror Pick kapan saja).</li>
+              <li><strong>Free 4-Star Rule:</strong> Karakter spesifik yang ditetapkan oleh Wasit akan mendapatkan imunitas Ban/Mirror pada babak (Half) yang telah ditentukan.</li>
             </ul>
           </div>
 
