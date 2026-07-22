@@ -17,6 +17,9 @@ export default function AuthModal({ isOpen, onClose, initialMode = 'login' }) {
   useEffect(() => {
     if (isOpen) {
       setMode(initialMode);
+      setUsername('');
+      setPassword('');
+      setShowPassword(false);
     }
   }, [isOpen, initialMode]);
 
@@ -49,8 +52,8 @@ export default function AuthModal({ isOpen, onClose, initialMode = 'login' }) {
             icon: 'success', 
             timer: 1500, 
             showConfirmButton: false,
-            background: 'var(--bg-panel)',
-            color: 'var(--text-main)'
+            background: 'var(--theme-bg-panel)',
+            color: 'var(--theme-text-main)'
           });
           onClose();
         } else {
@@ -62,8 +65,8 @@ export default function AuthModal({ isOpen, onClose, initialMode = 'login' }) {
             title: 'Berhasil', 
             text: 'Akun peserta berhasil dibuat! Silakan Login.', 
             icon: 'success',
-            background: 'var(--bg-panel)',
-            color: 'var(--text-main)'
+            background: 'var(--theme-bg-panel)',
+            color: 'var(--theme-text-main)'
           });
           setMode('login');
           setPassword('');

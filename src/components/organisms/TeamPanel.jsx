@@ -18,7 +18,8 @@ export default function TeamPanel({
   onToggleWeapon,
   onToggleConstellation,
   isGuest,
-  onNameChange
+  onNameChange,
+  onOpenGuestReg
 }) {
   const isRightSide = playerKey === 'playerB';
   const state = draftState[playerKey];
@@ -68,7 +69,17 @@ export default function TeamPanel({
           
           {/* Registrasi 5 Star Limited */}
           <div className={`flex flex-col ${isRightSide ? 'items-end' : 'items-start'}`}>
-            <h3 className="text-yellow-500/80 font-bold mb-2 tracking-widest uppercase text-xs md:text-sm">Registered Limited</h3>
+            <div className={`flex items-center gap-2 mb-2 ${isRightSide ? 'flex-row-reverse' : ''}`}>
+              <h3 className="text-yellow-500/80 font-bold tracking-widest uppercase text-xs md:text-sm">Registered Limited</h3>
+              {isGuest && (
+                <button 
+                  onClick={() => onOpenGuestReg(playerKey)}
+                  className="bg-yellow-500/20 text-yellow-400 hover:bg-yellow-500/40 p-1 rounded transition-colors text-[10px] px-2 font-bold"
+                >
+                  EDIT
+                </button>
+              )}
+            </div>
             <div className={`grid grid-cols-4 gap-2 ${isRightSide ? 'justify-items-end' : 'justify-items-start'}`}>
               {state.registered.map((data, i) => (
                 <RegSlot key={`reg-${i}`} index={i} data={data} player={playerKey} onSlotClick={onSlotClick} />

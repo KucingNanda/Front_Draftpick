@@ -10,6 +10,7 @@ import TeamPanel from '../components/organisms/TeamPanel';
 import CharacterSelectorModal from '../components/organisms/CharacterSelectorModal';
 import ArenaHeader from '../components/organisms/ArenaHeader';
 import DraftRulesModal from '../components/organisms/DraftRulesModal';
+import GuestRegisteredModal from '../components/organisms/GuestRegisteredModal';
 
 export default function DraftPick() {
   const navigate = useNavigate();
@@ -23,6 +24,7 @@ export default function DraftPick() {
   const [bgms, setBgms] = useState([]);
   const [currentTrackIndex, setCurrentTrackIndex] = useState(0);
   const [isRulesOpen, setIsRulesOpen] = useState(false);
+  const [activeGuestReg, setActiveGuestReg] = useState(null);
 
   useEffect(() => {
     api(`${import.meta.env.VITE_API_BASE_URL}/api/bgm`)
@@ -56,6 +58,7 @@ export default function DraftPick() {
   const currentBgm = bgms.length > 0 ? bgms[currentTrackIndex] : null;
 
   const {
+    karakters,
     pesertas,
     playerA, playerB,
     draftState,
@@ -65,6 +68,7 @@ export default function DraftPick() {
     filteredModalCharacters,
     calculateCost,
     handleSelectPeserta,
+    handleSetGuestRegistered,
     handleSlotClick,
     handleSelectCharacter,
     handleRemoveCharacter,
@@ -166,6 +170,7 @@ export default function DraftPick() {
             onToggleConstellation={toggleConstellation}
             isGuest={isGuest}
             onNameChange={handleNameChange}
+            onOpenGuestReg={setActiveGuestReg}
           />
         </div>
 
@@ -186,6 +191,7 @@ export default function DraftPick() {
             onToggleConstellation={toggleConstellation}
             isGuest={isGuest}
             onNameChange={handleNameChange}
+            onOpenGuestReg={setActiveGuestReg}
           />
         </div>
       </div>
@@ -205,6 +211,15 @@ export default function DraftPick() {
       <DraftRulesModal 
         isOpen={isRulesOpen}
         onClose={() => setIsRulesOpen(false)}
+      />
+
+      <GuestRegisteredModal 
+        isOpen={activeGuestReg !== null}
+        onClose={() => setActiveGuestReg(null)}
+        playerKey={activeGuestReg}
+        karakters={karakters}
+        draftState={draftState}
+        onSave={handleSetGuestRegistered}
       />
 
     </div>

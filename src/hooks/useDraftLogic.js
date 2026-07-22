@@ -75,6 +75,18 @@ export function useDraftLogic() {
     }
   };
 
+  const handleSetGuestRegistered = (playerKey, chars) => {
+    setDraftState(prev => {
+      const newState = structuredClone(prev);
+      const regSlots = Array(8).fill(null);
+      chars.forEach((c, idx) => {
+        if (idx < 8) regSlots[idx] = c;
+      });
+      newState[playerKey].registered = regSlots;
+      return newState;
+    });
+  };
+
   const handleSlotClick = (player, type, action, index) => {
     const selectedProfile = player === 'playerA' ? playerA : playerB;
     if (!selectedProfile && !isGuest) {
@@ -260,15 +272,18 @@ export function useDraftLogic() {
 
       let availableChars = chars.filter(k => !lockedIds.includes(k.id));
 
-      if (!isGuest && selectedProfile && selectedProfile.karakters) {
-        const registeredIds = selectedProfile.karakters.map(pk => pk.karakter.id);
-        availableChars = availableChars.filter(k => {
-          if (k.cost === 1) {
-            return registeredIds.includes(k.id);
-          }
-          return true;
-        });
-      }
+      // Batasi B5 Limited (cost 1) HANYA untuk karakter yang ada di kotak Registered
+      // Berlaku untuk Guest maupun Peserta biasa karena kotak Registered adalah sumber utama
+      const currentRegIds = draftState[player].registered
+        .map(c => c ? c.id : null)
+        .filter(id => id !== null);
+
+      availableChars = availableChars.filter(k => {
+        if (k.cost === 1) {
+          return currentRegIds.includes(k.id);
+        }
+        return true;
+      });
 
       return availableChars;
     }
@@ -284,6 +299,7 @@ export function useDraftLogic() {
     filteredModalCharacters,
     calculateCost,
     handleSelectPeserta,
+    handleSetGuestRegistered,
     handleNameChange,
     handleSlotClick,
     handleSelectCharacter,

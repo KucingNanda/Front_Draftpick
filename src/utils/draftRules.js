@@ -31,6 +31,13 @@ export const getLockedIdsForPlayer = (draftState, settings, currentPlayer, curre
     ? currentPlayerProfile.karakters.map(pk => pk.karakter.id) 
     : [];
 
+  // Hitung jumlah karakter B4 yang kembar saat ini di seluruh babak (Kecuali Free 4-Star)
+  const pAPicks = [...draftState.playerA.firstHalf.picks, ...draftState.playerA.secondHalf.picks].filter(c => c && c.rarity === '4 Star' && c.id !== settings.free4StarId);
+  const pBPicks = [...draftState.playerB.firstHalf.picks, ...draftState.playerB.secondHalf.picks].filter(c => c && c.rarity === '4 Star' && c.id !== settings.free4StarId);
+  const aIds = pAPicks.map(c => c.id);
+  const bIds = pBPicks.map(c => c.id);
+  const mirroredB4Count = [...new Set(aIds.filter(id => bIds.includes(id)))].length;
+
   // Pengecekan pada Pick (Tim Sendiri & Tim Lawan)
   ['firstHalf', 'secondHalf'].forEach(half => {
     // Karakter yang sudah di-pick tim sendiri
@@ -52,25 +59,26 @@ export const getLockedIdsForPlayer = (draftState, settings, currentPlayer, curre
       if (c) {
         const isTraveler = c.rarity === '5 Star Khusus' || c.nama.toLowerCase().includes('traveler');
         if (!isTraveler) {
-          if (half === currentHalf) {
-            const isFree = settings.free4StarId > 0 && c.id === settings.free4StarId && (settings.free4StarHalf === 'all' || settings.free4StarHalf === currentHalf);
-            
-            const isB5Standard = c.rarity === '5 Star Standar';
-            const isB5LimitedRegistered = c.rarity === '5 Star Limited' && registeredIds.includes(c.id);
-            const isB4 = c.rarity === '4 Star';
+          const isFree = settings.free4StarId > 0 && c.id === settings.free4StarId && (settings.free4StarHalf === 'all' || settings.free4StarHalf === currentHalf);
+          
+          const isB5Standard = c.rarity === '5 Star Standar';
+          const isB5LimitedRegistered = c.rarity === '5 Star Limited' && registeredIds.includes(c.id);
+          const isB4 = c.rarity === '4 Star';
 
-            if (isB5Standard) {
-              // Bebas mirror B5 Standard
-            } else if (isB5LimitedRegistered) {
-              // Bebas mirror B5 Limited yang didaftarkan (Punya Sendiri)
-            } else if (isFree) {
-              // Bebas mirror Karakter Spesial
-            } else if (isB4) {
-              // B4 bisa di-mirror 1x per pemain. Sistem tidak memblokir UI agar referee bisa mengizinkan pick 1x tersebut.
-            } else {
-              // Yang diblokir adalah B5 Limited yang TIDAK didaftarkan (milik lawan murni)
+          if (isB5Standard) {
+            // Bebas mirror B5 Standard
+          } else if (isB5LimitedRegistered) {
+            // Bebas mirror B5 Limited yang didaftarkan (Punya Sendiri)
+          } else if (isFree) {
+            // Bebas mirror Karakter Spesial
+          } else if (isB4) {
+            // B4 hanya boleh kembar maksimal 2 pasang dalam 1 match penuh
+            if (mirroredB4Count >= 2) {
               locked.push(c.id);
             }
+          } else {
+            // Yang diblokir adalah B5 Limited yang TIDAK didaftarkan (milik lawan murni)
+            locked.push(c.id);
           }
         }
       }
