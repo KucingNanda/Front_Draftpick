@@ -93,3 +93,15 @@
 .rules-modal b {
   font-weight: 800 !important;
 }
+
+/* Sembunyikan ikon mata default browser (Edge/Chrome) pada input password */
+input[type="password"]::-ms-reveal,
+input[type="password"]::-ms-clear {
+  display: none;
+}
+input[type="password"]::-webkit-credentials-auto-fill-button {
+  visibility: hidden;
+  pointer-events: none;
+  position: absolute;
+  right: 0;
+}

@@ -39,5 +39,6 @@ export const REGIONS = [
 export const SINERGIS = [
   "Moonsign",
   "Hexerei",
+  "Stellar",
   "Tidak Ada"
 ];

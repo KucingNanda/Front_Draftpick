@@ -30,8 +30,8 @@ export function useApi() {
         headers,
       });
 
-      // 4. Cek status 401 Unauthorized
-      if (response.status === 401) {
+      // 4. Cek status 401 Unauthorized (kecuali saat mencoba login)
+      if (response.status === 401 && !url.includes('/api/login')) {
         Swal.fire({
           title: 'Sesi Habis!',
           text: 'Sesi Anda telah berakhir atau tidak valid. Silakan login kembali.',

@@ -80,7 +80,7 @@ export default function TeamPanel({
                 </button>
               )}
             </div>
-            <div className={`grid grid-cols-4 gap-2 ${isRightSide ? 'justify-items-end' : 'justify-items-start'}`}>
+            <div className={`grid grid-cols-4 gap-1 ${isRightSide ? 'justify-items-end' : 'justify-items-start'}`}>
               {state.registered.map((data, i) => (
                 <RegSlot key={`reg-${i}`} index={i} data={data} player={playerKey} onSlotClick={onSlotClick} />
               ))}
@@ -90,7 +90,7 @@ export default function TeamPanel({
           {/* Permanent Ban */}
           <div className={`flex flex-col ${isRightSide ? 'items-end' : 'items-start'}`}>
             <h3 className="text-red-500/90 font-bold mb-2 tracking-widest uppercase text-xs md:text-sm text-center">Permanent Ban</h3>
-            <div className="flex gap-2">
+            <div className="flex gap-1">
               {state.globalBans.map((data, i) => (
                 <PermaBanSlot key={`perma-${i}`} index={i} data={data} player={playerKey} onSlotClick={onSlotClick} onRemove={onRemoveCharacter} />
               ))}
@@ -108,12 +108,12 @@ export default function TeamPanel({
             <span className={`px-2 py-0.5 rounded text-xs font-bold ${fhCost > settings.maxCost ? 'bg-red-500/20 text-red-400' : 'bg-blue-500/20 text-blue-400'}`}>Cost: {fhCost}/{settings.maxCost}</span>
           </div>
           <div className={`flex gap-3 items-center ${isRightSide ? 'flex-row-reverse' : ''}`}>
-            <div className="flex gap-2">
+            <div className="flex gap-1">
               {state.firstHalf.picks.map((data, i) => (
                 <PickSlot key={`fh-pick-${i}`} index={i} data={data} player={playerKey} type="firstHalf" onSlotClick={onSlotClick} onRemove={onRemoveCharacter} onToggleWeapon={onToggleWeapon} onToggleConstellation={onToggleConstellation} isGuest={isGuest} />
               ))}
             </div>
-            <div className="flex gap-2 opacity-90">
+            <div className="flex gap-1 opacity-90">
               {state.firstHalf.bans.map((data, i) => (
                 <BanSlot key={`fh-ban-${i}`} index={i} data={data} player={playerKey} type="firstHalf" onSlotClick={onSlotClick} onRemove={onRemoveCharacter} />
               ))}
@@ -128,12 +128,12 @@ export default function TeamPanel({
             <span className={`px-2 py-0.5 rounded text-xs font-bold ${shCost > settings.maxCost ? 'bg-red-500/20 text-red-400' : 'bg-blue-500/20 text-blue-400'}`}>Cost: {shCost}/{settings.maxCost}</span>
           </div>
           <div className={`flex gap-3 items-center ${isRightSide ? 'flex-row-reverse' : ''}`}>
-            <div className="flex gap-2">
+            <div className="flex gap-1">
               {state.secondHalf.picks.map((data, i) => (
                 <PickSlot key={`sh-pick-${i}`} index={i} data={data} player={playerKey} type="secondHalf" onSlotClick={onSlotClick} onRemove={onRemoveCharacter} onToggleWeapon={onToggleWeapon} onToggleConstellation={onToggleConstellation} isGuest={isGuest} />
               ))}
             </div>
-            <div className="flex gap-2 opacity-90">
+            <div className="flex gap-1 opacity-90">
               {state.secondHalf.bans.map((data, i) => (
                 <BanSlot key={`sh-ban-${i}`} index={i} data={data} player={playerKey} type="secondHalf" onSlotClick={onSlotClick} onRemove={onRemoveCharacter} />
               ))}

@@ -57,7 +57,13 @@ export default function AuthModal({ isOpen, onClose, initialMode = 'login' }) {
           });
           onClose();
         } else {
-          Swal.fire('Gagal', data.error || 'Login gagal', 'error');
+          Swal.fire({
+            title: 'Gagal', 
+            text: data.error || 'Login gagal, pastikan Username dan Password benar.', 
+            icon: 'error',
+            background: 'var(--theme-bg-panel)',
+            color: 'var(--theme-text-main)'
+          });
         }
       } else {
         if (res.ok) {
@@ -71,11 +77,23 @@ export default function AuthModal({ isOpen, onClose, initialMode = 'login' }) {
           setMode('login');
           setPassword('');
         } else {
-          Swal.fire('Gagal', data.error || 'Register gagal', 'error');
+          Swal.fire({
+            title: 'Gagal', 
+            text: data.error || 'Register gagal, username mungkin sudah dipakai.', 
+            icon: 'error',
+            background: 'var(--theme-bg-panel)',
+            color: 'var(--theme-text-main)'
+          });
         }
       }
     } catch (error) {
-      Swal.fire('Error', 'Koneksi terputus', 'error');
+      Swal.fire({
+        title: 'Error', 
+        text: 'Koneksi ke server terputus.', 
+        icon: 'error',
+        background: 'var(--theme-bg-panel)',
+        color: 'var(--theme-text-main)'
+      });
     } finally {
       setIsLoading(false);
     }

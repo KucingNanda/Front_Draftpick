@@ -29,17 +29,19 @@ export default function PickSlot({ data, player, type, index, onSlotClick, onRem
 
           {/* Konstelasi C1 (Kiri Bawah) */}
           {isGuest ? (
-            <button 
-              onClick={(e) => onToggleConstellation(e, player, type, index)}
-              className={`absolute bottom-1 left-1 px-1 py-0.5 md:px-1.5 md:py-1 rounded-sm shadow-md transition-all z-10 text-[9px] md:text-[10px] font-black
-                ${data.isC1 
-                  ? 'bg-yellow-500 text-white border border-yellow-300 shadow-[0_0_8px_rgba(234,179,8,0.8)]' 
-                  : 'bg-theme-bgBase text-theme-textSub border border-transparent hover:bg-theme-bgHover'}
-              `}
-              title="Klik untuk Toggle C1"
-            >
-              {data.isC1 ? 'C1' : 'C0'}
-            </button>
+            data.cost === 1 && (
+              <button 
+                onClick={(e) => onToggleConstellation(e, player, type, index)}
+                className={`absolute bottom-1 left-1 px-1 py-0.5 md:px-1.5 md:py-1 rounded-sm shadow-md transition-all z-10 text-[9px] md:text-[10px] font-black
+                  ${data.isC1 
+                    ? 'bg-yellow-500 text-white border border-yellow-300 shadow-[0_0_8px_rgba(234,179,8,0.8)]' 
+                    : 'bg-theme-bgBase text-theme-textSub border border-transparent hover:bg-theme-bgHover'}
+                `}
+                title="Klik untuk Toggle C1"
+              >
+                {data.isC1 ? 'C1' : 'C0'}
+              </button>
+            )
           ) : (
             data.isC1 && (
               <div 

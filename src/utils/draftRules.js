@@ -26,10 +26,10 @@ export const getLockedIdsForPlayer = (draftState, settings, currentPlayer, curre
   let locked = [];
   const opponent = currentPlayer === 'playerA' ? 'playerB' : 'playerA';
   
-  const currentPlayerProfile = currentPlayer === 'playerA' ? playerA : playerB;
-  const registeredIds = (currentPlayerProfile && currentPlayerProfile.karakters) 
-    ? currentPlayerProfile.karakters.map(pk => pk.karakter.id) 
-    : [];
+  // Menggunakan draftState sebagai referensi "Registered" agar berlaku rata untuk Guest maupun Peserta Resmi
+  const registeredIds = draftState[currentPlayer].registered
+    .map(c => c ? c.id : null)
+    .filter(id => id !== null);
 
   // Hitung jumlah karakter B4 yang kembar saat ini di seluruh babak (Kecuali Free 4-Star)
   const pAPicks = [...draftState.playerA.firstHalf.picks, ...draftState.playerA.secondHalf.picks].filter(c => c && c.rarity === '4 Star' && c.id !== settings.free4StarId);
