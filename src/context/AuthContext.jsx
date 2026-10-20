@@ -15,49 +15,83 @@ const parseJwt = (token) => {
   }
 };
 
-export function AuthProvider({ children }) {
-  const [role, setRole] = useState('guest');
-  const [token, setToken] = useState(null);
-
-  useEffect(() => {
-    localStorage.removeItem('userRole'); // Bersihkan sisa-sisa lama
+const getInitialAuth = () => {
+  try {
+    localStorage.removeItem('userRole');
     localStorage.removeItem('adminToken');
-    
     const savedToken = localStorage.getItem('userToken');
-    if (savedToken) {
+    if (savedToken && savedToken !== 'null' && savedToken !== 'undefined') {
       const decoded = parseJwt(savedToken);
       if (decoded && decoded.role) {
-        if (decoded.exp * 1000 < Date.now()) {
+        if (decoded.exp && decoded.exp * 1000 < Date.now()) {
           localStorage.removeItem('userToken');
         } else {
-          setRole(decoded.role);
-          setToken(savedToken);
+          return { role: decoded.role, token: savedToken };
         }
       }
     }
-  }, []);
+  } catch (e) {
+    console.error(e);
+  }
+  return { role: 'guest', token: null };
+};
+
+export function AuthProvider({ children }) {
+  const [auth, setAuth] = useState(getInitialAuth);
+  const role = auth.role;
+  const token = auth.token;
 
   const login = useCallback((newToken) => {
     localStorage.setItem('userToken', newToken);
     const decoded = parseJwt(newToken);
     if (decoded && decoded.role) {
-      setRole(decoded.role);
+      setAuth({ role: decoded.role, token: newToken });
+    } else {
+      setAuth({ role: 'guest', token: newToken });
     }
-    setToken(newToken);
   }, []);
 
   const logout = useCallback(() => {
-    localStorage.removeItem('userRole'); // Just in case
+    localStorage.removeItem('userRole');
     localStorage.removeItem('userToken');
-    setRole('guest');
-    setToken(null);
+    setAuth({ role: 'guest', token: null });
   }, []);
 
+  const refreshUser = useCallback(async () => {
+    const currentToken = localStorage.getItem('userToken');
+    if (!currentToken || currentToken === 'null' || currentToken === 'undefined') return;
+    try {
+      const res = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/me`, {
+        headers: { 'Authorization': `Bearer ${currentToken}` }
+      });
+      if (res.ok) {
+        const data = await res.json();
+        if (data && data.role) {
+          setAuth(prev => ({ ...prev, role: data.role }));
+        }
+      }
+    } catch (e) {
+      console.error('Failed to refresh user:', e);
+    }
+  }, []);
+
+
   return (
-    <AuthContext.Provider value={{ role, token, login, logout, isWasit: role === 'wasit', isPeserta: role === 'peserta', isGuest: role === 'guest' }}>
+    <AuthContext.Provider value={{ 
+      role, 
+      token, 
+      login, 
+      logout, 
+      refreshUser,
+      isWasit: role === 'wasit', 
+      isPeserta: role === 'peserta', 
+      isMember: role === 'member',
+      isGuest: role === 'guest' 
+    }}>
       {children}
     </AuthContext.Provider>
   );
 }
 
 export const useAuth = () => useContext(AuthContext);
+

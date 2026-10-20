@@ -88,17 +88,17 @@ export default function RiwayatPertandingan() {
   }
 
   return (
-    <div className="p-6 md:p-12 max-w-6xl mx-auto text-theme-textMain">
-      <div className="flex justify-between items-center mb-8 border-b border-theme-border pb-4">
+    <div className="max-w-6xl mx-auto text-theme-textMain pb-4">
+      <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 border-b border-theme-border pb-4 pt-8 -mt-8 gap-4 sticky -top-8 z-40 bg-theme-bgBase">
         <div>
-          <h1 className="text-3xl font-bold text-blue-400 flex items-center gap-3">
+          <h1 className="text-3xl font-bold text-blue-400 flex items-center gap-3 mb-2">
             <Clock size={32} /> Riwayat Pertandingan
           </h1>
-          <p className="text-theme-textSub mt-2">
-            Anda dapat menyimpan hingga {isWasit ? '20' : '10'} riwayat. Jika penuh, riwayat terlama akan otomatis ditimpa.
+          <p className="text-theme-textSub">
+            Anda dapat menyimpan hingga {isWasit ? '20' : '10'} riwayat. Jika penuh, riwayat terlama otomatis ditimpa.
           </p>
         </div>
-        <div className="bg-theme-bgPanel px-4 py-2 rounded-lg border border-theme-border font-bold text-theme-textMain">
+        <div className="bg-theme-bgPanel px-4 py-2 rounded-lg border border-theme-border font-bold text-theme-textMain shrink-0">
           Tersimpan: <span className={histories.length >= (isWasit ? 20 : 10) ? 'text-red-400' : 'text-green-400'}>{histories.length}</span> / {isWasit ? 20 : 10}
         </div>
       </div>

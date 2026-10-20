@@ -14,6 +14,7 @@ import DraftPick from './pages/DraftPick';
 import AdminDashboard from './pages/AdminDashboard';
 import RiwayatPertandingan from './pages/RiwayatPertandingan';
 import Profil from './pages/Profil';
+import FormasiPeserta from './pages/FormasiPeserta';
 
 function App() {
   return (
@@ -35,6 +36,7 @@ function App() {
               {/* Rute Khusus User Login */}
               <Route element={<PrivateRoute />}>
                 <Route path="/profil" element={<Profil />} />
+                <Route path="/my-peserta" element={<FormasiPeserta />} />
               </Route>
 
               {/* Rute Khusus Wasit / Admin */}

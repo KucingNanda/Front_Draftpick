@@ -74,7 +74,7 @@ export default function Dashboard() {
           Selamat Datang di Draft Pick
         </h1>
         <p className="text-lg text-theme-textSub max-w-2xl mx-auto mb-6">
-          Mulai persaingan strategi tingkat tinggi, kelola daftar pahlawan Anda, dan pantau peserta turnamen.
+          Mulai persaingan strategi tingkat tinggi, kelola daftar karakter Anda, dan pantau peserta turnamen.
         </p>
         <button 
           onClick={() => setIsRulesOpen(true)} 

@@ -254,8 +254,8 @@ export default function MasterKarakter() {
   );
 
   return (
-    <div className="max-w-7xl mx-auto pb-12">
-      <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-6 border-b border-theme-border pb-4 gap-4">
+    <div className="max-w-7xl mx-auto pb-4">
+      <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-6 border-b border-theme-border pb-4 pt-8 -mt-8 gap-4 sticky -top-8 z-40 bg-theme-bgBase">
         <div>
           <h1 className="text-3xl font-bold text-theme-textMain mb-2">Master Karakter</h1>
           <p className="text-theme-textSub">Daftar {karakters.length} karakter yang tersedia dalam database.</p>
@@ -457,7 +457,7 @@ export default function MasterKarakter() {
 
       {/* Pagination Controls */}
       {!loading && totalPages > 1 && (
-        <div className="flex justify-center items-center gap-2 mt-6">
+        <div className="flex justify-center items-center gap-2 mt-2 mb-2">
           <button
             onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
             disabled={currentPage === 1}

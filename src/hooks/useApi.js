@@ -2,12 +2,15 @@ import { useCallback } from 'react';
 import { useAuth } from '../context/AuthContext';
 import Swal from 'sweetalert2';
 
+let isSessionAlertOpen = false;
+
 export function useApi() {
   const { logout } = useAuth();
 
   const callApi = useCallback(async (url, options = {}) => {
     // 1. Ambil token terbaru dari localStorage
-    const token = localStorage.getItem('userToken');
+    const rawToken = localStorage.getItem('userToken');
+    const token = (rawToken && rawToken !== 'null' && rawToken !== 'undefined') ? rawToken : null;
 
     // 2. Siapkan headers
     const headers = { ...options.headers };
@@ -18,7 +21,6 @@ export function useApi() {
     }
 
     // Jika body bukan FormData (misal JSON biasa), tambahkan Content-Type JSON
-    // Jangan tambahkan Content-Type jika FormData (browser yang akan atur boundary otomatis)
     if (!(options.body instanceof FormData) && !headers['Content-Type']) {
       headers['Content-Type'] = 'application/json';
     }
@@ -30,18 +32,23 @@ export function useApi() {
         headers,
       });
 
-      // 4. Cek status 401 Unauthorized (kecuali saat mencoba login)
-      if (response.status === 401 && !url.includes('/api/login')) {
+      // 4. Cek status 401 Unauthorized
+      // HANYA tampilkan notifikasi jika user sebelumnya memiliki token (bukan guest)
+      // dan bukan endpoint auth publik (login/register)
+      const isAuthUrl = url.includes('/api/login') || url.includes('/api/register');
+      if (response.status === 401 && !isAuthUrl && token && !isSessionAlertOpen) {
+        isSessionAlertOpen = true;
         Swal.fire({
           title: 'Sesi Habis!',
           text: 'Sesi Anda telah berakhir atau tidak valid. Silakan login kembali.',
           icon: 'warning',
-          background: '#1e293b',
-          color: '#fff',
+          background: 'var(--theme-bg-panel)',
+          color: 'var(--theme-text-main)',
           confirmButtonColor: '#3b82f6'
         }).then(() => {
+          isSessionAlertOpen = false;
           logout(); // Otomatis clear storage dan set role ke guest
-          window.location.href = '/'; // Force redirect ke home/login
+          window.location.href = '/'; // Force redirect ke home
         });
       }
 
